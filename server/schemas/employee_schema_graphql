@@ -1,0 +1,47 @@
+input EmployeeInputs {
+    fname: String!
+    lname: String!
+    age: Int!
+    dateOfJoining: Date
+    title: String
+    department: String
+    employeeType: String
+}
+
+input EmployeeUpdateInputs {
+    id: Int!
+    title: String!
+    department: String!
+    currentStatus: Int!
+}
+
+input FilterEmployeeInputs {
+    title: String
+    department: String
+    employeeType: String
+}
+
+scalar Date
+
+type Employee {
+    _id: ID
+    fname: String
+    lname: String
+    age: Int
+    dateOfJoining: Date
+    title: String
+    department: String
+    employeeType: String
+    currentStatus: Int
+}
+
+type Query {
+    listAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+    listSingleEmployee(id: Int!): Employee!
+}
+
+type Mutation {
+    createEmployee(employee: EmployeeInputs!): Employee!
+    updateEmployee(employee: EmployeeUpdateInputs): Boolean
+    deleteEmployee(id: Int!): Boolean
+}

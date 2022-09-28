@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Capstone Final Project - MERN",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Saim Alam",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^3.8.2",
+    "express": "^4.18.1",
+    "graphql": "^16.5.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.3.6"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.16"
+  }
+}

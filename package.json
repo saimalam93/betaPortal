@@ -1,0 +1,23 @@
+{
+  "name": "betaportal",
+  "version": "1.0.0",
+  "description": "Capstone Project - MERN",
+  "main": "null",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saimalam93/progressR.git"
+  },
+  "author": "Saim Alam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saimalam93/progressR/issues"
+  },
+  "homepage": "https://github.com/saimalam93/progressR#readme",
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  }
+}

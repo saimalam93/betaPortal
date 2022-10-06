@@ -2,14 +2,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const EmployeeSchema = new Schema({
+  loginID: String,
+  password: String,
   fname: String,
   lname: String,
-  age: Number,
-  dateOfJoining: { type: Date, default: new Date() },
-  title: String,
-  department: String,
+  gender: String,
+  address: String,
+  mobile: String,
+  emergencyContact: String,
+  email: String,
+  role: String,
   employeeType: String,
-  currentStatus: { type: Number, default: 1 },
+  sin: String,
+
+  skills: [String],
+  dateOfBirth: { type: Date },
+  dateOfJoining: { type: Date, default: new Date() },
+  currentStatus: { type: String, default: "null" },
 });
 
 const Employee = mongoose.model("Employee", EmployeeSchema, "employees");

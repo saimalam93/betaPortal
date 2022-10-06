@@ -72,8 +72,8 @@ type Employee {
 }
 
 type Query {
-    viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    viewSingleEmployee(id: Int!): Employee!
+    listAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+    listSingleEmployee(id: Int!): Employee!
 }
 
 type Mutation {

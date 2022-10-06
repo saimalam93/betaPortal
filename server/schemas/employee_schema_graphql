@@ -1,43 +1,79 @@
 input EmployeeInputs {
+    id: ID
     fname: String!
     lname: String!
-    age: Int!
+    dateOfBirth: Date
+    loginID: String
+    password: String
+    gender: String
+    address: String
+    mobile: String
+    emergencyContact: String
+    email: String
     dateOfJoining: Date
-    title: String
+    role: String
+    levelOfJob: String
     department: String
     employeeType: String
+    eduction: String
+    skills: [String]
+    currentStatus:String
+    sin:string
 }
 
 input EmployeeUpdateInputs {
-    id: Int!
+    gender: String
+    address: String
+    mobile: String
+    emergencyContact: String
+    email: String
     title: String!
     department: String!
     currentStatus: Int!
-}
-
-input FilterEmployeeInputs {
-    title: String
+    role: String
     department: String
     employeeType: String
+    skills: [String]
+    currentStatus:String
+    sin:string
+}
+
+
+input FilterEmployeeInputs {
+    role: String
+    department: String
+    employeeType: String
+    skills: [String]
 }
 
 scalar Date
 
 type Employee {
-    _id: ID
-    fname: String
-    lname: String
-    age: Int
+    id: int
+    fname: String!
+    lname: String!
+    dateOfBirth: Date
+    loginID: String
+    password: String
+    gender: String
+    address: String
+    mobile: String
+    emergencyContact: String
+    email: String
     dateOfJoining: Date
-    title: String
+    role: String
+    levelOfJob: String
     department: String
     employeeType: String
-    currentStatus: Int
+    eduction: String
+    skills: [String]
+    currentStatus:String
+    sin:string
 }
 
 type Query {
-    listAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    listSingleEmployee(id: Int!): Employee!
+    viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+    viewSingleEmployee(id: Int!): Employee!
 }
 
 type Mutation {

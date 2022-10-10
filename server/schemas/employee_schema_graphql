@@ -29,7 +29,10 @@ input EmployeeUpdateInputs {
     sin:String
     currentStatus:String
 }
-
+input UserData {
+    loginID : String
+    password : String
+}
 input FilterEmployeeInputs {
     role: String
     department: String
@@ -59,9 +62,17 @@ type Employee {
     dateOfJoining: Date
 }
 
+type User{
+    loginID: String
+    password: String
+    role: String
+    token: String
+}
+
 type Query {
     viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
     viewSingleEmployee(_id: String!): Employee!
+    loginUser(userData : UserData!) : User
 }
 
 type Mutation {

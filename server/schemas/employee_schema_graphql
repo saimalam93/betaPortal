@@ -1,22 +1,37 @@
 input EmployeeInputs {
+    loginID: String
+    password: String
     fname: String!
     lname: String!
-    age: Int!
-    dateOfJoining: Date
-    title: String
-    department: String
+    mobile: String!
+    role: String!
+    email: String
+    gender: String
+    address: String
+    emergencyContact: String
     employeeType: String
+    department: String
+    sin:String
+    token:String
+    currentStatus:String
+    dateOfBirth: Date
+    dateOfJoining: Date!
 }
 
 input EmployeeUpdateInputs {
-    id: Int!
-    title: String!
-    department: String!
-    currentStatus: Int!
+    _id: String!
+    email: String
+    gender: String
+    address: String
+    emergencyContact: String
+    employeeType: String
+    department: String
+    sin:String
+    currentStatus:String
 }
 
 input FilterEmployeeInputs {
-    title: String
+    role: String
     department: String
     employeeType: String
 }
@@ -25,23 +40,32 @@ scalar Date
 
 type Employee {
     _id: ID
+    loginID: String
+    password: String
     fname: String
     lname: String
-    age: Int
-    dateOfJoining: Date
-    title: String
-    department: String
+    mobile: String
+    role: String
+    email: String
+    gender: String
+    address: String
+    emergencyContact: String
     employeeType: String
-    currentStatus: Int
+    department: String
+    sin: String
+    token: String
+    currentStatus: String
+    dateOfBirth: Date
+    dateOfJoining: Date
 }
 
 type Query {
-    listAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    listSingleEmployee(id: Int!): Employee!
+    viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+    viewSingleEmployee(_id: String!): Employee!
 }
 
 type Mutation {
-    createEmployee(employee: EmployeeInputs!): Employee!
+    addNewEmployee(employee: EmployeeInputs): Employee!
     updateEmployee(employee: EmployeeUpdateInputs): Boolean
-    deleteEmployee(id: Int!): Boolean
+    deleteEmployee(_id: String!): Boolean
 }

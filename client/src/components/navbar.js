@@ -5,6 +5,28 @@ import { AuthContext } from "../context/authContext";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  console.log(user);
+  let menu;
+  if (user) {
+    if (user.role === "Director") {
+      menu = (
+        <>
+          <Button style={{ textDecoration: "none", color: "white" }}>
+            Director
+          </Button>
+          <Button style={{ textDecoration: "none", color: "white" }}>
+            Some Other Director Menu Item
+          </Button>
+        </>
+      );
+    } else {
+      menu = (
+        <Button style={{ textDecoration: "none", color: "white" }}>
+          Someone Else
+        </Button>
+      );
+    }
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -16,6 +38,7 @@ const Navbar = () => {
             </Link>
           </Typography>
           <Box alignItems="right" style={{ flexGrow: 1, textAlign: "right" }}>
+            {menu}
             {user ? (
               <Button
                 onClick={logout}

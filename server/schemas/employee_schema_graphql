@@ -62,6 +62,13 @@ type Employee {
     dateOfJoining: Date
 }
 
+type User{
+    loginID: String
+    password: String
+    role: String
+    token: String
+}
+
 type Query {
     viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
     viewSingleEmployee(_id: String!): Employee!

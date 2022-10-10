@@ -62,11 +62,11 @@ type Employee {
 
 type Query {
     viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    viewSingleEmployee(loginID: String!): Employee!
+    viewSingleEmployee(_id: String!): Employee!
 }
 
 type Mutation {
     addNewEmployee(employee: EmployeeInputs): Employee!
     updateEmployee(employee: EmployeeUpdateInputs): Boolean
-    deleteEmployee(id: String!): Boolean
+    deleteEmployee(_id: String!): Boolean
 }

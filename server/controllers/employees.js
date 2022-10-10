@@ -15,22 +15,22 @@ async function viewAllEmployees(_, filters) {
   return await employees;
 }
 
-async function viewSingleEmployee(_, { id }) {
-  return await Employee.findOne({ id });
+async function viewSingleEmployee(_, { _id }) {
+  return await Employee.findOne({ _id: _id });
 }
 
 async function addNewEmployee(_, { employee }) {
   employee.loginID = await generateLoginID({ employee });
-  
+
   employee.password =
     employee.fname.substring(0, 1) +
     employee.lname.substring(0, 1) +
     employee.mobile;
-  
+
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
     employee.dateOfJoining = moment().format("YYYY-MM-DD");
   }
-  
+
   return await Employee.create(employee);
 }
 
@@ -63,8 +63,8 @@ async function updateEmployee(_, { employee }) {
   return false;
 }
 
-async function deleteEmployee(_, { id }) {
-  const result = await Employee.findOneAndDelete({ id });
+async function deleteEmployee(_, { _id }) {
+  const result = await Employee.findOneAndDelete({ _id: _id });
   if (result) {
     return true;
   }

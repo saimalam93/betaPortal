@@ -1,83 +1,72 @@
 input EmployeeInputs {
-    id: ID
+    loginID: String!
+    password: String!
     fname: String!
     lname: String!
-    dateOfBirth: Date
-    loginID: String
-    password: String
+    mobile: String!
+    role: String!
+    email: String
     gender: String
     address: String
-    mobile: String
     emergencyContact: String
-    email: String
-    dateOfJoining: Date
-    role: String
-    levelOfJob: String
-    department: String
     employeeType: String
-    eduction: String
-    skills: [String]
+    department: String
+    sin:String
+    token:String
     currentStatus:String
-    sin:string
+    dateOfBirth: Date!
+    dateOfJoining: Date!
 }
 
 input EmployeeUpdateInputs {
+    mobile: String
+    role: String
+    email: String
     gender: String
     address: String
-    mobile: String
     emergencyContact: String
-    email: String
-    title: String!
-    department: String!
-    currentStatus: Int!
-    role: String
-    department: String
     employeeType: String
-    skills: [String]
+    department: String
+    sin:String
     currentStatus:String
-    sin:string
 }
-
 
 input FilterEmployeeInputs {
     role: String
     department: String
     employeeType: String
-    skills: [String]
 }
 
 scalar Date
 
 type Employee {
-    id: int
-    fname: String!
-    lname: String!
-    dateOfBirth: Date
+    _id: ID
     loginID: String
     password: String
+    fname: String
+    lname: String
+    mobile: String
+    role: String
+    email: String
     gender: String
     address: String
-    mobile: String
     emergencyContact: String
-    email: String
-    dateOfJoining: Date
-    role: String
-    levelOfJob: String
-    department: String
     employeeType: String
-    eduction: String
-    skills: [String]
-    currentStatus:String
-    sin:string
+    department: String
+    sin: String
+    token: String
+    currentStatus: String
+    dateOfBirth: Date
+    dateOfJoining: Date
 }
 
 type Query {
-    listAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    listSingleEmployee(id: Int!): Employee!
+    viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+    viewSingleEmployee(loginID: String!): Employee!
 }
 
 type Mutation {
-    createEmployee(employee: EmployeeInputs!): Employee!
+    addNewEmployee(employee: EmployeeInputs): Employee!
     updateEmployee(employee: EmployeeUpdateInputs): Boolean
-    deleteEmployee(id: Int!): Boolean
+    deleteEmployee(id: String!): Boolean
 }

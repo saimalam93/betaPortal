@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const DB = process.env.DATABASE;
 mongoose.connect(DB);
 mongoose.connection.on("connected", function () {
-  console.log("Application is connected to Databse");
+  console.log("Application is connected to Database");
 });
 
 const _ = require("lodash");

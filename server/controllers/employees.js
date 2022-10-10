@@ -75,18 +75,10 @@ async function deleteEmployee(_, { _id }) {
   return false;
 }
 
-async function loginUser(_, { userData }) {
-  const user = await Employee.findOne({ loginID: userData.loginID });
-  const decoded = jwt.verify(user.token, process.env.ACCESS_TOKEN_SECRET);
-  console.log(decoded);
-  return user;
-}
-
 module.exports = {
   viewAllEmployees,
   viewSingleEmployee,
   addNewEmployee,
   updateEmployee,
   deleteEmployee,
-  loginUser,
 };

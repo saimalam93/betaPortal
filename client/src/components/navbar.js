@@ -5,7 +5,6 @@ import { AuthContext } from "../context/authContext";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
   let menu;
   if (user) {
     if (user.role === "Director") {

@@ -6,20 +6,21 @@ const EmployeeSchema = new Schema({
   password: String,
   fname: String,
   lname: String,
+  mobile: String,
+  role: String,
+  email: String,
   gender: String,
   address: String,
-  mobile: String,
   emergencyContact: String,
-  email: String,
-  role: String,
   employeeType: String,
+  department: String,
   sin: String,
   token: String,
 
-  skills: [String],
+  currentStatus: { type: String, default: "null" },
+
   dateOfBirth: { type: Date },
   dateOfJoining: { type: Date, default: new Date() },
-  currentStatus: { type: String, default: "null" },
 });
 
 const Employee = mongoose.model("Employee", EmployeeSchema, "employees");

@@ -3,10 +3,10 @@ const Employee = require("../models/employee.js");
 const jwt = require("jsonwebtoken");
 var moment = require("moment");
 
-async function listAllEmployees(_, filters) {
+async function viewAllEmployees(_, filters) {
   let employees = Employee.find();
-  if (filters.title) {
-    employees = employees.or({ title: filters.title });
+  if (filters.role) {
+    employees = employees.or({ title: filters.role });
   }
   if (filters.department) {
     employees = employees.or({ department: filters.department });
@@ -17,16 +17,17 @@ async function listAllEmployees(_, filters) {
   return await employees;
 }
 
-async function listSingleEmployee(_, { id }) {
-  return await Employee.findOne({ id });
+async function viewSingleEmployee(_, { _id }) {
+  return await Employee.findOne({ _id: _id });
 }
 
-async function createEmployee(_, { employee }) {
-  const all = await Employee.find({});
+async function addNewEmployee(_, { employee }) {
+  employee.loginID = await generateLoginID({ employee });
 
-  employee.loginID = "test" + (all.length + 1);
-  employee.password = "test";
-  employee.currentStatus = 1;
+  employee.password =
+    employee.fname.substring(0, 1) +
+    employee.lname.substring(0, 1) +
+    employee.mobile;
 
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
     employee.dateOfJoining = moment().format("YYYY-MM-DD");
@@ -37,9 +38,27 @@ async function createEmployee(_, { employee }) {
   return await Employee.create(employee);
 }
 
+async function generateLoginID({ employee }) {
+  let tailValueInitial = 0;
+  const employeeRole = await Employee.find({ role: employee.role });
+  if (employee.role == "Director") {
+    tailValueInitial = 10000;
+  } else if (employee.role == "Admin") {
+    tailValueInitial = 20000;
+  } else if (employee.role == "Manager") {
+    tailValueInitial = 30000;
+  } else if (employee.role == "Employee") {
+    tailValueInitial = 40000;
+  }
+  return (
+    employee.role.substring(0, 3).toUpperCase() +
+    (tailValueInitial + employeeRole.length + 1).toString()
+  );
+}
+
 async function updateEmployee(_, { employee }) {
   const result = await Employee.findOneAndUpdate(
-    { id: employee.id },
+    { _id: employee._id },
     { $set: employee }
   );
   if (result) {
@@ -48,8 +67,8 @@ async function updateEmployee(_, { employee }) {
   return false;
 }
 
-async function deleteEmployee(_, { id }) {
-  const result = await Employee.findOneAndDelete({ id });
+async function deleteEmployee(_, { _id }) {
+  const result = await Employee.findOneAndDelete({ _id: _id });
   if (result) {
     return true;
   }
@@ -64,9 +83,9 @@ async function loginUser(_, { userData }) {
 }
 
 module.exports = {
-  listAllEmployees,
-  listSingleEmployee,
-  createEmployee,
+  viewAllEmployees,
+  viewSingleEmployee,
+  addNewEmployee,
   updateEmployee,
   deleteEmployee,
   loginUser,

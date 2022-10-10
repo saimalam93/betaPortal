@@ -4,12 +4,12 @@ const employees = require("../controllers/employees.js");
 const adminResolvers = {
   Date: dateScalar,
   Query: {
-    listAllEmployees: employees.listAllEmployees,
-    listSingleEmployee: employees.listSingleEmployee,
+    viewAllEmployees: employees.viewAllEmployees,
+    viewSingleEmployee: employees.viewSingleEmployee,
     loginUser: employees.loginUser,
   },
   Mutation: {
-    createEmployee: employees.createEmployee,
+    addNewEmployee: employees.addNewEmployee,
     updateEmployee: employees.updateEmployee,
     deleteEmployee: employees.deleteEmployee,
   },

@@ -1,6 +1,6 @@
 input EmployeeInputs {
-    loginID: String!
-    password: String!
+    loginID: String
+    password: String
     fname: String!
     lname: String!
     mobile: String!
@@ -14,13 +14,12 @@ input EmployeeInputs {
     sin:String
     token:String
     currentStatus:String
-    dateOfBirth: Date!
+    dateOfBirth: Date
     dateOfJoining: Date!
 }
 
 input EmployeeUpdateInputs {
-    mobile: String
-    role: String
+    _id: String!
     email: String
     gender: String
     address: String

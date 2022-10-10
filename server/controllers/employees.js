@@ -54,7 +54,7 @@ async function generateLoginID({ employee }) {
 
 async function updateEmployee(_, { employee }) {
   const result = await Employee.findOneAndUpdate(
-    { id: employee.id },
+    { _id: employee._id },
     { $set: employee }
   );
   if (result) {

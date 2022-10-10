@@ -1,4 +1,7 @@
+require("dotenv").config();
 const Employee = require("../models/employee.js");
+const jwt = require("jsonwebtoken");
+var moment = require("moment");
 
 async function listAllEmployees(_, filters) {
   let employees = Employee.find();
@@ -21,12 +24,15 @@ async function listSingleEmployee(_, { id }) {
 async function createEmployee(_, { employee }) {
   const all = await Employee.find({});
 
-  employee.id = all.length + 1;
+  employee.loginID = "test" + (all.length + 1);
+  employee.password = "test";
   employee.currentStatus = 1;
 
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
     employee.dateOfJoining = moment().format("YYYY-MM-DD");
   }
+  const token = jwt.sign(employee, process.env.ACCESS_TOKEN_SECRET);
+  employee.token = token;
 
   return await Employee.create(employee);
 }
@@ -50,10 +56,18 @@ async function deleteEmployee(_, { id }) {
   return false;
 }
 
+async function loginUser(_, { userData }) {
+  const user = await Employee.findOne({ loginID: userData.loginID });
+  const decoded = jwt.verify(user.token, process.env.ACCESS_TOKEN_SECRET);
+  console.log(decoded);
+  return user;
+}
+
 module.exports = {
   listAllEmployees,
   listSingleEmployee,
   createEmployee,
   updateEmployee,
   deleteEmployee,
+  loginUser,
 };

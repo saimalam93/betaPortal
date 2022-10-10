@@ -6,6 +6,7 @@ const adminResolvers = {
   Query: {
     listAllEmployees: employees.listAllEmployees,
     listSingleEmployee: employees.listSingleEmployee,
+    loginUser: employees.loginUser,
   },
   Mutation: {
     createEmployee: employees.createEmployee,

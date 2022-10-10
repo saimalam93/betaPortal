@@ -14,6 +14,7 @@ const EmployeeSchema = new Schema({
   role: String,
   employeeType: String,
   sin: String,
+  token: String,
 
   skills: [String],
   dateOfBirth: { type: Date },

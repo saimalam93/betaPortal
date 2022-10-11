@@ -2,14 +2,17 @@ import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import RequestsBell from "./requestsBell";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   let menu;
+
   if (user) {
     if (user.role === "Director") {
       menu = (
         <>
+          <RequestsBell iconColor="action" badgeContent={5} />
           <Button style={{ textDecoration: "none", color: "white" }}>
             Director
           </Button>

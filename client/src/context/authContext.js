@@ -53,8 +53,6 @@ function AuthProvider(props) {
         type: "LOGIN",
         payload: userData,
       });
-    } else {
-      throw new Error("Login Failed");
     }
   };
 

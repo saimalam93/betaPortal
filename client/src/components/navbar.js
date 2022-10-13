@@ -6,6 +6,9 @@ import RequestsBell from "./requestsBell";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+
+  const navItems = ['Home', 'About', 'Contact'];
+
   let menu;
 
   if (user) {
@@ -16,9 +19,13 @@ const Navbar = () => {
           <Button style={{ textDecoration: "none", color: "white" }}>
             Director
           </Button>
-          <Button style={{ textDecoration: "none", color: "white" }}>
-            Some Other Director Menu Item
+          <Button component={Link} to="/createemployee" style={{ textDecoration: "none", color: "white" }}>
+            Create
           </Button>
+          <Button component={Link} to="/listemployee" style={{ textDecoration: "none", color: "white" }}>
+            List
+          </Button>
+
         </>
       );
     } else {
@@ -28,6 +35,7 @@ const Navbar = () => {
         </Button>
       );
     }
+
   }
 
   return (
@@ -36,7 +44,7 @@ const Navbar = () => {
         <Toolbar>
           <Typography variant="h5" component="div">
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              Home
+              betaPortal 1.0
             </Link>
           </Typography>
           <Box alignItems="right" style={{ flexGrow: 1, textAlign: "right" }}>
@@ -45,6 +53,7 @@ const Navbar = () => {
               <Button
                 onClick={logout}
                 style={{ textDecoration: "none", color: "white" }}
+                component={Link} to="/login"
               >
                 Logout
               </Button>
@@ -68,3 +77,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

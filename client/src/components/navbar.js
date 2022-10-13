@@ -6,36 +6,36 @@ import RequestsBell from "./requestsBell";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-
-  const navItems = ['Home', 'About', 'Contact'];
-
   let menu;
-
   if (user) {
-    if (user.role === "Director") {
+    if (user.role === "Admin") {
       menu = (
         <>
           <RequestsBell iconColor="action" badgeContent={2} />
-          <Button style={{ textDecoration: "none", color: "white" }}>
-            Director
-          </Button>
-          <Button component={Link} to="/createemployee" style={{ textDecoration: "none", color: "white" }}>
-            Create
-          </Button>
-          <Button component={Link} to="/listemployee" style={{ textDecoration: "none", color: "white" }}>
+          <Button
+            component={Link}
+            to="/listemployee"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             List
           </Button>
 
+          <Button
+            component={Link}
+            to="/createemployee"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Create
+          </Button>
         </>
       );
     } else {
       menu = (
         <Button style={{ textDecoration: "none", color: "white" }}>
-          Someone Else
+          Someone {user.role} Button
         </Button>
       );
     }
-
   }
 
   return (
@@ -43,8 +43,11 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h5" component="div">
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              betaPortal 1.0
+            <Link
+              to={user ? (user.role === "Admin" ? `/listemployee` : "/") : "/"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              {user ? `${user.role} Portal` : "betaPortal 1.0"}
             </Link>
           </Typography>
           <Box alignItems="right" style={{ flexGrow: 1, textAlign: "right" }}>
@@ -53,7 +56,8 @@ const Navbar = () => {
               <Button
                 onClick={logout}
                 style={{ textDecoration: "none", color: "white" }}
-                component={Link} to="/login"
+                component={Link}
+                to="/login"
               >
                 Logout
               </Button>
@@ -77,5 +81,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

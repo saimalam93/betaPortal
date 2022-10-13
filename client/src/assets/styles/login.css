@@ -1,56 +1,51 @@
-body{
-    margin:0;
-    padding:0;
-    background:url(../images/img1.jpg);
-    background-size:cover;
-    background-position: center;
-    font-family: sans-serif;
-    
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../images/img1.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: sans-serif;
 }
-.login-sec{
-    width:320px;
-    height:420px;
-    background:rgba(0,0,0,0.5);
-    color:#fff;
-    top:50%;
-    left:50%;
-    position:absolute;
-    transform:translate(-50%,-50%);
-    box-sizing:border-box;
-    padding:80px 40px;
-
+.login-sec {
+  width: 320px;
+  height: 420px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 80px 40px;
 }
-.user{
-    width:100px;
-    height:100px;
-    border-radius: 50%;
-    position:absolute;
-    top:-50px;
-    left:calc(50% - 50px);
+.user {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
 }
-h1{
-    margin:0;
-    padding:0 0 20px;
-    text-align: center;
+h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
 }
-.login-sec p{
-    margin:0;
-    padding:0;
-    font-weight:bold;
-
+.login-sec p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
 }
-.login-sec input{
-    width:100%;
-    margin-bottom:25px;
+.login-sec input {
+  width: 100%;
+  margin-bottom: 25px;
 }
-.login-sec input[type="submit"]
-{
-    border:none;
-    outline:none;
-    height:40px;
-    background:#054878;
-    color:#fff;
-    font-size: 18px;
-    border-radius: 20px;
+.login-sec input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #054878;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
 }
-

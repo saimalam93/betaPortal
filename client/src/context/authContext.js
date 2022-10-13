@@ -8,15 +8,11 @@ const intialState = {
 let userToken = localStorage.getItem("token");
 
 if (userToken !== null) {
-  try {
-    const decodeToken = jwtDecode(userToken);
-    if (decodeToken.exp * 1000 < Date.now()) {
-      localStorage.removeItem("token");
-    } else {
-      intialState.user = decodeToken;
-    }
-  } catch {
-    console.log("error heere");
+  const decodeToken = jwtDecode(userToken);
+  if (decodeToken.exp * 1000 < Date.now()) {
+    localStorage.removeItem("token");
+  } else {
+    intialState.user = decodeToken;
   }
 }
 

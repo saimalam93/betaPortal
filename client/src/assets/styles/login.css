@@ -1,7 +1,7 @@
 body{
     margin:0;
     padding:0;
-    background:url(img1.jpg);
+    background:url(../images/img1.jpg);
     background-size:cover;
     background-position: center;
     font-family: sans-serif;
@@ -53,3 +53,4 @@ h1{
     font-size: 18px;
     border-radius: 20px;
 }
+

@@ -15,7 +15,7 @@ const Navbar = () => {
     if (user.role === "Director") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={5} />
+          <RequestsBell iconColor="action" badgeContent={2} />
           <Button style={{ textDecoration: "none", color: "white" }}>
             Director
           </Button>

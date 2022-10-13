@@ -5,8 +5,8 @@ var moment = require("moment");
 
 async function viewAllEmployees(_, filters) {
   let employees = Employee.find();
-  if (filters.role) {
-    employees = employees.or({ title: filters.role });
+  if (filters.title) {
+    employees = employees.or({ title: filters.title });
   }
   if (filters.department) {
     employees = employees.or({ department: filters.department });
@@ -22,6 +22,7 @@ async function viewSingleEmployee(_, { _id }) {
 }
 
 async function addNewEmployee(_, { employee }) {
+  // console.log(employee);
   employee.loginID = await generateLoginID({ employee });
 
   employee.password =

@@ -41,6 +41,7 @@ async function addNewEmployee(_, { employee }) {
 
 async function generateLoginID({ employee }) {
   let tailValueInitial = 0;
+  // str.charAt(0).toUpperCase() + str.slice(1);
   const employeeRole = await Employee.find({ role: employee.role });
   if (employee.role == "Director") {
     tailValueInitial = 10000;

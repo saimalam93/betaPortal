@@ -1,18 +1,23 @@
-const query = `query ViewAllEmployees($filters: FilterEmployeeInputs) {
+const query = `query Query($filters: FilterEmployeeInputs) {
   viewAllEmployees(filters: $filters) {
     _id
+    loginID
+    password
     fname
     lname
     mobile
-    dateOfJoining
     role
+    email
+    gender
+    address
+    emergencyContact
+    employeeType
+    department
+    sin
+    token
     currentStatus
     dateOfBirth
-    emergencyContact
-    department
-    employeeType  
-    sin 
-    address
+    dateOfJoining
   }
 }`;
 

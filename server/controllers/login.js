@@ -1,16 +1,23 @@
 const Employee = require("../models/employee.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 async function loginUser(_, { userData }) {
   const user = await Employee.findOne({ loginID: userData.loginID });
   if (!user) {
     throw new Error("User Does Not Exist");
   }
-  const decoded = jwt.verify(user.token, process.env.ACCESS_TOKEN_SECRET);
-  if (userData.password !== decoded.password) {
-    throw new Error("Wrong Password!");
+  const decodedJWT = jwt.verify(user.token, user.password);
+  if (decodedJWT) {
+    const isMatch = await bcrypt.compare(
+      userData.password,
+      decodedJWT.password
+    );
+    if (!isMatch) {
+      throw new Error("Incorrect Password");
+    }
+    return user;
   }
-  return user;
 }
 
 module.exports = {

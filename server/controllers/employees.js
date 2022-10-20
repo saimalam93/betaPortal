@@ -1,7 +1,8 @@
 require("dotenv").config();
 const Employee = require("../models/employee.js");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-var moment = require("moment");
+const moment = require("moment");
 
 async function viewAllEmployees(_, filters) {
   let employees = Employee.find();
@@ -22,18 +23,18 @@ async function viewSingleEmployee(_, { _id }) {
 }
 
 async function addNewEmployee(_, { employee }) {
-  // console.log(employee);
   employee.loginID = await generateLoginID({ employee });
 
-  employee.password =
+  employee.password = await generateHashPassword(
     employee.fname.substring(0, 1) +
-    employee.lname.substring(0, 1) +
-    employee.mobile;
+      employee.lname.substring(0, 1) +
+      employee.mobile
+  );
 
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
     employee.dateOfJoining = moment().format("YYYY-MM-DD");
   }
-  const token = jwt.sign(employee, process.env.ACCESS_TOKEN_SECRET);
+  const token = jwt.sign(employee, employee.password);
   employee.token = token;
 
   return await Employee.create(employee);
@@ -56,6 +57,13 @@ async function generateLoginID({ employee }) {
     employee.role.substring(0, 3).toUpperCase() +
     (tailValueInitial + employeeRole.length + 1).toString()
   );
+}
+
+async function generateHashPassword(password) {
+  const saltRounds = 10;
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
 }
 
 async function updateEmployee(_, { employee }) {

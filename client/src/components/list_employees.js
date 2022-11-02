@@ -15,10 +15,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import viewAllEmployees from "../graphql/viewAllEmployees";
 import resetPassword from "../graphql/resetPassword";
+import Alert from "@mui/material/Alert";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const List_Employees = (props) => {
   const url = "http://localhost:4000/graphql";
   const [employees, setEmployees] = useState([]);
+  const [success, setSuccess] = useState(false);
 
   let filters = {};
 
@@ -34,14 +38,16 @@ const List_Employees = (props) => {
 
   const resetUserPassword = (id) => {
     resetPassword(url, { id }).then((result) => {
-      console.log("Reset Password Result:", result.data.resetPassword);
+      setSuccess(result.data.resetPassword);
     });
   };
 
   return (
     <Container maxWidth={false}>
       <h1 align="center">LIST OF ALL EMPLOYEES</h1>
-
+      {success ? (
+        <Alert severity="success">Password Reset Successfully!</Alert>
+      ) : null}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -127,6 +133,7 @@ const List_Employees = (props) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
+                      setSuccess(false);
                       resetUserPassword(emp._id);
                     }}
                     variant="outlined"

@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,8 +12,9 @@ import TableRow from "@mui/material/TableRow";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import viewAllEmployees from "../graphql/viewAllEmployees";
+import resetPassword from "../graphql/resetPassword";
 
 const List_Employees = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -22,13 +24,19 @@ const List_Employees = (props) => {
 
   useEffect(() => {
     loadData(filters);
-  }, [employees]);
+  }, []);
 
   const loadData = (filters) => {
     viewAllEmployees(url, filters).then((result) => {
       setEmployees(result.data.viewAllEmployees);
     });
   }; // end of loadData
+
+  const resetUserPassword = (id) => {
+    resetPassword(url, { id }).then((result) => {
+      console.log("Reset Password Result:", result.data.resetPassword);
+    });
+  };
 
   return (
     <Container maxWidth={false}>
@@ -116,6 +124,16 @@ const List_Employees = (props) => {
                       />
                     </IconButton>
                   </Link>
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      resetUserPassword(emp._id);
+                    }}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Reset Password
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

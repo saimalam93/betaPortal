@@ -29,7 +29,30 @@ const Navbar = () => {
           </Button>
         </>
       );
-    } else {
+    } else if (user.role === "Director") {
+      menu = (
+        <>
+          <RequestsBell iconColor="action" badgeContent={2} />
+          {/* <Button
+            component={Link}
+            to="/listemployee"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            List
+          </Button> */}
+
+          <Button
+            component={Link}
+            to="/createproject"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Create
+          </Button>
+        </>
+      );
+    }
+  
+    else {
       menu = (
         <Button style={{ textDecoration: "none", color: "white" }}>
           Someone {user.role} Button

@@ -19,15 +19,20 @@ const loginTypeDefs = fs.readFileSync(
   "./schemas/login_schema_graphql",
   "utf-8"
 );
+const directorTypeDefs = fs.readFileSync(
+  "./schemas/project_schema_graphql",
+  "utf-8"
+);
 
 const adminResolvers = require("./resolvers/admin_resolvers");
 const loginResolver = require("./resolvers/login_resolver");
+const directorResolvers = require("./resolvers/director_resolvers");
 
-const resolvers = _.merge({}, adminResolvers, loginResolver);
+const resolvers = _.merge({}, adminResolvers, loginResolver, directorResolvers);
 
 const { ApolloServer } = require("apollo-server-express");
 const server = new ApolloServer({
-  typeDefs: [adminTypeDefs, loginTypeDefs],
+  typeDefs: [adminTypeDefs, loginTypeDefs, directorTypeDefs],
   resolvers,
 });
 

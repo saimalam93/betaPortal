@@ -1,0 +1,62 @@
+input ProjectInputs {
+    projectNum: String!
+    projectName: String
+    projectType: String
+    projectDescription: String
+    projectCost: String
+    projectClient: String!
+
+    projectStatus: String
+    projectManager: ID
+
+    startDate: Date
+    endDate: Date
+}
+
+input ProjectUpdateInputs {
+    _id: String!
+    projectManager: String
+    startDate: Date
+    endDate: Date
+}
+
+input FilterProjectInputs {
+    projectType: String
+    projectCost: String
+    projectClient: String
+
+    projectStatus: String
+    projectManager: String
+
+    startDate: Date
+    endDate: Date
+}
+
+scalar Date
+
+type Project {
+    _id: ID
+    projectNum: String
+    projectName: String
+    projectType: String
+    projectDescription: String
+    projectCost: String
+    projectClient: String
+
+    projectStatus: String
+    projectManager: Employee
+
+    startDate: Date
+    endDate: Date
+}
+
+type Query {
+    viewAllProjects(filters: FilterProjectInputs): [Project!]!
+    viewSingleProject(_id: String!): Project!
+}
+
+type Mutation {
+    addNewProject(project: ProjectInputs): Project!
+    updateProject(project: ProjectUpdateInputs): Boolean
+    deleteProject(_id: String!): Boolean
+}

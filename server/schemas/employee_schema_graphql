@@ -67,4 +67,5 @@ type Mutation {
     addNewEmployee(employee: EmployeeInputs): Employee!
     updateEmployee(employee: EmployeeUpdateInputs): Boolean
     deleteEmployee(_id: String!): Boolean
+    resetPassword(_id: String!): Boolean
 }

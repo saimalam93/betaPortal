@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PreviewIcon from '@mui/icons-material/Preview';
 import Paper from "@mui/material/Paper";
@@ -12,29 +13,42 @@ import TableRow from "@mui/material/TableRow";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import viewAllEmployees from "../graphql/viewAllEmployees";
+import resetPassword from "../graphql/resetPassword";
+import Alert from "@mui/material/Alert";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const List_Employees = (props) => {
   const url = "http://localhost:4000/graphql";
   const [employees, setEmployees] = useState([]);
+  const [success, setSuccess] = useState(false);
 
   let filters = {};
 
   useEffect(() => {
     loadData(filters);
-  }, [employees]);
+  }, []);
 
   const loadData = (filters) => {
-    viewAllEmployees(url, filters).then((result) => {
+    viewAllEmployees(url, { filters }).then((result) => {
       setEmployees(result.data.viewAllEmployees);
     });
   }; // end of loadData
 
+  const resetUserPassword = (id) => {
+    resetPassword(url, { id }).then((result) => {
+      setSuccess(result.data.resetPassword);
+    });
+  };
+
   return (
     <Container maxWidth={false}>
       <h1 align="center">LIST OF ALL EMPLOYEES</h1>
-
+      {success ? (
+        <Alert severity="success">Password Reset Successfully!</Alert>
+      ) : null}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -125,6 +139,17 @@ const List_Employees = (props) => {
                       />
                     </IconButton>
                   </Link>
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSuccess(false);
+                      resetUserPassword(emp._id);
+                    }}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Reset Password
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

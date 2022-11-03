@@ -42,6 +42,8 @@ const LoginPage = () => {
         context.login(result.data.loginUser);
         if (result.data.loginUser.role === "Admin") {
           navigate("/listemployee");
+        } else if (result.data.loginUser.role === "Director") {
+          navigate("/director-dashboard");
         } else {
           // navigate("/dashboard");
           // navigate("/chart");

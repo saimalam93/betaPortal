@@ -1,5 +1,5 @@
-const query = `query ViewAllProjects($filters: FilterProjectInputs) {
-  viewAllProjects(filters: $filters) {
+const query = `query ViewSingleProject($_id: String!) {
+  viewSingleProject(_id: $_id) {
     _id
     projectNum
     projectName
@@ -20,7 +20,7 @@ const query = `query ViewAllProjects($filters: FilterProjectInputs) {
   }
 }`;
 
-async function viewAllProjects(url = "", variables) {
+async function viewSingleProject(url = "", variables) {
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -29,4 +29,4 @@ async function viewAllProjects(url = "", variables) {
   return response.json();
 }
 
-export default viewAllProjects;
+export default viewSingleProject;

@@ -9,6 +9,10 @@ import Delete_Employee from "./components/delete_employee";
 import Edit_Employee from "./components/edit_employee";
 import List_Employees from "./components/list_employees";
 import View_Employee from "./components/view_employee";
+import Create_Project from "./components/create_project";
+import Delete_Project from "./components/delete_project";
+import Edit_Project from "./components/edit_project";
+import List_Projects from "./components/list_projects";
 import Footer from "./components/footer";
 import Request_Table from "./components/request_employees";
 // import Chart from "./components/chart";
@@ -50,22 +54,25 @@ function App() {
         </nav>
       </header>
       <body>
-        {/* <BarChart chartData={userData} /> */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/createemployee' exact element={<Create_Employee />} />
-          <Route path='/listemployee' element={<List_Employees />} />
-          <Route path="/view/:_id" element={<View_Employee />} />
-          <Route path="/edit/:_id" element={<Edit_Employee />} />
-          <Route path='/requestemployees' element={<Request_Table />} />
-          <Route path="/delete/:_id" element={<Delete_Employee />} />
-          {/* <Route path="/chart" element={<Chart />} /> */}
-          <Route
+        
+       <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path='/createemployee' exact element={<Create_Employee />} />
+            <Route path='/listemployee' element={<List_Employees />} />
+            <Route path="/view/:_id" element={<View_Employee />} />
+            <Route path="/edit/:_id" element={<Edit_Employee />} />
+            <Route path='/requestemployees' element={<Request_Table />} />
+            <Route path="/delete/:_id" element={<Delete_Employee />} />
+            <Route path='/createproject' exact element={<Create_Project />} />
+            <Route path='/listproject' element={<List_Projects />} />
+            <Route path="/editproject/:_id" element={<Edit_Project />} />
+            <Route path="/deleteproject/:_id" element={<Delete_Project />} />
+            <Route
             path="/directordashboard"
             element={<DirectorDashboard chartData={userData} />}
           />
-        </Routes>
+          </Routes>
       </body>
 
       <div>

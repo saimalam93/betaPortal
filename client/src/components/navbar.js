@@ -3,8 +3,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import RequestsBell from "./requestsBell";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  let navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
   let menu;
   if (user) {
@@ -35,15 +37,7 @@ const Navbar = () => {
           <RequestsBell iconColor="action" badgeContent={2} />
           <Button
             component={Link}
-            to="/directordashboard"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            Dashboard
-          </Button>
-
-          <Button
-            component={Link}
-            to="/listprojects"
+            to="/listproject"
             style={{ textDecoration: "none", color: "white" }}
           >
             List
@@ -51,16 +45,21 @@ const Navbar = () => {
 
           <Button
             component={Link}
-            to="/requestemployees"
+            to="/createproject"
             style={{ textDecoration: "none", color: "white" }}
           >
-            Request
+            Create
           </Button>
         </>
       );
     } else {
       menu = (
-        <Button style={{ textDecoration: "none", color: "white" }}>
+        <Button
+          style={{ textDecoration: "none", color: "white" }}
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        >
           Someone {user.role} Button
         </Button>
       );
@@ -73,7 +72,15 @@ const Navbar = () => {
         <Toolbar>
           <Typography variant="h5" component="div">
             <Link
-              to={user ? (user.role === "Admin" ? `/listemployee` : "/") : "/"}
+              to={
+                user
+                  ? user.role === "Admin"
+                    ? `/listemployee`
+                    : user.role === "Director"
+                    ? `/director-dashboard`
+                    : "/"
+                  : "/"
+              }
               style={{ textDecoration: "none", color: "white" }}
             >
               {user ? `${user.role} Portal` : "betaPortal 1.0"}

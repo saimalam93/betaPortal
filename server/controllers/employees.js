@@ -4,16 +4,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
-async function viewAllEmployees(_, filters) {
+async function viewAllEmployees(_, { filters }) {
   let employees = Employee.find();
-  if (filters.title) {
-    employees = employees.or({ title: filters.title });
-  }
-  if (filters.department) {
-    employees = employees.or({ department: filters.department });
-  }
-  if (filters.employeeType) {
-    employees = employees.or({ employeeType: filters.employeeType });
+  if (filters.role) {
+    employees = employees.or({ role: filters.role });
   }
   return await employees;
 }
@@ -77,6 +71,29 @@ async function updateEmployee(_, { employee }) {
   return false;
 }
 
+async function resetPassword(_, { _id }) {
+  const employee = await Employee.findOne({ _id: _id });
+
+  employee.password = await generateHashPassword(
+    employee.fname.substring(0, 1) +
+      employee.lname.substring(0, 1) +
+      employee.mobile
+  );
+
+  employee.token = "";
+  const token = jwt.sign(employee.toJSON(), employee.password);
+  employee.token = token;
+
+  const result = await Employee.findOneAndUpdate(
+    { _id: employee._id },
+    { $set: employee }
+  );
+  if (result) {
+    return true;
+  }
+  return false;
+}
+
 async function deleteEmployee(_, { _id }) {
   const result = await Employee.findOneAndDelete({ _id: _id });
   if (result) {
@@ -91,4 +108,5 @@ module.exports = {
   addNewEmployee,
   updateEmployee,
   deleteEmployee,
+  resetPassword,
 };

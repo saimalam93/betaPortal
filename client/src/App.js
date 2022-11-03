@@ -9,6 +9,10 @@ import Create_Employee from "./components/create_employee";
 import Delete_Employee from "./components/delete_employee";
 import Edit_Employee from "./components/edit_employee";
 import List_Employees from "./components/list_employees";
+import Create_Project from "./components/create_project";
+import Delete_Project from "./components/delete_project";
+import Edit_Project from "./components/edit_project";
+import List_Projects from "./components/list_projects";
 import Footer from "./components/footer";
 import "./assets/styles/footer.css"
 
@@ -27,6 +31,10 @@ function App() {
             <Route path='/listemployee' element={<List_Employees />} />
             <Route path="/edit/:_id" element={<Edit_Employee />} />
             <Route path="/delete/:_id" element={<Delete_Employee />} />
+            <Route path='/createproject' exact element={<Create_Project />} />
+            <Route path='/listproject' element={<List_Projects />} />
+            <Route path="/editproject/:_id" element={<Edit_Project />} />
+            <Route path="/deleteproject/:_id" element={<Delete_Project />} />
           </Routes>
         </nav>
 

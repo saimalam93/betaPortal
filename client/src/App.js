@@ -4,25 +4,21 @@ import "./assets/styles/App.css";
 import LoginPage from "./pages/loginpage";
 import HomePage from "./pages/homepage";
 import Navbar from "./components/navbar";
-import Create_Employee from "./components/create_employee";
-import Delete_Employee from "./components/delete_employee";
-import Edit_Employee from "./components/edit_employee";
-import List_Employees from "./components/list_employees";
-import View_Employee from "./components/view_employee";
-import Create_Project from "./components/create_project";
-import Delete_Project from "./components/delete_project";
-import Edit_Project from "./components/edit_project";
-import List_Projects from "./components/list_projects";
+import CreateEmployee from "./components/create_employee";
+import DeleteEmployee from "./components/delete_employee";
+import EditEmployee from "./components/edit_employee";
+import ListEmployees from "./components/list_employees";
+import ViewEmployee from "./components/view_employee";
+import CreateProject from "./components/create_project";
+import DeleteProject from "./components/delete_project";
+import EditProject from "./components/edit_project";
+import ListProjects from "./components/list_projects";
 import Footer from "./components/footer";
-import Request_Table from "./components/request_employees";
-// import Chart from "./components/chart";
+import RequestTable from "./components/request_employees";
 import "./assets/styles/footer.css";
-
-// import BarChart from "./components/BarChart";
 import DirectorDashboard from "./components/DirectorDashboard";
 import { UserData } from "./Data";
 import { useState } from "react";
-// import { margin } from "@mui/system";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -51,16 +47,16 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/createemployee" exact element={<Create_Employee />} />
-          <Route path="/listemployee" element={<List_Employees />} />
-          <Route path="/view/:_id" element={<View_Employee />} />
-          <Route path="/edit/:_id" element={<Edit_Employee />} />
-          <Route path="/requestemployees" element={<Request_Table />} />
-          <Route path="/delete/:_id" element={<Delete_Employee />} />
-          <Route path="/createproject" exact element={<Create_Project />} />
-          <Route path="/listproject" element={<List_Projects />} />
-          <Route path="/editproject/:_id" element={<Edit_Project />} />
-          <Route path="/deleteproject/:_id" element={<Delete_Project />} />
+          <Route path="/createemployee" exact element={<CreateEmployee />} />
+          <Route path="/listemployee" element={<ListEmployees />} />
+          <Route path="/view/:_id" element={<ViewEmployee />} />
+          <Route path="/edit/:_id" element={<EditEmployee />} />
+          <Route path="/requestemployees" element={<RequestTable />} />
+          <Route path="/delete/:_id" element={<DeleteEmployee />} />
+          <Route path="/createproject" exact element={<CreateProject />} />
+          <Route path="/listproject" element={<ListProjects />} />
+          <Route path="/editproject/:_id" element={<EditProject />} />
+          <Route path="/deleteproject/:_id" element={<DeleteProject />} />
           <Route
             path="/director-dashboard"
             element={<DirectorDashboard chartData={userData} />}

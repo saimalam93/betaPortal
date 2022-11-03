@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BasicList = ({ anchorEl, handleClose, open }) => {
   const navigate = useNavigate();
@@ -46,7 +46,16 @@ const BasicList = ({ anchorEl, handleClose, open }) => {
           );
         })}
       </List>
-      <MenuItem onClick={handleClose}>View All Requests</MenuItem>
+      <Link
+        to="/requestemployees"
+        style={{
+          textDecoration: "none",
+          color: "black",
+          marginRight: "20px",
+        }}
+      >
+        <MenuItem onClick={handleClose}>View All Requests</MenuItem>
+      </Link>
     </Menu>
   );
 };

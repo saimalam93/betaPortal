@@ -93,10 +93,10 @@ const List_Projects = (props) => {
                   {project.projectManager.fname} {project.projectManager.lname}
                 </TableCell>
                 <TableCell align="right">
-                  {moment(project.StartDate).format("DD/MM/YYYY")}
+                  {moment(project.startDate).utc().format("DD/MM/YYYY")}
                 </TableCell>
                 <TableCell align="right">
-                  {moment(project.EndDate).format("DD/MM/YYYY")}
+                  {moment(project.endDate).utc().format("DD/MM/YYYY")}
                 </TableCell>
 
                 <TableCell align="right">

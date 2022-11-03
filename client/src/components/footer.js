@@ -5,10 +5,11 @@ const style = {
   borderTop: "0px solid #E7E7E7",
   textAlign: "center",
   padding: "2% 0",
-  top: "10px",
+  // top: "10px",
   left: "0",
   bottom: "0",
   width: "100%",
+  margin: "10px 0"
 };
 
 const footer = () => {

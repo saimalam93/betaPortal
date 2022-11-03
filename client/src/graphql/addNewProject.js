@@ -28,4 +28,4 @@ async function addNewProject(url = "", variables) {
   return response.json();
 }
 
-export default addNewProject;
+export default addNewProject;

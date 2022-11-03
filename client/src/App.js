@@ -15,14 +15,10 @@ import Edit_Project from "./components/edit_project";
 import List_Projects from "./components/list_projects";
 import Footer from "./components/footer";
 import Request_Table from "./components/request_employees";
-// import Chart from "./components/chart";
 import "./assets/styles/footer.css";
-
-// import BarChart from "./components/BarChart";
 import DirectorDashboard from "./components/DirectorDashboard";
 import { UserData } from "./Data";
 import { useState } from "react";
-// import { margin } from "@mui/system";
 
 function App() {
   const [userData, setUserData] = useState({

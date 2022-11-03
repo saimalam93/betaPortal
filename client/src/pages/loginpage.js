@@ -43,7 +43,10 @@ const LoginPage = () => {
         if (result.data.loginUser.role === "Admin") {
           navigate("/listemployee");
         } else {
-          navigate("/dashboard");
+          // navigate("/dashboard");
+          // navigate("/chart");
+          navigate("/directordashboard");
+
         }
       }
     });

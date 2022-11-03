@@ -1,6 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import PreviewIcon from '@mui/icons-material/Preview';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -100,6 +101,14 @@ const List_Employees = (props) => {
                 <TableCell align="right">{emp.address}</TableCell>
                 <TableCell align="right">{emp.sin}</TableCell>
                 <TableCell align="right">
+                  <Link to={`/view/${emp._id}`} className="btn btn-primary">
+                    <IconButton aria-label="preview" size="large">
+                      <PreviewIcon
+                        style={{ fill: "#6593F5" }}
+                        fontSize="inherit"
+                      />
+                    </IconButton>
+                  </Link>
                   <Link to={`/edit/${emp._id}`} className="btn btn-primary">
                     <IconButton aria-label="edit" size="large">
                       <EditIcon

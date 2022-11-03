@@ -29,6 +29,35 @@ const Navbar = () => {
           </Button>
         </>
       );
+    } else if (user.role === "Director") {
+      menu = (
+        <>
+          <RequestsBell iconColor="action" badgeContent={2} />
+          <Button
+            component={Link}
+            to="/directordashboard"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Dashboard
+          </Button>
+
+          <Button
+            component={Link}
+            to="/listprojects"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            List
+          </Button>
+
+          <Button
+            component={Link}
+            to="/requestemployees"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Request
+          </Button>
+        </>
+      );
     } else {
       menu = (
         <Button style={{ textDecoration: "none", color: "white" }}>

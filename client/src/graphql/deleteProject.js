@@ -1,5 +1,5 @@
-const query = `mutation DeleteProject($id: String!) {
-  deleteProject(_id: $id)
+const query = `mutation DeleteProject($_id: String!) {
+  deleteProject(_id: $_id)
 }`;
 
 async function deleteProject(url = "", variables) {

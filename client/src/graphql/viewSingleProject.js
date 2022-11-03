@@ -1,5 +1,5 @@
-const query = `query ViewSingleProject($id: String!) {
-  viewSingleProject(_id: $id) {
+const query = `query ViewSingleProject($_id: String!) {
+  viewSingleProject(_id: $_id) {
     _id
     projectNum
     projectName

@@ -31,7 +31,7 @@ const List_Employees = (props) => {
   }, []);
 
   const loadData = (filters) => {
-    viewAllEmployees(url, filters).then((result) => {
+    viewAllEmployees(url, { filters }).then((result) => {
       setEmployees(result.data.viewAllEmployees);
     });
   }; // end of loadData

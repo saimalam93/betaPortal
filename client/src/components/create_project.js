@@ -1,26 +1,37 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import addNewProject from "../graphql/addNewProject";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-import Grid from "@mui/system/Unstable_Grid";
-import styled from "@mui/system/styled";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import Container from "@mui/material/Container";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/system/Unstable_Grid";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import addNewProject from "../graphql/addNewProject";
+import viewAllEmployees from "../graphql/viewAllEmployees";
 
 // create a new project
 
 const Create_Project = () => {
   const url = "http://localhost:4000/graphql";
   const navigate = useNavigate();
-  
+  const [managers, setManagers] = useState([]);
+
+  let filters = { role: "Manager" };
+
+  useEffect(() => {
+    loadData(filters);
+  }, []);
+
+  const loadData = (filters) => {
+    viewAllEmployees(url, { filters }).then((result) => {
+      setManagers(result.data.viewAllEmployees);
+    });
+  }; // end of loadData
+
   const [project, setProject] = useState({
+    projectNum: "",
     projectName: "",
     projectType: "",
     projectDescription: "",
@@ -28,7 +39,7 @@ const Create_Project = () => {
     projectClient: "",
     projectStatus: "",
     projectManager: "",
-    startDate:"",
+    startDate: "",
     endDate: "",
   });
 
@@ -36,12 +47,12 @@ const Create_Project = () => {
   const handleChange = (event) => {
     setProject({ ...project, [event.target.name]: event.target.value });
   };
-  console.log(setProject);
 
   // handle submit function
   const submit = (e) => {
     e.preventDefault();
     setProject({
+      projectNum: "",
       projectName: "",
       projectType: "",
       projectDescription: "",
@@ -49,16 +60,15 @@ const Create_Project = () => {
       projectClient: "",
       projectStatus: "",
       projectManager: "",
-      startDate:"",
-      endDate:"",
+      startDate: "",
+      endDate: "",
     });
-    console.log(project);
-    let newProject = project;
-
-    addNewProject(url, { newProject }).then((result) => {
-      console.log("result:", result);
+    if (project.projectManager === "") {
+      project.projectManager = null;
+    }
+    addNewProject(url, { project }).then((result) => {
       setProject(result.data.addNewProject);
-      navigate("/dashboard");
+      navigate("/listproject");
     });
   };
 
@@ -89,6 +99,7 @@ const Create_Project = () => {
                   name="projectName"
                   value={project.projectName}
                   onChange={handleChange}
+                  required
                 />
               </Grid>
               <Grid xs>
@@ -125,6 +136,7 @@ const Create_Project = () => {
                   name="projectClient"
                   value={project.projectClient}
                   onChange={handleChange}
+                  required
                 />
               </Grid>
               <Grid xs>
@@ -136,15 +148,26 @@ const Create_Project = () => {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs>
-                <TextField
-                  label="Project Manager"
-                  type="text"
+              <Box sx={{ minWidth: 430, margin: "0" }}>
+                <InputLabel id="Project Manager" sx={{ margin: "0 25px" }}>
+                  Project Manager
+                </InputLabel>
+                <Select
+                  labelId="Project Manager"
                   name="projectManager"
                   value={project.projectManager}
+                  label="Project Manager"
                   onChange={handleChange}
-                />
-              </Grid>
+                  fullWidth
+                  sx={{ margin: "0 25px" }}
+                >
+                  {managers.map((manager) => (
+                    <MenuItem key={manager._id} value={manager._id}>
+                      {manager.fname} {manager.lname}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
 
               <Grid xs>
                 <TextField

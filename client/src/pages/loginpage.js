@@ -45,7 +45,10 @@ const LoginPage = () => {
         } else if (result.data.loginUser.role === "Director") {
           navigate("/director-dashboard");
         } else {
-          navigate("/dashboard");
+          // navigate("/dashboard");
+          // navigate("/chart");
+          navigate("/directordashboard");
+
         }
       }
     });

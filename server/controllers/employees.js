@@ -4,16 +4,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
-async function viewAllEmployees(_, filters) {
+async function viewAllEmployees(_, { filters }) {
   let employees = Employee.find();
-  if (filters.title) {
-    employees = employees.or({ title: filters.title });
-  }
-  if (filters.department) {
-    employees = employees.or({ department: filters.department });
-  }
-  if (filters.employeeType) {
-    employees = employees.or({ employeeType: filters.employeeType });
+  if (filters.role) {
+    employees = employees.or({ role: filters.role });
   }
   return await employees;
 }

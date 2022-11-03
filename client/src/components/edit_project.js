@@ -120,9 +120,6 @@ const Edit_Project = (props) => {
               alignItems="center"
               spacing={3}
             >
-              <Grid>
-                <h1>Project Upgrade</h1>
-              </Grid>
               <Box sx={{ minWidth: 430, margin: "0" }}>
                 <InputLabel id="Project Manager" sx={{ margin: "0 25px" }}>
                   Project Manager

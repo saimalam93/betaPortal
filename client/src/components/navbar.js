@@ -13,7 +13,7 @@ const Navbar = () => {
     if (user.role === "Admin") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={2} />
+          <RequestsBell iconColor="action" badgeContent={3} />
           <Button
             component={Link}
             to="/listemployee"
@@ -34,7 +34,7 @@ const Navbar = () => {
     } else if (user.role === "Director") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={2} />
+          <RequestsBell iconColor="action" badgeContent={3} />
           <Button
             component={Link}
             to="/listproject"

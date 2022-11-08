@@ -1,15 +1,7 @@
-import { color } from "@mui/system";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import Image from "../assets/images/betaPortal_bg.jpg";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-// const styles = {
-//     paperContainer: {
-//         height: 1356,
-//         background: color('#163932')
-//         // background: `url(${Image})`
-//     }
-// };
 const theme = createTheme({
   typography: {
     allVariants: {

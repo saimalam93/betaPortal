@@ -9,7 +9,7 @@ const style = {
   left: "0",
   bottom: "0",
   width: "100%",
-  margin: "10px 0"
+  margin: "0",
 };
 
 const footer = () => {

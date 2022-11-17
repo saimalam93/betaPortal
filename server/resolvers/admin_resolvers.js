@@ -12,6 +12,7 @@ const adminResolvers = {
     updateEmployee: employees.updateEmployee,
     deleteEmployee: employees.deleteEmployee,
     resetPassword: employees.resetPassword,
+    updatePassword: employees.updatePassword,
   },
 };
 

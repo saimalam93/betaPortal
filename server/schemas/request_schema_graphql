@@ -1,0 +1,51 @@
+input RequestInputs {
+
+    request_subject: String
+    reason: String
+    employee: ID
+    request_status: String
+    startDate: Date
+    endDate: Date
+
+}
+
+input UpdateRequestInputs {
+    _id: ID!
+    reason: String
+    request_status: String
+    startDate: Date
+    endDate: Date 
+}
+
+
+input RequestFilterInputs {
+    employee: ID
+    request_status: String
+    startDate: Date
+
+}
+type Request {
+    id: ID!
+    request_subject: String
+    reason: String
+    employee: Employee
+    request_status: String
+    startDate: Date
+    endDate: Date
+    
+}
+
+scalar Date
+
+type Query {
+    viewAllRequests(filter: RequestFilterInputs): [Request]
+    viewSingleRequest(_id: ID!): Request
+}
+
+type Mutation {
+    createRequest(request: RequestInputs): Request!
+    updateRequest(request: UpdateRequestInputs): Boolean
+    deleteRequest(_id: ID!): Boolean
+}
+
+

@@ -94,6 +94,26 @@ async function resetPassword(_, { _id }) {
   return false;
 }
 
+async function updatePassword(_, { employee }) {
+  const oldemployee = await Employee.findOne({ _id: employee._id });
+
+  oldemployee.password = await generateHashPassword(employee.password);
+
+  oldemployee.token = "";
+  const token = jwt.sign(oldemployee.toJSON(), oldemployee.password);
+  oldemployee.token = token;
+
+  const result = await Employee.findOneAndUpdate(
+    { _id: oldemployee._id },
+    { $set: oldemployee }
+  );
+  if (result) {
+    return true;
+  }
+
+  return false;
+}
+
 async function deleteEmployee(_, { _id }) {
   const result = await Employee.findOneAndDelete({ _id: _id });
   if (result) {
@@ -109,4 +129,5 @@ module.exports = {
   updateEmployee,
   deleteEmployee,
   resetPassword,
+  updatePassword,
 };

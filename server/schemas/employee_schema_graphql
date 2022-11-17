@@ -29,6 +29,12 @@ input EmployeeUpdateInputs {
     sin:String
     currentStatus:String
 }
+
+input EmployeePasswordUpdateInputs {
+    _id: String!
+    password: String!
+}
+
 input FilterEmployeeInputs {
     role: String
     department: String
@@ -68,4 +74,5 @@ type Mutation {
     updateEmployee(employee: EmployeeUpdateInputs): Boolean
     deleteEmployee(_id: String!): Boolean
     resetPassword(_id: String!): Boolean
+    updatePassword(employee: EmployeePasswordUpdateInputs): Boolean
 }

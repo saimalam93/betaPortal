@@ -23,16 +23,27 @@ const directorTypeDefs = fs.readFileSync(
   "./schemas/project_schema_graphql",
   "utf-8"
 );
+const requestTypeDefs = fs.readFileSync(
+  "./schemas/request_schema_graphql",
+  "utf-8"
+);
 
 const adminResolvers = require("./resolvers/admin_resolvers");
 const loginResolver = require("./resolvers/login_resolver");
 const directorResolvers = require("./resolvers/director_resolvers");
+const requestResolvers = require("./resolvers/request_resolvers");
 
-const resolvers = _.merge({}, adminResolvers, loginResolver, directorResolvers);
+const resolvers = _.merge(
+  {},
+  adminResolvers,
+  loginResolver,
+  directorResolvers,
+  requestResolvers
+);
 
 const { ApolloServer } = require("apollo-server-express");
 const server = new ApolloServer({
-  typeDefs: [adminTypeDefs, loginTypeDefs, directorTypeDefs],
+  typeDefs: [adminTypeDefs, loginTypeDefs, directorTypeDefs, requestTypeDefs],
   resolvers,
 });
 

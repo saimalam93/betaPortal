@@ -5,7 +5,6 @@ import Grid from "@mui/system/Unstable_Grid";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import addNewEmployee from "../graphql/addNewEmployee";
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -56,19 +55,12 @@ const Create_Employee = () => {
       setemployee(result.data.addNewEmployee);
       navigate("/listemployee");
     });
-    // addNewEmployee(url, employee)
   };
 
-  // const darkTheme = createTheme({
-  //     palette: {
-  //         mode: 'dark',
-  //     },
-  // });
+ 
 
   return (
-    // <ThemeProvider theme={darkTheme}>
-    //     <CssBaseline />
-    //     <main>
+   
     <div>
       <form onSubmit={submit}>
         <Box
@@ -151,15 +143,6 @@ const Create_Employee = () => {
                 }}
               />
             </Grid>
-            {/* <Grid xs>
-                            <TextField
-                                label="Role"
-                                type="text"
-                                name="role"
-                                value={employee.role}
-                                onChange={handleChange}
-                            />
-                        </Grid> */}
             <Grid>
               <Box sx={{ minWidth: 432.5 }}>
                 <FormControl fullWidth>
@@ -167,9 +150,7 @@ const Create_Employee = () => {
                   <Select
                     labelId="role"
                     label="Role"
-                    // type="text"
                     name="role"
-                    // value={employee.email}
                     onChange={handleChange}
                   >
                     <MenuItem value={"Admin"}>Administrator</MenuItem>
@@ -224,8 +205,6 @@ const Create_Employee = () => {
           </Grid>
         </Box>
       </form>
-
-      {/* {userCreated ? <h2>User Created Succeefully</h2> : userCreated = false} */}
     </div>
   );
 };

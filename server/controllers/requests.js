@@ -16,7 +16,7 @@ async function viewSingleRequest(_, { _id }) {
 }
 
 async function createRequest(_, { request }) {
-  console.log(request);
+  // console.log(request);
   return await Request.create(request);
 }
 

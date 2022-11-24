@@ -16,7 +16,7 @@ const EmployeeSchema = new Schema({
   department: String,
   sin: String,
   token: String,
-
+  image: String,
   currentStatus: { type: String, default: "null" },
 
   dateOfBirth: { type: Date },

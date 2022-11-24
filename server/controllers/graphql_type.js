@@ -9,7 +9,6 @@ const dateScalar = new GraphQLScalarType({
   },
 
   parseValue(value) {
-    //return new Date(value);
     const dateValue = new Date(value);
     return isNaN(dateValue) ? undefined : dateValue;
   },
@@ -18,11 +17,9 @@ const dateScalar = new GraphQLScalarType({
     if (ast.kind == Kind.INT) {
       const value = new Date(ast.value);
       return isNaN(value) ? undefined : value;
-      //return new Date(parseInt(ast.value, 10));
     } else if (ast.kind == Kind.STRING) {
       const value = new Date(ast.value);
       return isNaN(value) ? undefined : value;
-      //return new Date(ast.value)
     }
     return null;
   },

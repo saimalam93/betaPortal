@@ -1,5 +1,5 @@
-const query = `query ViewSingleRequest($id: ID!) {
-  viewSingleRequest(_id: $id) {
+const query = `query ViewSingleRequest($_id: ID!) {
+  viewSingleRequest(_id: $_id) {
     id
     request_subject
     reason

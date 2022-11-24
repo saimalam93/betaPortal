@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Employee = require("../models/employee.js");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -17,12 +18,13 @@ async function viewSingleEmployee(_, { _id }) {
 }
 
 async function addNewEmployee(_, { employee }) {
+  employee._id = new mongoose.Types.ObjectId();
   employee.loginID = await generateLoginID({ employee });
 
   employee.password = await generateHashPassword(
     employee.fname.substring(0, 1) +
-      employee.lname.substring(0, 1) +
-      employee.mobile
+    employee.lname.substring(0, 1) +
+    employee.mobile
   );
 
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
@@ -36,7 +38,6 @@ async function addNewEmployee(_, { employee }) {
 
 async function generateLoginID({ employee }) {
   let tailValueInitial = 0;
-  // str.charAt(0).toUpperCase() + str.slice(1);
   const employeeRole = await Employee.find({ role: employee.role });
   if (employee.role == "Director") {
     tailValueInitial = 10000;
@@ -76,8 +77,8 @@ async function resetPassword(_, { _id }) {
 
   employee.password = await generateHashPassword(
     employee.fname.substring(0, 1) +
-      employee.lname.substring(0, 1) +
-      employee.mobile
+    employee.lname.substring(0, 1) +
+    employee.mobile
   );
 
   employee.token = "";
@@ -95,7 +96,26 @@ async function resetPassword(_, { _id }) {
 }
 
 async function updatePassword(_, { employee }) {
-  const oldemployee = await Employee.findOne({ _id: employee._id });
+  const oldemployee = await Employee.findOne({ loginID: employee.loginID });
+
+  oldemployee.password = await generateHashPassword(employee.password);
+  oldemployee.token = "";
+  const token = jwt.sign(oldemployee.toJSON(), oldemployee.password);
+  oldemployee.token = token;
+
+  const result = await Employee.findOneAndUpdate(
+    { _id: oldemployee._id },
+    { $set: oldemployee }
+  );
+  if (result) {
+    return true;
+  }
+
+  return false;
+}
+
+async function updatePassword(_, { employee }) {
+  const oldemployee = await Employee.findOne({ loginID: employee.loginID });
 
   oldemployee.password = await generateHashPassword(employee.password);
 

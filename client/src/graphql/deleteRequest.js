@@ -1,5 +1,5 @@
-const query = `mutation Mutation($deleteRequestId: ID!) {
-  deleteRequest(_id: $deleteRequestId)
+const query = `mutation DeleteRequest($id: ID!) {
+  deleteRequest(_id: $id)
 }`;
 
 async function deleteRequest(url = "", variables) {

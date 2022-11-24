@@ -8,6 +8,7 @@ type User{
     password: String
     role: String
     token: String
+    _id: String
 }
 
 type Query {

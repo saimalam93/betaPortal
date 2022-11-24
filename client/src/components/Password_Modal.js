@@ -82,7 +82,12 @@ export default function Password_Modal(props) {
 
   const updateUserPassword = (employee) => {
     updatePassword(url, { employee }).then((result) => {
-      handleClose();
+        if(result.data.updatePassword){
+            handleClose()
+        }else{
+            setError(true);
+            setErrorMessage("Failed");
+        }
     });
   };
   return (
@@ -134,21 +139,6 @@ export default function Password_Modal(props) {
                   onChange={onInputChange}
                 />
               </Grid>
-
-              {/* <input
-              type="password"
-              name="password"
-              placeholder="Enter Password"
-              value={input.password}
-              onChange={onInputChange}
-            /> */}
-              {/* <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Enter Confirm Password"
-              value={input.confirmPassword}
-              onChange={onInputChange}
-            /> */}
               <Button 
               type="submit"
               variant="contained"

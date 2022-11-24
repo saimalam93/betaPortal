@@ -49,9 +49,6 @@ const Chart_Dash = () => {
                     
                 ]
                 }}
-                // width={600}
-                // height={400}
-                // options={{ maintainAspectRatio: false }}
             />
         </div>
     );

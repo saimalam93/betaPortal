@@ -39,7 +39,6 @@ const Delete_Employee = (props) => {
 
     const submit = (e) => {
         deleteEmployee(url, { _id }).then((result) => {
-
             setEmployee(result.data.deleteEmployee);
             navigate("/listemployee");
         });
@@ -81,33 +80,19 @@ const Delete_Employee = (props) => {
                 </TableContainer>
             </Container>
             <div >
-                {/* <form align="center"><br /> */}
-                {/* <Button variant="outlined" startIcon={<DeleteIcon />}>
-                        Delete
-                    </Button> */}
                 <Stack m={2} justifyContent="center" direction="row" spacing={2}>
                     <Button style={{
-                        // borderRadius: 35,
                         backgroundColor: "#8D021F",
-                        // padding: "18px 36px",
-                        // fontSize: "18px"
                     }} variant="contained" startIcon={<DeleteIcon />} onClick={submit}>Confirm</Button>
                     <Button style={{
-                        // borderRadius: 35,
                         backgroundColor: "#1D7874",
-                        // padding: "18px 36px",
-                        // fontSize: "18px"
                     }} variant="contained" startIcon={<NotInterested />} onClick={() => {
                         navigate("/listemployee");
                     }}>Cancel</Button>
                 </Stack>
-                {/* </form> */}
             </div>
         </div>
     );
 };
-
-
-
 
 export default Delete_Employee;

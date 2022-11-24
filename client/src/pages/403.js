@@ -106,28 +106,3 @@ const UnauthorizedAccess = () => {
 
 export default UnauthorizedAccess;
 
-// test Code
-
-// <Container
-//   maxWidth={false}
-//   sx={{
-//     display: "flex",
-//     backgroundImage: `url(${bg})`,
-//     backgroundPosition: "center",
-//     backgroundSize: "cover",
-//     backgroundRepeat: "no-repeat",
-//     width: "100vw",
-//     height: "100vh",
-//   }}
-// >
-//   <Box
-//     sx={{
-//       backgroundImage: `url(${bots})`,
-//       backgroundSize: "cover",
-//       backgroundRepeat: "no-repeat",
-//       width: "100%",
-//     }}
-//   ></Box>
-//   <h1>403</h1>
-//   <h1>Unauthorized Access</h1>
-// </Container>

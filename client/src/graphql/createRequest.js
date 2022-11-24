@@ -1,6 +1,5 @@
-const query = `mutation CreateRequest($requests: RequestInputs) {
-  createRequest(request: $requests) {
-    id
+const query = `mutation CreateRequest($request: RequestInputs) {
+  createRequest(request: $request) {
     request_subject
     reason
     request_status

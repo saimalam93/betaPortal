@@ -4,6 +4,7 @@ const query = `query LoginUser($userData: UserData!) {
     password
     token
     role
+    _id
   }
 }`;
 

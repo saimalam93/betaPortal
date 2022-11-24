@@ -95,10 +95,9 @@ async function resetPassword(_, { _id }) {
 }
 
 async function updatePassword(_, { employee }) {
-  const oldemployee = await Employee.findOne({ _id: employee._id });
+  const oldemployee = await Employee.findOne({ loginID: employee.loginID });
 
   oldemployee.password = await generateHashPassword(employee.password);
-
   oldemployee.token = "";
   const token = jwt.sign(oldemployee.toJSON(), oldemployee.password);
   oldemployee.token = token;

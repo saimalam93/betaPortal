@@ -45,6 +45,8 @@ const LoginPage = () => {
           navigate("/listemployee");
         } else if (result.data.loginUser.role === "Director") {
           navigate("/director-dashboard");
+        } else if (result.data.loginUser.role === "Employee") {
+          navigate("/employee-dashboard");
         } else {
           navigate("/dashboard");
         }

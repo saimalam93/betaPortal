@@ -1,21 +1,21 @@
 input EmployeeInputs {
-    loginID: String
-    password: String
-    fname: String!
-    lname: String!
-    mobile: String!
-    role: String!
-    email: String
-    gender: String
-    address: String
-    emergencyContact: String
-    employeeType: String
-    department: String
-    sin:String
-    token:String
-    currentStatus:String
-    dateOfBirth: Date
-    dateOfJoining: Date!
+  loginID: String
+  password: String
+  fname: String!
+  lname: String!
+  mobile: String!
+  role: String!
+  email: String
+  gender: String
+  address: String
+  emergencyContact: String
+  employeeType: String
+  department: String
+  sin: String
+  token: String
+  currentStatus: String
+  dateOfBirth: Date
+  dateOfJoining: Date!
 }
 
 input EmployeeUpdateInputs {
@@ -28,12 +28,20 @@ input EmployeeUpdateInputs {
     department: String
     sin:String
     currentStatus:String
+    image: String
 }
+
+input EmployeePasswordUpdateInputs {
+  loginID: String!
+  password: String!
+}
+
 input FilterEmployeeInputs {
-    role: String
-    department: String
-    employeeType: String
+  role: String
+  department: String
+  employeeType: String
 }
+
 
 scalar Date
 
@@ -53,19 +61,21 @@ type Employee {
     department: String
     sin: String
     token: String
+    image: String
     currentStatus: String
     dateOfBirth: Date
     dateOfJoining: Date
 }
 
 type Query {
-    viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
-    viewSingleEmployee(_id: String!): Employee!
+  viewAllEmployees(filters: FilterEmployeeInputs): [Employee!]!
+  viewSingleEmployee(_id: String!): Employee!
 }
 
 type Mutation {
-    addNewEmployee(employee: EmployeeInputs): Employee!
-    updateEmployee(employee: EmployeeUpdateInputs): Boolean
-    deleteEmployee(_id: String!): Boolean
-    resetPassword(_id: String!): Boolean
+  addNewEmployee(employee: EmployeeInputs): Employee!
+  updateEmployee(employee: EmployeeUpdateInputs): Boolean
+  deleteEmployee(_id: String!): Boolean
+  resetPassword(_id: String!): Boolean
+  updatePassword(employee: EmployeePasswordUpdateInputs): Boolean
 }

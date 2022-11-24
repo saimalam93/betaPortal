@@ -1,8 +1,8 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import viewSingleProject from "../graphql/viewSingleProject";
+import viewSingleRequest from "../graphql/viewSingleRequest";
 import { useParams } from "react-router-dom";
-import deleteProject from "../graphql/deleteProject";
+import deleteRequest from "../graphql/deleteRequest";
 import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,8 +20,8 @@ import NotInterested from "@mui/icons-material/NotInterested";
 const Delete_Project = (props) => {
   const url = "http://localhost:4000/graphql";
   const navigate = useNavigate();
-  const [project, setProject] = useState([]);
-  const [projectManager, setProjectManager] = useState({});
+  const [request, setRequest] = useState([]);
+  const [employee, setEmployee] = useState({});
   const { _id } = useParams();
   console.log(_id);
 
@@ -30,91 +30,80 @@ const Delete_Project = (props) => {
   }, []);
 
   const loadData = () => {
-    viewSingleProject(url, { _id }).then((result) => {
-      const { projectManager, ...project } = {
-        ...result.data.viewSingleProject,
+    viewSingleRequest(url, { _id }).then((result) => {
+      const { employee, ...request } = {
+        ...result.data.viewSingleRequest,
       };
-      setProject(project);
-      setProjectManager(projectManager);
+      setRequest(request);
+      setEmployee(employee);
     });
   }; // end of loadData
 
   const handleChange = (event) => {
-    setProject({ ...project, [event.target.name]: event.target.value });
+    setRequest({ ...request, [event.target.name]: event.target.value });
   };
 
   const submit = (e) => {
-    deleteProject(url, { _id }).then((result) => {
-      setProject(result.data.deleteProject);
-      navigate("/listproject");
+    deleteRequest(url, { _id }).then((result) => {
+      setRequest(result.data.deleteRequest);
+      navigate("/listrequest");
     });
   };
 
   return (
     <div>
       <h1 align="center">Delete Project</h1>
+
       <Container>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow style={{ backgroundColor: "#1D7874", color: "white" }}>
                 <TableCell style={{ color: "#ffffff" }}>
-                  Project Number
+                  Request Number
                 </TableCell>
-                <TableCell style={{ color: "#ffffff" }}>Project Name</TableCell>
-                <TableCell style={{ color: "#ffffff" }}>Project Type</TableCell>
+                <TableCell style={{ color: "#ffffff" }}>Request Subject</TableCell>
+                <TableCell style={{ color: "#ffffff" }}>Reason</TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Description
-                </TableCell>
-                <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Cost
+                  Request Status
                 </TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Client
+                  Start Date
                 </TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Status
+                  End Date
                 </TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Manager
+                  Created At
                 </TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project Start Date
+                  Updated At
                 </TableCell>
 
-                <TableCell style={{ color: "#ffffff" }} align="right">
-                  Project End Date
-                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow
-                key={project._id}
+                key={request._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {project.projectNum}
+                  {request.request_subject}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {project.projectName}
+                  {employee.fname} {employee.lname}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {project.projectType}
+                  {request.request_status}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {request.reason}
                 </TableCell>
                 <TableCell align="right">
-                  {project.projectDescription}
-                </TableCell>
-                <TableCell align="right">{project.projectCost}</TableCell>
-                <TableCell align="right">{project.projectClient}</TableCell>
-                <TableCell align="right">{project.projectStatus}</TableCell>
-                <TableCell align="right">
-                  {projectManager.fname} {projectManager.lname}
+                  {moment(request.startDate).format("DD/MM/YYYY")}
                 </TableCell>
                 <TableCell align="right">
-                  {moment(project.StartDate).format("DD/MM/YYYY")}
-                </TableCell>
-                <TableCell align="right">
-                  {moment(project.EndDate).format("DD/MM/YYYY")}
+                  {moment(request.endDate).format("DD/MM/YYYY")}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -125,7 +114,7 @@ const Delete_Project = (props) => {
         <Stack m={2} justifyContent="center" direction="row" spacing={2}>
           <Button
             style={{
-              backgroundColor: "#8D021F",    
+              backgroundColor: "#8D021F",
             }}
             variant="contained"
             startIcon={<DeleteIcon />}

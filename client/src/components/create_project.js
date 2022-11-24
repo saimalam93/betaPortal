@@ -46,6 +46,7 @@ const Create_Project = () => {
   // handle change function
   const handleChange = (event) => {
     setProject({ ...project, [event.target.name]: event.target.value });
+    
   };
 
   // handle submit function
@@ -68,6 +69,7 @@ const Create_Project = () => {
     }
     addNewProject(url, { project }).then((result) => {
       setProject(result.data.addNewProject);
+      console.log(result);
       navigate("/listproject");
     });
   };

@@ -51,7 +51,36 @@ const Navbar = () => {
           </Button>
         </>
       );
-    } else {
+    } else if (user.role === "Employee") {
+      menu = (
+        <>
+          <RequestsBell iconColor="action" badgeContent={3} />
+          <Button
+            component={Link}
+            to="/viewprofile"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Profile
+          </Button>
+
+          <Button
+            component={Link}
+            to="/employeerequests"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            List
+          </Button>
+
+          <Button
+            component={Link}
+            to="/createrequest"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Create
+          </Button>
+        </>
+      );
+    }else {
       menu = (
         <Button
           style={{ textDecoration: "none", color: "white" }}
@@ -77,7 +106,9 @@ const Navbar = () => {
                     ? `/listemployee`
                     : user.role === "Director"
                     ? `/director-dashboard`
-                    : "/"
+                    :  user.role === "Employee"
+                    ? `/employee-dashboard`
+                    : `/`
                   : "/"
               }
               style={{ textDecoration: "none", color: "white" }}

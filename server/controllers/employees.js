@@ -1,6 +1,7 @@
 require("dotenv").config();
 // const mongoose = require("mongoose");
 const Employee = require("../models/employee.js");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -18,7 +19,7 @@ async function viewSingleEmployee(_, { _id }) {
 }
 
 async function addNewEmployee(_, { employee }) {
-  // employee._id = new mongoose.Types.ObjectId();
+  employee._id = new mongoose.Types.ObjectId();
   employee.loginID = await generateLoginID({ employee });
 
   employee.password = await generateHashPassword(
@@ -38,7 +39,6 @@ async function addNewEmployee(_, { employee }) {
 
 async function generateLoginID({ employee }) {
   let tailValueInitial = 0;
-  // str.charAt(0).toUpperCase() + str.slice(1);
   const employeeRole = await Employee.find({ role: employee.role });
   if (employee.role == "Director") {
     tailValueInitial = 10000;
@@ -96,6 +96,24 @@ async function resetPassword(_, { _id }) {
   return false;
 }
 
+async function updatePassword(_, { employee }) {
+  const oldemployee = await Employee.findOne({ loginID: employee.loginID });
+  oldemployee.password = await generateHashPassword(employee.password);
+  oldemployee.token = "";
+  const token = jwt.sign(oldemployee.toJSON(), oldemployee.password);
+  oldemployee.token = token;
+
+  const result = await Employee.findOneAndUpdate(
+    { _id: oldemployee._id },
+    { $set: oldemployee }
+  );
+  if (result) {
+    return true;
+  }
+
+  return false;
+}
+
 async function deleteEmployee(_, { _id }) {
   const result = await Employee.findOneAndDelete({ _id: _id });
   if (result) {
@@ -111,4 +129,5 @@ module.exports = {
   updateEmployee,
   deleteEmployee,
   resetPassword,
+  updatePassword,
 };

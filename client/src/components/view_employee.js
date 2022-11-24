@@ -1,45 +1,22 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Button } from "@mui/material";
-import Stack from "@mui/system/Stack";
-import Typography from "@mui/material/Typography";
-import Chip from '@mui/material/Chip';
-// import TextField from "@mui/material/TextField";
-import { Container } from "@mui/system";
-// import Grid from "@mui/system/Unstable_Grid";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-// import updateEmployee from "../graphql/editEmployee";
-import viewSingleEmployee from "../graphql/viewSingleEmployee";
-// import NotInterested from "@mui/icons-material/NotInterested";
-// import Stack from "@mui/material/Stack";
-
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-import Divider from '@mui/material/Divider';
-import MuiGrid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import "../assets/styles/viewEmp.css"
-import Rating from '@mui/material/Rating';
-// import EmailIcon from '@mui/icons-material/Email';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-
-import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { sizing } from '@mui/system';
-import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Divider from '@mui/material/Divider';
+import MuiGrid from '@mui/material/Grid';
+import Rating from '@mui/material/Rating';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import Tab from '@mui/material/Tab';
+import Typography from "@mui/material/Typography";
+import { Container } from "@mui/system";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "../assets/styles/viewEmp.css";
+import viewSingleEmployee from "../graphql/viewSingleEmployee";
 
-// import img from '../assets/images/helly.jpg';
+
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
     ...theme.typography.body2,
@@ -49,24 +26,11 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 }));
 
 const theme = createTheme({
-    // typography: {
-    //     h4: {
-    //         color: 'red'
-    //     },
-    //     empDetailsFade: {
-    //         color: 'blue'
-    //     },
-    //     empDetails: {
-    //         color: 'blue'
-    //     }
-    // }
 });
 
-const Edit_Employee = (props) => {
+const View_Employee = (props) => {
     const url = "http://localhost:4000/graphql";
-    // const [employee, setEmployee] = useState({});
     const [oldEmp, setOldEmp] = useState({});
-    // const navigate = useNavigate();
     const { _id } = useParams();
     let filters = {};
 
@@ -94,154 +58,6 @@ const Edit_Employee = (props) => {
         <ThemeProvider theme={theme}>
             <div>
                 <h1 align="center">EMPLOYEE PROFILE</h1>
-
-                {/* <Container>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow style={{ backgroundColor: "#1D7874", color: "white" }}>
-                                <TableCell style={{ color: "#ffffff" }}>Employee ID</TableCell>
-                                <TableCell style={{ color: "#ffffff" }}>First Name</TableCell>
-                                <TableCell style={{ color: "#ffffff" }}>Last Name</TableCell>
-                                <TableCell style={{ color: "#ffffff" }}>Mobile</TableCell>
-                                <TableCell style={{ color: "#ffffff" }} align="right">
-                                    Date Of Joining
-                                </TableCell>
-                                <TableCell style={{ color: "#ffffff" }}>Role</TableCell>
-                                <TableCell style={{ color: "#ffffff" }}>Current Status</TableCell>
-                                <TableCell style={{ color: "#ffffff" }} align="right">
-                                    Date Of Birth
-                                </TableCell>
-                                <TableCell style={{ color: "#ffffff" }} align="right">Emergency Contact</TableCell>
-                                <TableCell style={{ color: "#ffffff" }} align="right">Address</TableCell>
-                                <TableCell style={{ color: "#ffffff" }} align="right">SIN</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow
-                                key={oldEmp._id}
-                                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {oldEmp.loginID}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {oldEmp.fname}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {oldEmp.lname}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.mobile}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {moment(oldEmp.dateOfJoining).utc().format("Do MMMM YYYY")}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.role}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.currentStatus}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {moment(oldEmp.dateOfBirth).utc().format("Do MMMM YYYY")}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.emergencyContact}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.address}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {oldEmp.sin}
-                                </TableCell>
-
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Container>
-            <Container>
-                <div>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs>
-                                {oldEmp.sin}
-                            </Grid>
-                            <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    <TableHead>
-                                        <TableRow style={{ backgroundColor: "#1D7874", color: "white" }}>
-                                            <TableCell style={{ color: "#ffffff" }}>Employee ID</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }}>First Name</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }}>Last Name</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }}>Mobile</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">
-                                                Date Of Joining
-                                            </TableCell>
-                                            <TableCell style={{ color: "#ffffff" }}>Role</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }}>Current Status</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">
-                                                Date Of Birth
-                                            </TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">Emergency Contact</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">Address</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">SIN</TableCell>
-                                            <TableCell style={{ color: "#ffffff" }} align="right">Action</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <TableRow
-                                            key={oldEmp._id}
-                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                {oldEmp.loginID}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {oldEmp.fname}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {oldEmp.lname}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.mobile}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {moment(oldEmp.dateOfJoining).utc().format("Do MMMM YYYY")}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.role}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.currentStatus}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {moment(oldEmp.dateOfBirth).utc().format("Do MMMM YYYY")}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.emergencyContact}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.address}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {oldEmp.sin}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Fab color="secondary" aria-label="edit">
-                                                    <EditIcon />
-                                                </Fab>
-                                            </TableCell>
-
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Grid>
-                    </Box>
-                </div>
-            </Container> */}
                 <Container fixed>
                     <Grid container>
                         <Grid item xs>
@@ -317,7 +133,6 @@ const Edit_Employee = (props) => {
                                     </TabContext>
 
                                 </Box>
-                                {/* <Divider variant="middle" /> */}
                                 <Box sx={{ m: 2 }}>
                                     <Typography gutterBottom variant="h6" >
                                         CONTACT INFORMATION
@@ -342,4 +157,4 @@ const Edit_Employee = (props) => {
     );
 };
 
-export default Edit_Employee;
+export default View_Employee;

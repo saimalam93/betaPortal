@@ -19,6 +19,7 @@ import "./assets/styles/footer.css";
 import DirectorDashboard from "./components/DirectorDashboard";
 import { AuthContext } from "./context/authContext";
 import UnauthorizedAccess from "./pages/403";
+import ViewProfile from "./components/view_profile";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -63,6 +64,8 @@ function App() {
               />
             </>
           ) : null}
+          <Route path="/dashboard" element={<DirectorDashboard />} />
+          <Route path="/viewprofile" element={<ViewProfile />} />
           <Route path="*" element={<UnauthorizedAccess />} />
         </Routes>
       </body>

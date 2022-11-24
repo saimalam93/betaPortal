@@ -1,4 +1,5 @@
 require("dotenv").config();
+// const mongoose = require("mongoose");
 const Employee = require("../models/employee.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -17,6 +18,7 @@ async function viewSingleEmployee(_, { _id }) {
 }
 
 async function addNewEmployee(_, { employee }) {
+  // employee._id = new mongoose.Types.ObjectId();
   employee.loginID = await generateLoginID({ employee });
 
   employee.password = await generateHashPassword(

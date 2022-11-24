@@ -4,6 +4,7 @@ input UserData {
 }
 
 type User{
+    _id : String
     loginID: String
     password: String
     role: String

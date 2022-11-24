@@ -1,36 +1,20 @@
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Button } from "@mui/material";
-import Stack from "@mui/system/Stack";
+import Divider from '@mui/material/Divider';
+import MuiGrid from '@mui/material/Grid';
+import Rating from '@mui/material/Rating';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import Tab from '@mui/material/Tab';
 import Typography from "@mui/material/Typography";
-import Chip from '@mui/material/Chip';
-// import TextField from "@mui/material/TextField";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../assets/styles/viewEmp.css";
 import viewSingleEmployee from "../graphql/viewSingleEmployee";
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-import Divider from '@mui/material/Divider';
-import MuiGrid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import "../assets/styles/viewEmp.css"
-import Rating from '@mui/material/Rating';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { sizing } from '@mui/system';
-import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from "@mui/material/styles";
 
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
@@ -44,7 +28,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 const theme = createTheme({
 });
 
-const Edit_Employee = (props) => {
+const View_Employee = (props) => {
     const url = "http://localhost:4000/graphql";
     const [oldEmp, setOldEmp] = useState({});
     const { _id } = useParams();
@@ -173,4 +157,4 @@ const Edit_Employee = (props) => {
     );
 };
 
-export default Edit_Employee;
+export default View_Employee;

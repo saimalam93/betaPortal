@@ -88,7 +88,6 @@ export default function Password_Modal(props) {
             setError(true);
             setErrorMessage("Failed");
         }
-     
     });
   };
   return (

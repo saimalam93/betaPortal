@@ -1,26 +1,25 @@
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import MuiGrid from "@mui/material/Grid";
+import {
+  default as Button,
+  default as IconButton,
+  default as PhotoCamera,
+} from "@mui/material/IconButton";
+import Rating from "@mui/material/Rating";
+import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import viewSingleEmployee from "../graphql/viewSingleEmployee";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import Divider from "@mui/material/Divider";
-import MuiGrid from "@mui/material/Grid";
-import Rating from "@mui/material/Rating";
-import { styled } from "@mui/material/styles";
 import "../assets/styles/viewEmp.css";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Tab from "@mui/material/Tab";
 import { AuthContext } from "../context/authContext";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/IconButton";
-import PhotoCamera from "@mui/material/IconButton";
-import Password_Modal from "./Password_Modal";
+import PasswordModal from "./Password_Modal";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
   width: "100%",
@@ -52,18 +51,18 @@ async function uploadImage(file) {
   return img.secure_url;
 }
 
-const Veiw_Profile = (props) => {
-  const url = "http://localhost:4000/graphql";
+const Veiw_Profile = () => {
   const [loggedEmp, setloggedEmp] = useState({});
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    console.log("user", user);
     setloggedEmp(user);
-  }, [loggedEmp]);
+  }, [loggedEmp, user]);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  let filters = {};
 
   const [formData, setFormData] = useState({
     // ...other fields
@@ -86,13 +85,13 @@ const Veiw_Profile = (props) => {
     // disable the form submit when uploading image
     if (uploadingImg) return;
 
-    const content = (
-      <div>
-        {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
-       Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-       Sed malesuada lobortis pretium.`}
-      </div>
-    );
+    // const content = (
+    //   <div>
+    //     {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
+    //    Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+    //    Sed malesuada lobortis pretium.`}
+    //   </div>
+    // );
   };
 
   return (
@@ -103,7 +102,7 @@ const Veiw_Profile = (props) => {
           <form onSubmit={handleSubmit}>
             <Grid container>
               {open ? (
-                <Password_Modal open={open} handleClose={handleClose} />
+                <PasswordModal open={open} handleClose={handleClose} />
               ) : null}
               <Grid item xs>
                 {/* Image preview */}

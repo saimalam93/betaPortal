@@ -44,10 +44,11 @@ function AuthProvider(props) {
 
   const login = (userData) => {
     if (userData) {
+      const decodeToken = jwtDecode(userData.token);
       localStorage.setItem("token", userData.token);
       dispatch({
         type: "LOGIN",
-        payload: userData,
+        payload: decodeToken,
       });
     }
   };

@@ -4,11 +4,11 @@ input UserData {
 }
 
 type User{
+    _id : String
     loginID: String
     password: String
     role: String
     token: String
-    _id: String
 }
 
 type Query {

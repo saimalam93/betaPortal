@@ -56,8 +56,6 @@ function App() {
               <Route path="/edit/:_id" element={<EditEmployee />} />
               <Route path="/requestemployees" element={<RequestTable />} />
               <Route path="/delete/:_id" element={<DeleteEmployee />} />
-
-
             </>
           ) : user && user.role === "Director" ? (
             <>
@@ -73,11 +71,17 @@ function App() {
             </>
           ) : user && user.role === "Employee" ? (
             <>
-              <Route path="/employee-dashboard" element={<Employee_Dashboard />} />
+              <Route
+                path="/employee-dashboard"
+                element={<Employee_Dashboard />}
+              />
               <Route path="/createrequest" exact element={<CreateRequest />} />
               <Route path="/deleterequest/:_id" element={<DeleteRequest />} />
               <Route path="/editrequest/:_id" element={<UpdateRequest />} />
-              <Route path="/employeerequests/:_id" element={<EmployeeRequests />} />
+              <Route
+                path="/employeerequests/:_id"
+                element={<EmployeeRequests />}
+              />
               <Route path="/viewprofile" element={<ViewProfile />} />
             </>
           ) : null}

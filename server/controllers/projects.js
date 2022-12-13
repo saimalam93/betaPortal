@@ -1,4 +1,4 @@
-const Project = require("../models/Project.js");
+const Project = require("../models/project.js");
 const moment = require("moment");
 
 async function viewAllProjects(_, filters) {

@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import viewSingleRequest from "../graphql/viewSingleRequest";
 
 const Employee_Requests = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [requests, setRequests] = useState([]);
 
   let filters = { employee: "637e9da0088e91277d025e16" };

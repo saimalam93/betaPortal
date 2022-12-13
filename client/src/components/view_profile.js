@@ -52,7 +52,7 @@ async function uploadImage(file) {
 }
 
 const Veiw_Profile = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [loggedEmp, setloggedEmp] = useState({});
   const { user } = useContext(AuthContext);
 

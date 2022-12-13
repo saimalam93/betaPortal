@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import viewAllProjects from "../graphql/viewAllProjects";
 
 const List_Projects = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [projects, setProjects] = useState([]);
 
   let filters = {};

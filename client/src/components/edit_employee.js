@@ -19,7 +19,7 @@ import updateEmployee from "../graphql/editEmployee";
 import viewSingleEmployee from "../graphql/viewSingleEmployee";
 
 const Edit_Employee = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [employee, setEmployee] = useState({});
   const [oldEmp, setOldEmp] = useState({});
   const navigate = useNavigate();

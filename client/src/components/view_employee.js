@@ -27,7 +27,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 const theme = createTheme({});
 
 const View_Employee = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [oldEmp, setOldEmp] = useState({});
   const { _id } = useParams();
   let filters = {};

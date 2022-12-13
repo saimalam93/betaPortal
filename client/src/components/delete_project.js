@@ -17,7 +17,7 @@ import deleteProject from "../graphql/deleteProject";
 import viewSingleProject from "../graphql/viewSingleProject";
 
 const Delete_Project = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const navigate = useNavigate();
   const [project, setProject] = useState([]);
   const [projectManager, setProjectManager] = useState({});

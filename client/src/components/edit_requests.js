@@ -23,7 +23,7 @@ import viewAllEmployees from "../graphql/viewAllEmployees";
 import viewSingleRequest from "../graphql/viewSingleRequest";
 
 const Edit_Request = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [request, setRequest] = useState([]);
   const [oldRequest, setOldRequest] = useState({});
   const [projectemployee, setProjectEmployee] = useState({});

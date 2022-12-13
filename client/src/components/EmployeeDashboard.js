@@ -1,79 +1,70 @@
 import { useState } from "react";
 import "../assets/styles/dashboard.css";
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 function Tasks() {
-  const [toggleState, setToggleState] = useState(1);
+  const [cards] = useState([
+    {
+      title: 'Task 1 : Due Today',
+      text1: `Create graphs for dashboard`,
+      text2: `Description: Pie chart showing growth of the project`,
+      text3: `Status: Done`,
+      text4: `Project: Vision 3D`,
+      flag: `true`,
 
-  const toggleTask = (index) => {
-    setToggleState(index);
-  };
-  
-  return (
-    <div>
-    <h1 class="text-center">My dashboard</h1>
-    <div className="container">
+    },
+    {
+      title: 'Task 2 : Due on 15th Dec',
+      text1: `Update API of the rent table and change datatype of columns specific to value.`,
+      text2: `Description: Add column for Image and update datatype of price to Decimal`,
+      text3: `Status: Done`,
+      text4: `Project: Health Care`,
+    },
+    {
+      title: 'Task 3 : Due on 20th Dec',
+      text1: `Delete customer who are not eligible for upgrade of mobile device and sim.`,
+      text2: `Description: Delete with specific id which matches to the first time user.`,
+      text3: `Status: Doing`,
+      text4: `Project: Capstone`,
+      flag: `false`,
+    },
+    {
+      title: 'Task 4 : Due on 22th Dec',
+      text1: `Fix design for rent listing with respect to AODA complaince style.`,
+      text2: `Description: Desing using mui and Ant design for specific requirements.`,
+      text3: `Status: Doing`,
+      text4: `Project: Robotics`,
+    },
    
-      <div className="bloc-tabs">
-        <button
-          className={toggleState === 1 ? "task active-task" : "task"}
-          onClick={() => toggleTask(1)}
-        >
-          Project Task
-        </button>
-        <button
-          className={toggleState === 2 ? "task active-task" : "task"}
-          onClick={() => toggleTask(2)}
-        >
-          Personal Task
-        </button>
-        <button
-          className={toggleState === 3 ? "task active-task" : "task"}
-          onClick={() => toggleTask(3)}
-        >
-          News
-        </button>
-      </div>
+  ])
+  
+ 
+  return (
 
-      <div className="content-tabs">
-        <div
-          className={toggleState === 1 ? "content  active-content" : "content"}
-        >
-          <h2>Task 1</h2>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-            praesentium incidunt quia aspernatur quasi quidem facilis quo nihil
-            vel voluptatum?
-          </p>
-        </div>
+    <div class="section">
+      <section>
+        <div className="container1">
+          <h1 align="center">My dashboard</h1>
+          <div className="cards">
+            {
+              cards.map((card, i) => (
 
-        <div
-          className={toggleState === 2 ? "content  active-content" : "content"}
-        >
-          <h2>Task 2</h2>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            voluptatum qui adipisci.
-          </p>
+                <div key={i} className="card">
+                  <h2>{card.title}</h2>
+                  <br />
+                  <p>{card.text1}</p>
+                  <p>{card.text2}</p>
+                  <p>{card.text4}</p>
+                  <p>{card.text3}</p>
+                </div>
+              ))
+            }
+          </div>
+        
         </div>
+      </section>
 
-        <div
-          className={toggleState === 3 ? "content  active-content" : "content"}
-        >
-          <h2>Company News</h2>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos sed
-            nostrum rerum laudantium totam unde adipisci incidunt modi alias!
-            Accusamus in quia odit aspernatur provident et ad vel distinctio
-            recusandae totam quidem repudiandae omnis veritatis nostrum
-            laboriosam architecto optio rem, dignissimos voluptatum beatae
-            aperiam voluptatem atque. Beatae rerum dolores sunt.
-          </p>
-        </div>
-      </div>
-    </div>
     </div>
 
   );

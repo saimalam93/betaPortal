@@ -35,7 +35,7 @@ const List_Employees = (props) => {
     viewAllEmployees(url, { filters }).then((result) => {
       setEmployees(result.data.viewAllEmployees);
     });
-  }; // end of loadData
+  }; 
 
   const resetUserPassword = (id) => {
     resetPassword(url, { id }).then((result) => {
@@ -74,7 +74,6 @@ const List_Employees = (props) => {
               <TableCell style={{ color: "#ffffff" }} align="right">
                 Emergency Contact
               </TableCell>
-              {/* <TableCell style={{ color: '#ffffff' }} align="right">Department</TableCell> */}
               <TableCell style={{ color: "#ffffff" }} align="right">
                 Address
               </TableCell>
@@ -111,7 +110,6 @@ const List_Employees = (props) => {
                   {moment(emp.dateOfBirth).utc().format("Do MMMM YYYY")}
                 </TableCell>
                 <TableCell align="right">{emp.emergencyContact}</TableCell>
-                {/* <TableCell align="right">{emp.department}</TableCell> */}
                 <TableCell align="right">{emp.address}</TableCell>
                 <TableCell align="right">{emp.sin}</TableCell>
                 <TableCell align="right">

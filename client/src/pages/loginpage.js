@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "../assets/styles/login.css";
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -55,76 +56,85 @@ const LoginPage = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Box
-            component="form"
-            onSubmit={handleLoginSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            {errors.map((error) => {
-              return (
-                <Alert
-                  key={error}
-                  severity="error"
-                  style={{ marginBottom: "20px" }}
-                >
-                  {error.message}
-                </Alert>
-              );
-            })}
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Login ID"
-              name="loginId"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Password"
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <div class="flex-container">
+
+      <div>
+      <img class="login_img" src={require('../assets/images/login_img.png')} alt="login_img" width={"200%"}/>
+      </div>
+
+      <div>
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              Login
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Box
+                component="form"
+                onSubmit={handleLoginSubmit}
+                noValidate
+                sx={{ mt: 1 }}
+              >
+                {errors.map((error) => {
+                  return (
+                    <Alert
+                      key={error}
+                      severity="error"
+                      style={{ marginBottom: "20px" }}
+                    >
+                      {error.message}
+                    </Alert>
+                  );
+                })}
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Login ID"
+                  name="loginId"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Password"
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Login
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
+      </div>
+    </div>
   );
 };
 

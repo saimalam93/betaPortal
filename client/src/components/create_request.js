@@ -11,9 +11,8 @@ import { useNavigate } from "react-router-dom";
 import createRequest from "../graphql/createRequest";
 import viewAllEmployees from "../graphql/viewAllEmployees";
 import { AuthContext, AuthProvider } from "../context/authContext";
+import Textarea from '@mui/joy/Textarea';
 
-
-// create a new request
 
 const Create_Request = () => {
     const url = "http://localhost:4000/graphql";
@@ -29,13 +28,11 @@ const Create_Request = () => {
         endDate: "",
     });
 
-    // handle change function
     const handleChange = (event) => {
         setRequest({ ...request, [event.target.name]: event.target.value });
 
     };
 
-    // handle submit function
     const submit = (e) => {
         e.preventDefault();
         setRequest({
@@ -56,20 +53,15 @@ const Create_Request = () => {
             <div>
                 <form onSubmit={submit}>
                     <Box
-                        sx={{
-                            "& .MuiTextField-root": { m: 1, width: "50ch" },
-                            flexGrow: 1,
-                        }}
                     >
                         <Grid
                             container
                             direction="column"
                             justifyContent="center"
-                            alignItems="center"
                             spacing={3}
                         >
                             <Grid>
-                                <h1>Create A New Request</h1>
+                                <center><h1>Create A New Request</h1></center>
                             </Grid>
                             <Grid xs>
                                 <TextField
@@ -78,11 +70,24 @@ const Create_Request = () => {
                                     name="request_subject"
                                     value={request.request_subject}
                                     onChange={handleChange}
+                                    sx={{
+                                        width: '100%'
+                                    }}
                                     required
                                 />
                             </Grid>
                             <Grid xs>
-                                <TextField
+
+                                <Textarea
+                                    sx={{
+                                        width: { md: 400 },
+                                        "& .MuiInputBase-root": {
+                                            height: 80
+                                        }
+                                    }}
+                                    minRows={2}
+                                    placeholder="Reason"
+                                    size="lg"
                                     label="Reason"
                                     type="text"
                                     name="reason"
@@ -97,7 +102,12 @@ const Create_Request = () => {
                                     name="startDate"
                                     value={request.startDate}
                                     onChange={handleChange}
-                                    sx={{ width: 220 }}
+                                    sx={{
+                                        width: '100%',
+                                        '@media (min-width: 780px)': {
+                                            width: '100%'
+                                        }
+                                    }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -105,25 +115,31 @@ const Create_Request = () => {
                             </Grid>
                             <Grid xs>
                                 <TextField
+
                                     label="End Date"
                                     type="date"
                                     name="endDate"
                                     value={request.endDate}
                                     onChange={handleChange}
-                                    sx={{ width: 220 }}
+                                    sx={{
+                                        width: '100%',
+                                        '@media (min-width: 780px)': {
+                                            width: '100%'
+                                        }
+                                    }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
                             </Grid>
                             <Grid>
-                                <Button
+                                <center><Button
                                     type="submit"
                                     variant="contained"
                                     style={{ width: 200, height: 50, background: "#1D7874" }}
                                 >
                                     ADD
-                                </Button>
+                                </Button></center>
                             </Grid>
                         </Grid>
                     </Box>

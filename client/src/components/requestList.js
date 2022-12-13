@@ -50,7 +50,7 @@ const BasicList = ({ anchorEl, handleClose, open }) => {
         to="/listrequest"
         style={{
           textDecoration: "none",
-          color: "black",
+          color: "white",
           marginRight: "20px",
         }}
       >

@@ -21,7 +21,7 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/IconButton";
 import PhotoCamera from "@mui/material/IconButton";
 import Password_Modal from "./Password_Modal";
-
+import "../assets/styles/footer.css";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
@@ -68,7 +68,6 @@ const Veiw_Profile = (props) => {
     let filters = {};
 
     const [formData, setFormData] = useState({
-        // ...other fields
         img: ""
     });
     const [uploadingImg, setUploadingImg] = useState(false);
@@ -85,7 +84,6 @@ const Veiw_Profile = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // disable the form submit when uploading image
         if (uploadingImg) return;
 
         const content = (
@@ -102,6 +100,7 @@ const Veiw_Profile = (props) => {
         <ThemeProvider theme={theme}>
             <div>
                 <h1 align="center">{user.fname}'s PROFILE</h1>
+                <br /><br /><br />
                 <Container fixed>
                     <form onSubmit={handleSubmit}>
                         <Grid container>
@@ -109,7 +108,6 @@ const Veiw_Profile = (props) => {
                                 <Password_Modal open={open} handleClose={handleClose} />
                             ) : null}
                             <Grid item xs>
-                                {/* Image preview */}
                                 {formData.img && (
                                     <figure>
                                         <img
@@ -120,7 +118,6 @@ const Veiw_Profile = (props) => {
                                         <figcaption>Preview</figcaption>
                                     </figure>
                                 )}
-                                {/* Inputs */}
                                 <input
                                     type="file"
                                     accept="image/*"
@@ -191,7 +188,6 @@ const Veiw_Profile = (props) => {
                                         </TabContext>
 
                                     </Box>
-                                    {/* <Divider variant="middle" /> */}
                                     <Box sx={{ m: 2 }}>
                                         <Typography gutterBottom variant="h6" >
                                             CONTACT INFORMATION
@@ -209,20 +205,9 @@ const Veiw_Profile = (props) => {
 
                                     <Box sx={{ m: 2 }}>
 
-                                        <Button variant="contained" component="label" color="warning">
-                                            Upload Profile Image
-                                            <input hidden accept="image/*" multiple type="file" />
-                                        </Button>
-                                        <IconButton color="primary" aria-label="upload picture" component="label">
-                                            <input hidden accept="image/*" type="file" />
-
-                                            <PhotoCamera />
-                                        </IconButton>
-
-                                        <Button onClick={handleOpen} variant="contained" component="label" color="success">
+                                        <button onClick={handleOpen}>
                                             Change Password
-
-                                        </Button>
+                                        </button>
                                     </Box>
                                 </Box>
                             </Grid>

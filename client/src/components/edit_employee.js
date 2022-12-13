@@ -35,7 +35,7 @@ const Edit_Employee = (props) => {
       setOldEmp(result.data.viewSingleEmployee);
       console.log(result.data.viewSingleEmployee);
     });
-  }; // end of loadData
+  }; 
 
   const handleChange = (event) => {
     setEmployee({ ...employee, [event.target.name]: event.target.value });

@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import RequestsBell from "./requestsBell";
 import viewAllRequests from "../graphql/viewAllRequests";
+import { useNavigate } from "react-router-dom";
+import Logo from "../assets/images/betaPortalLogo.png"
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -24,6 +27,16 @@ const Navbar = () => {
   }; // end of loadData
 
   let menu;
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#1976d2',
+      },
+    },
+  });
+
   if (user) {
     if (user.role === "Admin") {
       menu = (
@@ -81,14 +94,6 @@ const Navbar = () => {
 
           <Button
             component={Link}
-            to="/employeerequests"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            List
-          </Button>
-
-          <Button
-            component={Link}
             to="/createrequest"
             style={{ textDecoration: "none", color: "white" }}
           >
@@ -112,52 +117,64 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h5" component="div">
-            <Link
-              to={
-                user
-                  ? user.role === "Admin"
-                    ? `/listemployee`
-                    : user.role === "Director"
-                    ? `/director-dashboard`
-                    : user.role === "Employee"
-                    ? `/employee-dashboard`
-                    : `/`
-                  : "/"
-              }
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              {user ? `${user.role} Portal` : "betaPortal 1.0"}
-            </Link>
-          </Typography>
-          <Box alignItems="right" style={{ flexGrow: 1, textAlign: "right" }}>
-            {menu}
-            {user ? (
-              <Button
-                onClick={logout}
-                style={{ textDecoration: "none", color: "white" }}
-                component={Link}
-                to="/login"
-              >
-                Logout
-              </Button>
-            ) : (
+      <ThemeProvider theme={darkTheme}>
+        <AppBar position="static">
+          <Toolbar>
+            <Box
+              component="img"
+              sx={{
+                height: 64,
+                width: 64,
+                border: 0,
+              }}
+              alt="Your logo."
+              src={Logo}
+            />
+            <Typography variant="h5" component="div">
               <Link
-                to="/login"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  marginRight: "20px",
-                }}
+                to={
+                  user
+                    ? user.role === "Admin"
+                      ? `/listemployee`
+                      : user.role === "Director"
+                        ? `/director-dashboard`
+                        : user.role === "Employee"
+                          ? `/employee-dashboard`
+                          : `/`
+                    : "/"
+                }
+                style={{ textDecoration: "none", color: "white" }}
               >
-                Login
+                {user ? `${user.role} Portal` : "betaPortal 1.0"}
               </Link>
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar>
+            </Typography>
+            <Box alignItems="right" style={{ flexGrow: 1, textAlign: "right" }}>
+              {menu}
+              {user ? (
+                <Button
+                  onClick={logout}
+                  style={{ textDecoration: "none", color: "white" }}
+                  component={Link}
+                  to="/login"
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Link
+                  to="/login"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    marginRight: "20px",
+                  }}
+                >
+                  Login
+                </Link>
+              )}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
     </Box>
   );
 };

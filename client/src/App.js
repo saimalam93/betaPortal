@@ -31,70 +31,63 @@ function App() {
   const { user } = useContext(AuthContext);
   return (
     <div>
-      <header>
+      <div className="content-container">
         <nav>
           <Navbar />
         </nav>
-      </header>
-      <body>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {user ? (
-            <Route path="/login" element={<UnauthorizedAccess />} />
-          ) : (
-            <Route path="/login" element={<LoginPage />} />
-          )}
-          {user && user.role === "Admin" ? (
-            <>
-              <Route
-                path="/createemployee"
-                exact
-                element={<CreateEmployee />}
-              />
-              <Route path="/listemployee" element={<ListEmployees />} />
-              <Route path="/view/:_id" element={<ViewEmployee />} />
-              <Route path="/edit/:_id" element={<EditEmployee />} />
-              <Route path="/requestemployees" element={<RequestTable />} />
-              <Route path="/delete/:_id" element={<DeleteEmployee />} />
-            </>
-          ) : user && user.role === "Director" ? (
-            <>
-              <Route path="/createproject" exact element={<CreateProject />} />
-              <Route path="/listproject" element={<ListProjects />} />
-              <Route path="/editproject/:_id" element={<EditProject />} />
-              <Route path="/deleteproject/:_id" element={<DeleteProject />} />
-              <Route path="/listrequest" element={<ListRequests />} />
-              <Route
-                path="/director-dashboard"
-                element={<DirectorDashboard />}
-              />
-            </>
-          ) : user && user.role === "Employee" ? (
-            <>
-              <Route
-                path="/employee-dashboard"
-                element={<EmployeeDashboard />}
-              />
-              <Route path="/createrequest" exact element={<CreateRequest />} />
-              <Route path="/deleterequest/:_id" element={<DeleteRequest />} />
-              <Route path="/editrequest/:_id" element={<UpdateRequest />} />
-              <Route
-                path="/employeerequests/:_id"
-                element={<EmployeeRequests />}
-              />
-              <Route path="/viewprofile" element={<ViewProfile />} />
-            </>
-          ) : null}
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {user ? (
+              <Route path="/login" element={<UnauthorizedAccess />} />
+            ) : (
+              <Route path="/login" element={<LoginPage />} />
+            )}
+            {user && user.role === "Admin" ? (
+              <>
+                <Route
+                  path="/createemployee"
+                  exact
+                  element={<CreateEmployee />}
+                />
+                <Route path="/listemployee" element={<ListEmployees />} />
+                <Route path="/view/:_id" element={<ViewEmployee />} />
+                <Route path="/edit/:_id" element={<EditEmployee />} />
+                <Route path="/requestemployees" element={<RequestTable />} />
+                <Route path="/delete/:_id" element={<DeleteEmployee />} />
+              </>
+            ) : user && user.role === "Director" ? (
+              <>
+                <Route path="/createproject" exact element={<CreateProject />} />
+                <Route path="/listproject" element={<ListProjects />} />
+                <Route path="/editproject/:_id" element={<EditProject />} />
+                <Route path="/deleteproject/:_id" element={<DeleteProject />} />
+                <Route path="/listrequest" element={<List_Requests />} />
+                <Route
+                  path="/director-dashboard"
+                  element={<DirectorDashboard />}
+                />
+              </>
+            ) : user && user.role === "Employee" ? (
+              <>
+                <Route path="/employee-dashboard" element={<Employee_Dashboard />} />
+                <Route path="/createrequest" exact element={<CreateRequest />} />
+                <Route path="/deleterequest/:_id" element={<DeleteRequest />} />
+                <Route path="/editrequest/:_id" element={<UpdateRequest />} />
+                <Route path="/employeerequests/:_id" element={<EmployeeRequests />} />
+                <Route path="/viewprofile" element={<ViewProfile />} />
+              </>
+            ) : null}
+            
+            <Route path="*" element={<UnauthorizedAccess />} />
+          </Routes>
 
-          <Route path="*" element={<UnauthorizedAccess />} />
-        </Routes>
-      </body>
 
-      <div>
-        <footer>
-          <Footer />
-        </footer>
+        </main>
       </div>
+      <footer className="footer--pin">
+        <Footer />
+      </footer>
     </div>
   );
 }

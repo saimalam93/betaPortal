@@ -31,7 +31,7 @@ const Delete_Employee = (props) => {
         viewSingleEmployee(url, { _id }).then((result) => {
             setEmployee(result.data.viewSingleEmployee);
         });
-    }; // end of loadData
+    }; 
 
     const handleChange = (event) => {
         setEmployee({ ...employee, [event.target.name]: event.target.value });

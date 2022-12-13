@@ -40,6 +40,7 @@ const LoginPage = () => {
       if (result.errors) {
         setErrors(result.errors);
       } else {
+        console.log(result.data.loginUser);
         context.login(result.data.loginUser);
         if (result.data.loginUser.role === "Admin") {
           navigate("/listemployee");

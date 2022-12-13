@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import RequestsBell from "./requestsBell";
 import { useNavigate } from "react-router-dom";

@@ -1,21 +1,23 @@
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import MuiGrid from "@mui/material/Grid";
+import {
+  default as Button,
+  default as IconButton,
+  default as PhotoCamera,
+} from "@mui/material/IconButton";
+import Rating from "@mui/material/Rating";
+import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
-import axios from 'axios';
-import viewSingleEmployee from "../graphql/viewSingleEmployee";
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import Divider from '@mui/material/Divider';
-import MuiGrid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
-import { styled } from '@mui/material/styles';
 import "../assets/styles/viewEmp.css";
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Tab from '@mui/material/Tab';
 import { AuthContext } from "../context/authContext";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/IconButton";
@@ -24,34 +26,33 @@ import Password_Modal from "./Password_Modal";
 import "../assets/styles/footer.css";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
-    width: '100%',
-    ...theme.typography.body2,
-    '& [role="separator"]': {
-        margin: theme.spacing(0, 2),
-    },
+  width: "100%",
+  ...theme.typography.body2,
+  '& [role="separator"]': {
+    margin: theme.spacing(0, 2),
+  },
 }));
 
-const theme = createTheme({
-});
+const theme = createTheme({});
 
 const NAME_OF_UPLOAD_PRESET = "aoayxrqj";
 const YOUR_CLOUDINARY_ID = "dtoza9lm0";
 
 // A helper function
 async function uploadImage(file) {
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
-    const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
-        {
-            method: "POST",
-            body: data
-        }
-    );
-    const img = await res.json();
-    console.log(img);
-    return img.secure_url;
+  const data = new FormData();
+  data.append("file", file);
+  data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
+    {
+      method: "POST",
+      body: data,
+    }
+  );
+  const img = await res.json();
+  console.log(img);
+  return img.secure_url;
 }
 
 const Veiw_Profile = (props) => {

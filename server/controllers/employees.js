@@ -1,4 +1,5 @@
 require("dotenv").config();
+// const mongoose = require("mongoose");
 const Employee = require("../models/employee.js");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -23,8 +24,8 @@ async function addNewEmployee(_, { employee }) {
 
   employee.password = await generateHashPassword(
     employee.fname.substring(0, 1) +
-    employee.lname.substring(0, 1) +
-    employee.mobile
+      employee.lname.substring(0, 1) +
+      employee.mobile
   );
 
   if (employee.dateOfJoining == "" || employee.dateOfJoining == null) {
@@ -77,8 +78,8 @@ async function resetPassword(_, { _id }) {
 
   employee.password = await generateHashPassword(
     employee.fname.substring(0, 1) +
-    employee.lname.substring(0, 1) +
-    employee.mobile
+      employee.lname.substring(0, 1) +
+      employee.mobile
   );
 
   employee.token = "";

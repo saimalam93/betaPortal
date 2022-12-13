@@ -1,8 +1,9 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import RequestsBell from "./requestsBell";
+import viewAllRequests from "../graphql/viewAllRequests";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/betaPortalLogo.png"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -10,6 +11,21 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const Navbar = () => {
   let navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
+  const url = "http://localhost:4000/graphql";
+  const [requests, setRequests] = useState([]);
+
+  let filters = {};
+
+  useEffect(() => {
+    loadData(filters);
+  }, []);
+
+  const loadData = (filters) => {
+    viewAllRequests(url, filters).then((result) => {
+      setRequests(result.data.viewAllRequests);
+    });
+  }; // end of loadData
+
   let menu;
 
   const darkTheme = createTheme({
@@ -46,7 +62,7 @@ const Navbar = () => {
     } else if (user.role === "Director") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={3} />
+          <RequestsBell iconColor="action" badgeContent={requests.length} />
           <Button
             component={Link}
             to="/listproject"

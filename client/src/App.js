@@ -20,12 +20,12 @@ import "./assets/styles/footer.css";
 import DirectorDashboard from "./components/DirectorDashboard";
 import { AuthContext } from "./context/authContext";
 import UnauthorizedAccess from "./pages/403";
-import List_Requests from "./components/list_requests";
+import ListRequests from "./components/list_requests";
 import DeleteRequest from "./components/delete_request";
 import UpdateRequest from "./components/edit_requests";
 import EmployeeRequests from "./components/employee_requests";
 import ViewProfile from "./components/view_profile";
-import Employee_Dashboard from "./components/EmployeeDashboard";
+import EmployeeDashboard from "./components/EmployeeDashboard";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -55,8 +55,6 @@ function App() {
                 <Route path="/edit/:_id" element={<EditEmployee />} />
                 <Route path="/requestemployees" element={<RequestTable />} />
                 <Route path="/delete/:_id" element={<DeleteEmployee />} />
-
-
               </>
             ) : user && user.role === "Director" ? (
               <>

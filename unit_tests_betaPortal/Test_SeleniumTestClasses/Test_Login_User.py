@@ -17,8 +17,7 @@ class Test_Login_User(object):
         password = self.driver.find_element("name", "password")
         password.send_keys(user_password)
 
-        button = self.driver.find_element("xpath", "/html/body/div/div/body/main/div/form/button")
-        self.driver.execute_script("arguments[0].click();", button)
+        password.submit()
 
         if user == "ADM20002":
             logged_in_user_logo = self.driver.find_element("link text", "Admin Portal")

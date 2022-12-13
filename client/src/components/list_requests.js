@@ -1,5 +1,5 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,10 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import viewAllRequests from "../graphql/viewAllRequests";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 const List_Requests = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -29,7 +27,6 @@ const List_Requests = (props) => {
   const loadData = (filters) => {
     viewAllRequests(url, filters).then((result) => {
       setRequests(result.data.viewAllRequests);
-      console.log(result);
     });
   }; // end of loadData
 
@@ -42,7 +39,9 @@ const List_Requests = (props) => {
           <TableHead>
             <TableRow style={{ backgroundColor: "#1D7874", color: "white" }}>
               {/* <TableCell style={{ color: "#ffffff" }}>Request Number</TableCell> */}
-              <TableCell style={{ color: "#ffffff" }}>Request Subject</TableCell>
+              <TableCell style={{ color: "#ffffff" }}>
+                Request Subject
+              </TableCell>
               <TableCell style={{ color: "#ffffff" }}>Reason</TableCell>
               <TableCell style={{ color: "#ffffff" }}>Request Status</TableCell>
               <TableCell style={{ color: "#ffffff" }} align="right">
@@ -83,7 +82,6 @@ const List_Requests = (props) => {
                 <TableCell align="right">
                   {moment(request.endDate).utc().format("DD/MM/YYYY")}
                 </TableCell>
-
 
                 <TableCell align="right">
                   <Link

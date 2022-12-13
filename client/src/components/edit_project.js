@@ -1,6 +1,11 @@
+import NotInterested from "@mui/icons-material/NotInterested";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,13 +19,8 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import updateProject from "../graphql/editProject";
-import viewSingleProject from "../graphql/viewSingleProject";
-import NotInterested from "@mui/icons-material/NotInterested";
-import Stack from "@mui/material/Stack";
 import viewAllEmployees from "../graphql/viewAllEmployees";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import viewSingleProject from "../graphql/viewSingleProject";
 
 const Edit_Project = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -58,9 +58,7 @@ const Edit_Project = (props) => {
     e.preventDefault();
     project._id = _id;
     updateProject(url, { project }).then((result) => {
-      console.log("result:", result);
       setProject(result.data.updateProject);
-      console.log("AAA", project);
       navigate("/listproject");
     });
   };

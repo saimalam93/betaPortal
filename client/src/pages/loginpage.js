@@ -1,18 +1,17 @@
-import { Button, TextField, Alert } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import { Container } from "@mui/system";
-import React from "react";
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
-import loginUser from "../graphql/loginUser";
-import CssBaseline from "@mui/material/CssBaseline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Alert, Button, TextField } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Container } from "@mui/system";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../assets/styles/login.css";
+import { AuthContext } from "../context/authContext";
+import loginUser from "../graphql/loginUser";
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -40,7 +39,6 @@ const LoginPage = () => {
       if (result.errors) {
         setErrors(result.errors);
       } else {
-        console.log(result.data.loginUser);
         context.login(result.data.loginUser);
         if (result.data.loginUser.role === "Admin") {
           navigate("/listemployee");
@@ -57,9 +55,13 @@ const LoginPage = () => {
 
   return (
     <div class="flex-container">
-
       <div>
-      <img class="login_img" src={require('../assets/images/login_img.png')} alt="login_img" width={"200%"}/>
+        <img
+          class="login_img"
+          src={require("../assets/images/login_img.png")}
+          alt="login_img"
+          width={"200%"}
+        />
       </div>
 
       <div>

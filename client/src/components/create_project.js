@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -10,8 +11,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import addNewProject from "../graphql/addNewProject";
 import viewAllEmployees from "../graphql/viewAllEmployees";
-import FormControl from '@mui/material/FormControl';
-
 
 const Create_Project = () => {
   const url = "http://localhost:4000/graphql";
@@ -28,7 +27,7 @@ const Create_Project = () => {
     viewAllEmployees(url, { filters }).then((result) => {
       setManagers(result.data.viewAllEmployees);
     });
-  }; 
+  };
 
   const [project, setProject] = useState({
     projectNum: "",
@@ -43,12 +42,9 @@ const Create_Project = () => {
     endDate: "",
   });
 
-  
   const handleChange = (event) => {
     setProject({ ...project, [event.target.name]: event.target.value });
-
   };
-
 
   const submit = (e) => {
     e.preventDefault();
@@ -69,7 +65,6 @@ const Create_Project = () => {
     }
     addNewProject(url, { project }).then((result) => {
       setProject(result.data.addNewProject);
-      console.log(result);
       navigate("/listproject");
     });
   };
@@ -78,9 +73,7 @@ const Create_Project = () => {
     <Container component="main" maxWidth="xs">
       <div>
         <form onSubmit={submit}>
-          <Box
-         
-          >
+          <Box>
             <Grid
               container
               direction="column"
@@ -88,7 +81,9 @@ const Create_Project = () => {
               spacing={3}
             >
               <Grid>
-                <center><h1>Create A New Project </h1></center>
+                <center>
+                  <h1>Create A New Project </h1>
+                </center>
               </Grid>
               <Grid xs>
                 <TextField
@@ -99,7 +94,7 @@ const Create_Project = () => {
                   onChange={handleChange}
                   required
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -111,7 +106,7 @@ const Create_Project = () => {
                   value={project.projectType}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -123,7 +118,7 @@ const Create_Project = () => {
                   value={project.projectDescription}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -135,7 +130,7 @@ const Create_Project = () => {
                   value={project.projectCost}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -148,7 +143,7 @@ const Create_Project = () => {
                   onChange={handleChange}
                   required
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -160,14 +155,16 @@ const Create_Project = () => {
                   value={project.projectStatus}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
 
-              <Box sx={{padding: "1.5%"}}>
+              <Box sx={{ padding: "1.5%" }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Project Manager</InputLabel>
+                  <InputLabel id="demo-simple-select-label">
+                    Project Manager
+                  </InputLabel>
                   <Select
                     labelId="Project Manager"
                     name="projectManager"
@@ -177,7 +174,7 @@ const Create_Project = () => {
                     fullWidth
                     sx={{
                       margin: "0 5px",
-                      width: '98%'
+                      width: "98%",
                     }}
                   >
                     {managers.map((manager) => (
@@ -197,10 +194,10 @@ const Create_Project = () => {
                   value={project.startDate}
                   onChange={handleChange}
                   sx={{
-                    width: '100%',
-                    '@media (min-width: 780px)': {
-                      width: '100%'
-                    }
+                    width: "100%",
+                    "@media (min-width: 780px)": {
+                      width: "100%",
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
@@ -216,10 +213,10 @@ const Create_Project = () => {
                   value={project.endDate}
                   onChange={handleChange}
                   sx={{
-                    width: '100%',
-                    '@media (min-width: 780px)': {
-                      width: '100%'
-                    }
+                    width: "100%",
+                    "@media (min-width: 780px)": {
+                      width: "100%",
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
@@ -228,13 +225,14 @@ const Create_Project = () => {
               </Grid>
 
               <Grid>
-                <center><Button
-                  type="submit"
-                  variant="contained"
-                  style={{ width: 200, height: 50, background: "#1D7874" }}
-                >
-                  ADD
-                </Button>
+                <center>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{ width: 200, height: 50, background: "#1D7874" }}
+                  >
+                    ADD
+                  </Button>
                 </center>
               </Grid>
             </Grid>

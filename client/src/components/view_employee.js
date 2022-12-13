@@ -32,14 +32,6 @@ const View_Employee = (props) => {
   const { _id } = useParams();
   let filters = {};
 
-  //   const content = (
-  //     <div>
-  //       {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
-  //        Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-  //        Sed malesuada lobortis pretium.`}
-  //     </div>
-  //   );
-
   useEffect(() => {
     loadData(filters);
   }, []);
@@ -47,7 +39,6 @@ const View_Employee = (props) => {
   const loadData = (filters) => {
     viewSingleEmployee(url, { _id }).then((result) => {
       setOldEmp(result.data.viewSingleEmployee);
-      console.log(result.data.viewSingleEmployee);
     });
   }; // end of loadData
 

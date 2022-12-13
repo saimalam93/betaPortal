@@ -1,12 +1,11 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Logo from "../assets/images/betaPortalLogo.png";
 import { AuthContext } from "../context/authContext";
-import RequestsBell from "./requestsBell";
 import viewAllRequests from "../graphql/viewAllRequests";
-import { useNavigate } from "react-router-dom";
-import Logo from "../assets/images/betaPortalLogo.png"
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import RequestsBell from "./requestsBell";
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -30,9 +29,9 @@ const Navbar = () => {
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: "dark",
       primary: {
-        main: '#1976d2',
+        main: "#1976d2",
       },
     },
   });
@@ -137,10 +136,10 @@ const Navbar = () => {
                     ? user.role === "Admin"
                       ? `/listemployee`
                       : user.role === "Director"
-                        ? `/director-dashboard`
-                        : user.role === "Employee"
-                          ? `/employee-dashboard`
-                          : `/`
+                      ? `/director-dashboard`
+                      : user.role === "Employee"
+                      ? `/employee-dashboard`
+                      : `/`
                     : "/"
                 }
                 style={{ textDecoration: "none", color: "white" }}

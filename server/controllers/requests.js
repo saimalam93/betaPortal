@@ -16,7 +16,6 @@ async function viewSingleRequest(_, { _id }) {
 }
 
 async function createRequest(_, { request }) {
-  // console.log(request);
   return await Request.create(request);
 }
 
@@ -32,7 +31,6 @@ async function updateRequest(_, { request }) {
 }
 
 async function deleteRequest(_, { _id }) {
-  console.log(_id);
   const result = await Request.findOneAndDelete({ _id: _id });
   if (result) {
     return true;

@@ -1,9 +1,8 @@
-import React from "react";
-import Badge from "@mui/material/Badge";
-import { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import React, { useState } from "react";
 import BasicList from "./requestList";
 
 const RequestsBell = ({ iconColor, badgeContent }) => {

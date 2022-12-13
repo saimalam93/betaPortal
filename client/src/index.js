@@ -2,9 +2,9 @@ import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import "./assets/styles/index.css";
 import client from "./apolloClient";
 import App from "./App";
+import "./assets/styles/index.css";
 import { AuthProvider } from "./context/authContext";
 import reportWebVitals from "./reportWebVitals";
 

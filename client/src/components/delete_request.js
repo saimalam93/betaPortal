@@ -1,21 +1,20 @@
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import viewSingleRequest from "../graphql/viewSingleRequest";
-import { useParams } from "react-router-dom";
-import deleteRequest from "../graphql/deleteRequest";
-import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import NotInterested from "@mui/icons-material/NotInterested";
+import { Button } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Container } from "@mui/system";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Stack from "@mui/material/Stack";
-import NotInterested from "@mui/icons-material/NotInterested";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import deleteRequest from "../graphql/deleteRequest";
+import viewSingleRequest from "../graphql/viewSingleRequest";
 
 const Delete_Project = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -23,7 +22,6 @@ const Delete_Project = (props) => {
   const [request, setRequest] = useState([]);
   const [employee, setEmployee] = useState({});
   const { _id } = useParams();
-  console.log(_id);
 
   useEffect(() => {
     loadData();
@@ -62,7 +60,9 @@ const Delete_Project = (props) => {
                 <TableCell style={{ color: "#ffffff" }}>
                   Request Number
                 </TableCell>
-                <TableCell style={{ color: "#ffffff" }}>Request Subject</TableCell>
+                <TableCell style={{ color: "#ffffff" }}>
+                  Request Subject
+                </TableCell>
                 <TableCell style={{ color: "#ffffff" }}>Reason</TableCell>
                 <TableCell style={{ color: "#ffffff" }} align="right">
                   Request Status
@@ -79,7 +79,6 @@ const Delete_Project = (props) => {
                 <TableCell style={{ color: "#ffffff" }} align="right">
                   Updated At
                 </TableCell>
-
               </TableRow>
             </TableHead>
             <TableBody>

@@ -1,6 +1,8 @@
+import NotInterested from "@mui/icons-material/NotInterested";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,8 +17,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import updateEmployee from "../graphql/editEmployee";
 import viewSingleEmployee from "../graphql/viewSingleEmployee";
-import NotInterested from "@mui/icons-material/NotInterested";
-import Stack from "@mui/material/Stack";
 
 const Edit_Employee = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -33,9 +33,8 @@ const Edit_Employee = (props) => {
   const loadData = (filters) => {
     viewSingleEmployee(url, { _id }).then((result) => {
       setOldEmp(result.data.viewSingleEmployee);
-      console.log(result.data.viewSingleEmployee);
     });
-  }; 
+  };
 
   const handleChange = (event) => {
     setEmployee({ ...employee, [event.target.name]: event.target.value });
@@ -46,9 +45,7 @@ const Edit_Employee = (props) => {
     e.preventDefault();
     employee._id = _id;
     updateEmployee(url, { employee }).then((result) => {
-      console.log("result:", result);
       setEmployee(result.data.updateEmployee);
-      console.log("AAA", employee);
       navigate("/listemployee");
     });
   };

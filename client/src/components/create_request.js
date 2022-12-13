@@ -36,7 +36,7 @@ const Create_Request = () => {
     request.employee = user._id;
     createRequest(url, { request }).then((result) => {
       setRequest(result.data.createRequest);
-      navigate("/listrequest");
+      navigate("/viewprofile");
     });
   };
   return (
@@ -69,12 +69,9 @@ const Create_Request = () => {
                 />
               </Grid>
               <Grid xs>
-                <Textarea
+                <TextField
                   sx={{
-                    width: { md: 400 },
-                    "& .MuiInputBase-root": {
-                      height: 80,
-                    },
+                    width: "100%",
                   }}
                   minRows={2}
                   placeholder="Reason"
@@ -84,6 +81,7 @@ const Create_Request = () => {
                   name="reason"
                   value={request.reason}
                   onChange={handleChange}
+                  multiline
                 />
               </Grid>
               <Grid xs>

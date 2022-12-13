@@ -11,7 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import viewAllProjects from "../graphql/viewAllProjects";
 
 const List_Projects = (props) => {

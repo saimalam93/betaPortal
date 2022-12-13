@@ -27,7 +27,6 @@ async function viewSingleEmployee(url = "", variables) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query, variables }),
   });
-  // console.log('response:',response.json())
   return response.json();
 }
 

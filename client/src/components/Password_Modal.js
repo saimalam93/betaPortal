@@ -1,14 +1,13 @@
-import React, { useContext, useState } from "react";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/system/Unstable_Grid";
+import { Alert } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Alert } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/system/Unstable_Grid";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import updatePassword from "../graphql/updatePassword";
-import Paper from "@mui/material/Paper";
 const style = {
   position: "absolute",
   top: "50%",
@@ -74,7 +73,6 @@ export default function Password_Modal(props) {
         loginID: user.loginID,
         password: password,
       };
-      console.log(employee);
 
       updateUserPassword(employee);
     }
@@ -82,12 +80,12 @@ export default function Password_Modal(props) {
 
   const updateUserPassword = (employee) => {
     updatePassword(url, { employee }).then((result) => {
-        if(result.data.updatePassword){
-            handleClose()
-        }else{
-            setError(true);
-            setErrorMessage("Failed");
-        }
+      if (result.data.updatePassword) {
+        handleClose();
+      } else {
+        setError(true);
+        setErrorMessage("Failed");
+      }
     });
   };
   return (
@@ -113,9 +111,9 @@ export default function Password_Modal(props) {
               spacing={3}
             >
               <Grid>
-              <Paper elevation={24} >
-                <h1 style={{ color: "#9db384" }}>Change Password</h1>
-              </Paper>
+                <Paper elevation={24}>
+                  <h1 style={{ color: "#9db384" }}>Change Password</h1>
+                </Paper>
               </Grid>
               <Grid>
                 {error && <Alert severity="error">{errorMessage}</Alert>}
@@ -139,11 +137,12 @@ export default function Password_Modal(props) {
                   onChange={onInputChange}
                 />
               </Grid>
-              <Button 
-              type="submit"
-              variant="contained"
-              style={{ width: 200, height: 50, background: "#1D7874" }}
-              >Submit
+              <Button
+                type="submit"
+                variant="contained"
+                style={{ width: 200, height: 50, background: "#1D7874" }}
+              >
+                Submit
               </Button>
             </Grid>
           </Box>

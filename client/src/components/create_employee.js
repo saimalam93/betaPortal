@@ -1,15 +1,15 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/system/Unstable_Grid";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import addNewEmployee from "../graphql/addNewEmployee";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Container from "@mui/material/Container";
 
 const Create_Employee = () => {
   const url = "http://localhost:4000/graphql";
@@ -48,26 +48,19 @@ const Create_Employee = () => {
       currentStatus: "",
       sin: "",
     });
-    console.log(employee);
     let newEmployee = employee;
 
     addNewEmployee(url, { newEmployee }).then((result) => {
-      console.log("result:", result);
       setemployee(result.data.addNewEmployee);
       navigate("/listemployee");
     });
   };
 
-
-
   return (
     <Container component="main" maxWidth="xs">
-
       <div>
         <form onSubmit={submit}>
-          <Box
-          
-          >
+          <Box>
             <Grid
               container
               direction="column"
@@ -75,7 +68,9 @@ const Create_Employee = () => {
               spacing={3}
             >
               <Grid>
-                <center><h1>ADD NEW EMPLOYEE DETAILS</h1></center>
+                <center>
+                  <h1>ADD NEW EMPLOYEE DETAILS</h1>
+                </center>
               </Grid>
               <Grid xs>
                 <TextField
@@ -85,7 +80,7 @@ const Create_Employee = () => {
                   value={employee.fname}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -97,7 +92,7 @@ const Create_Employee = () => {
                   value={employee.lname}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -109,7 +104,7 @@ const Create_Employee = () => {
                   value={employee.address}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -121,7 +116,7 @@ const Create_Employee = () => {
                   value={employee.mobile}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -133,7 +128,7 @@ const Create_Employee = () => {
                   value={employee.emergencyContact}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -145,7 +140,7 @@ const Create_Employee = () => {
                   value={employee.email}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -157,10 +152,10 @@ const Create_Employee = () => {
                   value={employee.dateOfBirth}
                   onChange={handleChange}
                   sx={{
-                    width: '100%',
-                    '@media (min-width: 780px)': {
-                      width: '100%'
-                    }
+                    width: "100%",
+                    "@media (min-width: 780px)": {
+                      width: "100%",
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
@@ -177,7 +172,7 @@ const Create_Employee = () => {
                       name="role"
                       onChange={handleChange}
                       sx={{
-                        width: '100%'
+                        width: "100%",
                       }}
                     >
                       <MenuItem value={"Admin"}>Administrator</MenuItem>
@@ -196,10 +191,10 @@ const Create_Employee = () => {
                   value={employee.dateOfJoining}
                   onChange={handleChange}
                   sx={{
-                    width: '100%',
-                    '@media (min-width: 780px)': {
-                      width: '100%'
-                    }
+                    width: "100%",
+                    "@media (min-width: 780px)": {
+                      width: "100%",
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
@@ -215,7 +210,7 @@ const Create_Employee = () => {
                   value={employee.currentStatus}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
@@ -227,18 +222,20 @@ const Create_Employee = () => {
                   value={employee.sin}
                   onChange={handleChange}
                   sx={{
-                    width: '100%'
+                    width: "100%",
                   }}
                 />
               </Grid>
               <Grid>
-                <center><Button
-                  type="submit"
-                  variant="contained"
-                  style={{ width: 200, height: 50, background: "#1D7874" }}
-                >
-                  ADD
-                </Button></center>
+                <center>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{ width: 200, height: 50, background: "#1D7874" }}
+                  >
+                    ADD
+                  </Button>
+                </center>
               </Grid>
             </Grid>
           </Box>

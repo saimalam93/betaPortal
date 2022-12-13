@@ -5,27 +5,30 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import viewAllRequests from "../graphql/viewAllRequests";
 
 const BasicList = ({ anchorEl, handleClose, open }) => {
   const navigate = useNavigate();
-  const sampleRequests = [
-    {
-      id: 1,
-      title: "Some Request One",
-      description: "Description of Request One",
-    },
-    {
-      id: 2,
-      title: "Some Request Two",
-      description: "Description of Request Two",
-    },
-  ];
+  const url = "http://localhost:4000/graphql";
+  const [requests, setRequests] = useState([]);
+
+  let filters = {};
+
+  useEffect(() => {
+    loadData(filters);
+  }, []);
+
+  const loadData = (filters) => {
+    viewAllRequests(url, filters).then((result) => {
+      setRequests(result.data.viewAllRequests);
+    });
+  }; // end of loadData
   return (
     <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
       <List sx={{ width: "450px", maxWidth: 500 }}>
-        {sampleRequests.map((request) => {
+        {requests.map((request) => {
           return (
             <React.Fragment key={request.id}>
               <ListItem disablePadding>
@@ -36,8 +39,8 @@ const BasicList = ({ anchorEl, handleClose, open }) => {
                 >
                   <ListItemText
                     onClick={handleClose}
-                    primary={request.title}
-                    secondary={request.description}
+                    primary={request.request_subject}
+                    secondary={request.reason}
                   />
                 </ListItemButton>
               </ListItem>

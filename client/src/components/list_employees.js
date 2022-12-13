@@ -1,8 +1,9 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import PreviewIcon from "@mui/icons-material/Preview";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import PreviewIcon from '@mui/icons-material/Preview';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,11 +15,9 @@ import { Container } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import viewAllEmployees from "../graphql/viewAllEmployees";
-import resetPassword from "../graphql/resetPassword";
-import Alert from "@mui/material/Alert";
-import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import resetPassword from "../graphql/resetPassword";
+import viewAllEmployees from "../graphql/viewAllEmployees";
 
 const List_Employees = (props) => {
   const url = "http://localhost:4000/graphql";
@@ -35,7 +34,7 @@ const List_Employees = (props) => {
     viewAllEmployees(url, { filters }).then((result) => {
       setEmployees(result.data.viewAllEmployees);
     });
-  }; 
+  };
 
   const resetUserPassword = (id) => {
     resetPassword(url, { id }).then((result) => {

@@ -17,7 +17,7 @@ import deleteEmployee from "../graphql/deleteEmployee";
 import viewSingleEmployee from "../graphql/viewSingleEmployee";
 
 const Delete_Employee = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const navigate = useNavigate();
   const [employee, setEmployee] = useState([]);
   const { _id } = useParams();

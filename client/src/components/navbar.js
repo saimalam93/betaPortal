@@ -10,7 +10,7 @@ import RequestsBell from "./requestsBell";
 const Navbar = () => {
   let navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [requests, setRequests] = useState([]);
 
   let filters = {};

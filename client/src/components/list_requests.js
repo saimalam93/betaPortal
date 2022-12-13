@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import viewAllRequests from "../graphql/viewAllRequests";
 
 const List_Requests = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [requests, setRequests] = useState([]);
 
   let filters = {};

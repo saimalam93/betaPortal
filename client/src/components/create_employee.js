@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import addNewEmployee from "../graphql/addNewEmployee";
 
 const Create_Employee = () => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const navigate = useNavigate();
 
   const [employee, setemployee] = useState({

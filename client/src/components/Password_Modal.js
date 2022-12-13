@@ -21,7 +21,7 @@ const style = {
 };
 
 export default function Password_Modal(props) {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
 
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(props.open);

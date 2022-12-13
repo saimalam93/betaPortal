@@ -10,7 +10,7 @@ import { AuthContext } from "../context/authContext";
 import createRequest from "../graphql/createRequest";
 
 const Create_Request = () => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 

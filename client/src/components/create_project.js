@@ -13,7 +13,7 @@ import addNewProject from "../graphql/addNewProject";
 import viewAllEmployees from "../graphql/viewAllEmployees";
 
 const Create_Project = () => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const navigate = useNavigate();
   const [managers, setManagers] = useState([]);
 

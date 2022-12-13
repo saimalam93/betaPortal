@@ -11,7 +11,7 @@ import viewAllRequests from "../graphql/viewAllRequests";
 
 const BasicList = ({ anchorEl, handleClose, open }) => {
   const navigate = useNavigate();
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [requests, setRequests] = useState([]);
 
   let filters = {};

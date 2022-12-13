@@ -17,7 +17,7 @@ const LoginPage = () => {
   let navigate = useNavigate();
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   let userData = {};
 
   const handleLoginSubmit = (e) => {

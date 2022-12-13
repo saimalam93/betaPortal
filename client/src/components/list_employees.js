@@ -20,7 +20,7 @@ import resetPassword from "../graphql/resetPassword";
 import viewAllEmployees from "../graphql/viewAllEmployees";
 
 const List_Employees = (props) => {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [employees, setEmployees] = useState([]);
   const [success, setSuccess] = useState(false);
 

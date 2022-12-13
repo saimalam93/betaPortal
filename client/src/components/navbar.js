@@ -1,18 +1,34 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import RequestsBell from "./requestsBell";
+import viewAllRequests from "../graphql/viewAllRequests";
 
 const Navbar = () => {
   let navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
+  const url = "http://localhost:4000/graphql";
+  const [requests, setRequests] = useState([]);
+
+  let filters = {};
+
+  useEffect(() => {
+    loadData(filters);
+  }, []);
+
+  const loadData = (filters) => {
+    viewAllRequests(url, filters).then((result) => {
+      setRequests(result.data.viewAllRequests);
+    });
+  }; // end of loadData
+
   let menu;
   if (user) {
     if (user.role === "Admin") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={3} />
+          {/* <RequestsBell iconColor="action" badgeContent={3} /> */}
           <Button
             component={Link}
             to="/listemployee"
@@ -33,7 +49,7 @@ const Navbar = () => {
     } else if (user.role === "Director") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={3} />
+          <RequestsBell iconColor="action" badgeContent={requests.length} />
           <Button
             component={Link}
             to="/listproject"
@@ -54,7 +70,7 @@ const Navbar = () => {
     } else if (user.role === "Employee") {
       menu = (
         <>
-          <RequestsBell iconColor="action" badgeContent={3} />
+          {/* <RequestsBell iconColor="action" badgeContent={3} /> */}
           <Button
             component={Link}
             to="/viewprofile"
@@ -80,7 +96,7 @@ const Navbar = () => {
           </Button>
         </>
       );
-    }else {
+    } else {
       menu = (
         <Button
           style={{ textDecoration: "none", color: "white" }}
@@ -106,7 +122,7 @@ const Navbar = () => {
                     ? `/listemployee`
                     : user.role === "Director"
                     ? `/director-dashboard`
-                    :  user.role === "Employee"
+                    : user.role === "Employee"
                     ? `/employee-dashboard`
                     : `/`
                   : "/"

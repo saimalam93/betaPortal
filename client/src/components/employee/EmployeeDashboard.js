@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../assets/styles/dashboard.css";
+import "../../assets/styles/dashboard.css";
 
 function Tasks() {
   const [cards] = useState([

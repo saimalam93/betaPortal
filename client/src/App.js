@@ -12,7 +12,7 @@ import DirectorDashboard from "./components/DirectorDashboard";
 import EditEmployee from "./components/edit_employee";
 import EditProject from "./components/edit_project";
 import UpdateRequest from "./components/edit_requests";
-import EmployeeDashboard from "./components/EmployeeDashboard";
+import EmployeeDashboard from "./components/employee/EmployeeDashboard";
 import EmployeeRequests from "./components/employee_requests";
 import Footer from "./components/footer";
 import ListEmployees from "./components/list_employees";
@@ -26,6 +26,7 @@ import { AuthContext } from "./context/authContext";
 import UnauthorizedAccess from "./pages/403";
 import HomePage from "./pages/homepage";
 import LoginPage from "./pages/loginpage";
+import ManagerDashboard from "./components/manager/ManagerDashboard";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -91,7 +92,17 @@ function App() {
                 />
                 <Route path="/viewprofile" element={<ViewProfile />} />
               </>
-            ) : null}
+            ) : user && user.role === "Manager" ? (
+              <>
+                <Route
+                  path="/manager-dashboard"
+                  element={<ManagerDashboard />}
+                />
+                {/* Add Manager routes if any here */}
+              </>
+            ) : (
+              <Route path="*" element={<UnauthorizedAccess />} />
+            )}
 
             <Route path="*" element={<UnauthorizedAccess />} />
           </Routes>

@@ -1,7 +1,6 @@
 import React from 'react';
 // import {makeStyles} from '@material-ui/core/styles';
-import { Button, ThemeProvider, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card, Avatar, CardHeader } from '@material-ui/core';
-import Theme from '../../Theme'
+import { Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card, Avatar, CardHeader } from '@material-ui/core';
 
 
 function createData(name, task, state) {

@@ -1,5 +1,6 @@
 main{
-  margin-inline: 50px;
+  margin-inline: 3rem;
+  margin-block: 2rem;
 }
 .App {
   text-align: center;
@@ -8,6 +9,49 @@ main{
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+/* overwrite MUI style */
+
+.MuiTypography-root.MuiTypography-subtitle1{
+  font-weight: 700;
+  padding-bottom: 24px
+}
+
+.MuiTableCell-root.MuiTableCell-body{
+  color:#616874
+}
+/* --------Global Card---------------*/
+.MuiCard-root{
+  padding: 24px
+}
+
+/* --------table ---------------*/
+.MuiCardHeader-avatar .MuiAvatar-root{
+  border-radius: 27%;
+}
+
+.MuiTableBody-root .MuiTableCell-root{
+  padding:0;
+  border: none;
+}
+.MuiFormControl-root .MuiInputBase-root{
+  border:0;
+}
+
+/* --------Input form------ */
+
+.MuiFormControl-root .MuiFilledInput-root{
+  background-color: #f8fafc;
+}
+.MuiButton-contained{
+  background-color: #157BFF !important;
+  text-transform: none!important;
+  color: #fff !important;
+  max-width: 200px!important;
+}
+.state-btn.MuiButton-disableElevation{
+  width: 68px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

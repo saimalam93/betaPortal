@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { Route, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
 import "./assets/styles/footer.css";
@@ -28,9 +29,27 @@ import HomePage from "./pages/homepage";
 import LoginPage from "./pages/loginpage";
 import ManagerDashboard from "./components/manager/ManagerDashboard";
 
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
+const theme = createTheme({
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          subtitle1: 'span',
+          subtitle2: 'span',
+          body1: 'p',
+          body2: 'p',
+        },
+      },
+    },
+  },
+});
+
 function App() {
   const { user } = useContext(AuthContext);
   return (
+    <ThemeProvider theme={theme}>
     <div>
       <div className="content-container">
         <nav>
@@ -112,6 +131,7 @@ function App() {
         <Footer />
       </footer>
     </div>
+    </ThemeProvider>
   );
 }
 

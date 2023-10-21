@@ -25,6 +25,16 @@ main{
 .MuiCard-root{
   padding: 24px
 }
+/*-------- tab -----------*/
+.MuiTabs-flexContainer .MuiTab-textColorInherit{
+  opacity: 0.5;
+}
+.MuiTabs-flexContainer .MuiTab-textColorInherit.Mui-selected {
+  color: #137bff;
+}
+.MuiTabs-scroller .PrivateTabIndicator-colorSecondary-7{
+  display: none;
+}
 
 /* --------table ---------------*/
 .MuiCardHeader-avatar .MuiAvatar-root{
@@ -40,20 +50,42 @@ main{
 }
 
 /* --------Input form------ */
+.MuiButtonBase-root{
+  text-transform: none !important;
+}
 
 .MuiFormControl-root .MuiFilledInput-root{
   background-color: #f8fafc;
 }
-.MuiButton-contained{
-  background-color: #157BFF !important;
-  text-transform: none!important;
-  color: #fff !important;
-  max-width: 200px!important;
+.MuiPaper-root .MuiButton-contained{
+  background-color: #157BFF ;
+  color: #fff ;
+  max-width: 200px;
+  text-align: end;
 }
 .state-btn.MuiButton-disableElevation{
   width: 68px;
 }
+/* ------ Three color of the state --------*/
+.state-btn.todo-btn{
+  background-color: #F8B362;
+  color: #893900;
+}
+.state-btn.doing-btn{
+  background-color: #FEBCBC;
+  color: #832525;
+}
+.state-btn.done-btn{
+  background-color: #B4F3B0;
+  color: #316B6E;
+}
 
+
+@media (min-width: 600px){
+  .MuiTabs-flexContainer .MuiTab-root {
+    min-width: 100px;
+}
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

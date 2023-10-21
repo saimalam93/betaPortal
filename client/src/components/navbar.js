@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { Avatar, AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +6,9 @@ import Logo from "../assets/images/betaPortalLogo.png";
 import { AuthContext } from "../context/authContext";
 import viewAllRequests from "../graphql/viewAllRequests";
 import RequestsBell from "./requestsBell";
+
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -35,6 +38,10 @@ const Navbar = () => {
       },
     },
   });
+
+
+  console.log(user)
+
 
   if (user) {
     if (user.role === "Admin") {
@@ -88,8 +95,14 @@ const Navbar = () => {
             to="/viewprofile"
             style={{ textDecoration: "none", color: "white" }}
           >
-            Profile
-          </Button>
+            <Avatar src="/broken-image.jpg" />
+            <div style={{
+              color: '#fff', textAlign: 'left', paddingInline: '1rem',
+              lineHeight: 1.5
+            }}>
+              <p style={{ fontWeight: 600 }}>{user.fname}</p>
+              <p style={{ fontWeight: 400 }}>{user.lname}</p>
+            </div>          </Button>
 
           <Button
             component={Link}
@@ -100,7 +113,28 @@ const Navbar = () => {
           </Button>
         </>
       );
-    } else {
+    } else if (user.role === "Manager") {
+      menu = (
+        <>
+          <Button
+            component={Link}
+            to="/viewprofile"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Avatar src="/broken-image.jpg" />
+            <div style={{
+              color: '#fff', textAlign: 'left', paddingInline: '1rem',
+              lineHeight: 1.5
+            }}>
+              <p style={{ fontWeight: 600 }}>{user.fname}</p>
+              <p style={{ fontWeight: 400 }}>{user.lname}</p>
+            </div>
+          </Button>
+
+        </>
+      );
+    }
+    else {
       menu = (
         <Button
           style={{ textDecoration: "none", color: "white" }}
@@ -136,10 +170,10 @@ const Navbar = () => {
                     ? user.role === "Admin"
                       ? `/listemployee`
                       : user.role === "Director"
-                      ? `/director-dashboard`
-                      : user.role === "Employee"
-                      ? `/employee-dashboard`
-                      : `/`
+                        ? `/director-dashboard`
+                        : user.role === "Employee"
+                          ? `/employee-dashboard`
+                          : `/`
                     : "/"
                 }
                 style={{ textDecoration: "none", color: "white" }}
@@ -156,7 +190,7 @@ const Navbar = () => {
                   component={Link}
                   to="/login"
                 >
-                  Logout
+                  <LogoutIcon />
                 </Button>
               ) : (
                 <Link
@@ -167,7 +201,7 @@ const Navbar = () => {
                     marginRight: "20px",
                   }}
                 >
-                  Login
+                  <LoginIcon />
                 </Link>
               )}
             </Box>

@@ -26,7 +26,7 @@ export default function TaskForReviewList() {
                 <Table >
                     <TableBody>
                         {rows.map((row, count) => (
-                            <TableRow hover={true} style={{ fontSize: '4rem', color: 'Theme.text.primary' }} key={row.name}>
+                            <TableRow hover={true} style={{ fontSize: '4rem' }} key={row.name}>
                                 <TableCell component="th" scope="row">
                                     <CardHeader
                                         avatar={
@@ -39,25 +39,11 @@ export default function TaskForReviewList() {
                                 </TableCell>
                                 <TableCell >{row.task}</TableCell>
                                 <TableCell>
-                                <Button className='state-btn'
-                                 disableElevation variant="contained" style=
-          {{
-
-            ...(row.status === 'Doing' && {
-              color: '#832525',
-              backgroundColor: '#FDECEC',
-            }),
-            ...(row.status === 'Todo' && {
-              color: '#078A96',
-              backgroundColor: '#EEF9FA',
-            }),
-            ...(row.status === 'Done' && {
-              color: '#316B6E',
-              backgroundColor: '#B4F3B0',
-            }),
-          }}
-          >{row.state}</Button>
-          </TableCell>
+                                    <Button className=
+                                    {`state-btn ${row.state === 'Todo' ? 'todo-btn' : (row.state === 'Doing' ? 'doing-btn' : 'done-btn')}`}
+                                        disableElevation variant="contained"
+                                    >{row.state}</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

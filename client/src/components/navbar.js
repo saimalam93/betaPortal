@@ -39,6 +39,25 @@ const Navbar = () => {
     },
   });
 
+  const UserAvatar = () => {
+    return (
+      <Button
+        component={Link}
+        to="/viewprofile"
+      >
+        <Avatar src="/broken-image.jpg" />
+        <div style={{
+          textAlign: 'left', paddingInline: '1rem',
+          lineHeight: 1.5
+        }}>
+          <p style={{ fontWeight: 600, color: '#fff' }}>{user.fname}</p>
+          <p style={{ fontWeight: 400, color: '#fff' }}>{user.lname}</p>
+        </div>
+      </Button>
+
+    )
+  }
+
 
   console.log(user)
 
@@ -90,20 +109,7 @@ const Navbar = () => {
       menu = (
         <>
           {/* <RequestsBell iconColor="action" badgeContent={3} /> */}
-          <Button
-            component={Link}
-            to="/viewprofile"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Avatar src="/broken-image.jpg" />
-            <div style={{
-              color: '#fff', textAlign: 'left', paddingInline: '1rem',
-              lineHeight: 1.5
-            }}>
-              <p style={{ fontWeight: 600 }}>{user.fname}</p>
-              <p style={{ fontWeight: 400 }}>{user.lname}</p>
-            </div>          </Button>
-
+          <UserAvatar />
           <Button
             component={Link}
             to="/createrequest"
@@ -116,21 +122,7 @@ const Navbar = () => {
     } else if (user.role === "Manager") {
       menu = (
         <>
-          <Button
-            component={Link}
-            to="/viewprofile"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Avatar src="/broken-image.jpg" />
-            <div style={{
-              color: '#fff', textAlign: 'left', paddingInline: '1rem',
-              lineHeight: 1.5
-            }}>
-              <p style={{ fontWeight: 600 }}>{user.fname}</p>
-              <p style={{ fontWeight: 400 }}>{user.lname}</p>
-            </div>
-          </Button>
-
+          <UserAvatar />
         </>
       );
     }
@@ -173,7 +165,9 @@ const Navbar = () => {
                         ? `/director-dashboard`
                         : user.role === "Employee"
                           ? `/employee-dashboard`
-                          : `/`
+                          : user.role === "Manager"
+                            ? `/manager-dashboard`
+                            : `/`
                     : "/"
                 }
                 style={{ textDecoration: "none", color: "white" }}

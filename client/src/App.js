@@ -50,87 +50,89 @@ function App() {
   const { user } = useContext(AuthContext);
   return (
     <ThemeProvider theme={theme}>
-    <div>
-      <div className="content-container">
-        <nav>
-          <Navbar />
-        </nav>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            {user ? (
-              <Route path="/login" element={<UnauthorizedAccess />} />
-            ) : (
-              <Route path="/login" element={<LoginPage />} />
-            )}
-            {user && user.role === "Admin" ? (
-              <>
-                <Route
-                  path="/createemployee"
-                  exact
-                  element={<CreateEmployee />}
-                />
-                <Route path="/listemployee" element={<ListEmployees />} />
-                <Route path="/view/:_id" element={<ViewEmployee />} />
-                <Route path="/edit/:_id" element={<EditEmployee />} />
-                <Route path="/requestemployees" element={<RequestTable />} />
-                <Route path="/delete/:_id" element={<DeleteEmployee />} />
-              </>
-            ) : user && user.role === "Director" ? (
-              <>
-                <Route
-                  path="/createproject"
-                  exact
-                  element={<CreateProject />}
-                />
-                <Route path="/listproject" element={<ListProjects />} />
-                <Route path="/editproject/:_id" element={<EditProject />} />
-                <Route path="/deleteproject/:_id" element={<DeleteProject />} />
-                <Route path="/listrequest" element={<ListRequests />} />
-                <Route
-                  path="/director-dashboard"
-                  element={<DirectorDashboard />}
-                />
-              </>
-            ) : user && user.role === "Employee" ? (
-              <>
-                <Route
-                  path="/employee-dashboard"
-                  element={<EmployeeDashboard />}
-                />
-                <Route
-                  path="/createrequest"
-                  exact
-                  element={<CreateRequest />}
-                />
-                <Route path="/deleterequest/:_id" element={<DeleteRequest />} />
-                <Route path="/editrequest/:_id" element={<UpdateRequest />} />
-                <Route
-                  path="/employeerequests/:_id"
-                  element={<EmployeeRequests />}
-                />
-                <Route path="/viewprofile" element={<ViewProfile />} />
-              </>
-            ) : user && user.role === "Manager" ? (
-              <>
-                <Route
-                  path="/manager-dashboard"
-                  element={<ManagerDashboard />}
-                />
-                {/* Add Manager routes if any here */}
-              </>
-            ) : (
-              <Route path="*" element={<UnauthorizedAccess />} />
-            )}
+      <div>
+        <div className="content-container">
+          <nav>
+            <Navbar />
+          </nav>
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              {user ? (
+                <Route path="/login" element={<UnauthorizedAccess />} />
+              ) : (
+                <Route path="/login" element={<LoginPage />} />
+              )}
+              {user && user.role === "Admin" ? (
+                <>
+                  <Route
+                    path="/createemployee"
+                    exact
+                    element={<CreateEmployee />}
+                  />
+                  <Route path="/listemployee" element={<ListEmployees />} />
+                  <Route path="/view/:_id" element={<ViewEmployee />} />
+                  <Route path="/edit/:_id" element={<EditEmployee />} />
+                  <Route path="/requestemployees" element={<RequestTable />} />
+                  <Route path="/delete/:_id" element={<DeleteEmployee />} />
+                </>
+              ) : user && user.role === "Director" ? (
+                <>
+                  <Route
+                    path="/createproject"
+                    exact
+                    element={<CreateProject />}
+                  />
+                  <Route path="/listproject" element={<ListProjects />} />
+                  <Route path="/editproject/:_id" element={<EditProject />} />
+                  <Route path="/deleteproject/:_id" element={<DeleteProject />} />
+                  <Route path="/listrequest" element={<ListRequests />} />
+                  <Route
+                    path="/director-dashboard"
+                    element={<DirectorDashboard />}
+                  />
+                </>
+              ) : user && user.role === "Employee" ? (
+                <>
+                  <Route
+                    path="/employee-dashboard"
+                    element={<EmployeeDashboard />}
+                  />
+                  <Route
+                    path="/createrequest"
+                    exact
+                    element={<CreateRequest />}
+                  />
+                  <Route path="/deleterequest/:_id" element={<DeleteRequest />} />
+                  <Route path="/editrequest/:_id" element={<UpdateRequest />} />
+                  <Route
+                    path="/employeerequests/:_id"
+                    element={<EmployeeRequests />}
+                  />
+                  <Route path="/viewprofile" element={<ViewProfile />} />
+                </>
+              ) : user && user.role === "Manager" ? (
+                <>
+                  <Route
+                    path="/manager-dashboard"
+                    element={<ManagerDashboard />}
+                  />
+                  <Route path="/viewprofile" element={<ViewProfile />} />
 
-            <Route path="*" element={<UnauthorizedAccess />} />
-          </Routes>
-        </main>
+                  {/* Add Manager routes if any here */}
+                </>
+              ) : (
+                <Route path="*" element={<UnauthorizedAccess />} />
+              )}
+
+              <Route path="*" element={<UnauthorizedAccess />} />
+            </Routes>
+          </main>
+        </div>
+        <footer className="footer--pin">
+          <Footer />
+        </footer>
       </div>
-      <footer className="footer--pin">
-        <Footer />
-      </footer>
-    </div>
     </ThemeProvider>
   );
 }

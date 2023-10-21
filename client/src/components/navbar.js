@@ -58,10 +58,6 @@ const Navbar = () => {
     )
   }
 
-
-  console.log(user)
-
-
   if (user) {
     if (user.role === "Admin") {
       menu = (

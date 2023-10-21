@@ -16,7 +16,16 @@ const query = `mutation AddNewProject($project: ProjectInputs) {
         mobile
         role
       }
+      projectEmpolyee {
+        employees {
+          loginID
+          fname
+          lname
+          mobile
+          role
+        }
     }
+  }
   }`;
 
 async function addNewProject(url = "", variables) {

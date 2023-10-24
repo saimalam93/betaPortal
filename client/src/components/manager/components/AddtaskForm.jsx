@@ -33,7 +33,6 @@ export default function TaskForReviewList() {
 
 
   const [task, setTask] = useState({
-    taskNum: "",
     taskName: "",
     taskDescription: "",
     taskEmployee: "",

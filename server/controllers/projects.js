@@ -1,7 +1,7 @@
 const Project = require("../models/project.js");
 const moment = require("moment");
 
-async function viewAllProjects(_, filters) {
+async function viewAllProjects(_, {filters}) {
   let projects = Project.find().populate("projectManager");
   if (filters.ProjectType) {
     projects = projects.or({ projectType: filters.ProjectType });

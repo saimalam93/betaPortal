@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { InputLabel, Select, MenuItem, Typography, Card, FormControl, TextField, Button } from '@material-ui/core';
+import { Box, Chip, InputLabel, Grid, Select, MenuItem, Typography, Card, FormControl, TextField, Button } from '@material-ui/core';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment'
 
-import addNewProject from "../../../graphql/addNewProject";
 import viewAllEmployees from "../../../graphql/viewAllEmployees";
+import createTask  from "../../../graphql/createTask";
 
 
 
 export default function TaskForReviewList() {
-  const url = "https://betaportal-saimalam.onrender.com/graphql";
-  const navigate = useNavigate();
+  const url = "http://localhost:4000/graphql";
   const [employees, setemployee] = useState([]);
+  const [endDate, setEndDate] = useState();
+  const [allTaks, setAllTasks] = useState([]);
 
   useEffect(() => {
     loadData(filters);
@@ -24,22 +26,18 @@ export default function TaskForReviewList() {
 
   const loadData = (filters) => {
     viewAllEmployees(url, { filters }).then((result) => {
-      let data = setemployee(result.data.viewAllEmployees);
+      setemployee(result.data.viewAllEmployees);
     });
 
   };
-  let filters = { role: "Employee" };
+  let filters = {};
 
 
-
-
-
-  const [project, setProject] = useState({
-    projectNum: "",
-    projectName: "",
-    projectDescription: "",
-    projectEmpolyee: [],
-    endDate: "",
+  const [task, setTask] = useState({
+    taskName: "",
+    taskDescription: "",
+    taskEmployee: "",
+    endDate: '',
   });
 
   const successfulNotify = () => (
@@ -55,33 +53,42 @@ export default function TaskForReviewList() {
   );
 
   const handleChange = (event) => {
-    setProject({ ...project, [event.target.name]: event.target.value });
+    setTask({ ...task, [event.target.name]: event.target.value });
 
   };
 
+  const handleDateChange = (e, date) => {
+    console.log(e.$d);
+    setEndDate(e.$d);
+    setTask({ ...task, endDate: e.$d });
+  }
+
+
+
   const submit = async (e) => {
     e.preventDefault();
-    setProject({
-      projectNum: "",
-      projectName: "",
-      projectDescription: "",
-      projectEmpolyee: [],
-      endDate: "",
-    });
-    if (project.projectEmpolyee === "") {
-      project.projectEmpolyee = null;
+    if (task.taskEmployee === "") {
+      throw new Error("Please select Employee");
     }
+
+    allTaks.push(task);
+
+    // createTask(url, {task}).then((result) => {
+    //   console.log(result);
+    // });
 
     try {
 
-      const result = await addNewProject(url, { project });
-      if (result && result.data && result.data.addNewProject) {
-        setProject(result.data.addNewProject);
-    } else {
-        console.error("Unexpected structure for result:", result);
-    }
-
-     // toast.info(successfulNotify);
+      const result = await createTask(url, { task }).then((result) => {
+        toast.info(successfulNotify);
+      });
+      setTask({
+        taskName: "",
+        taskDescription: "",
+        taskEmployee: "",
+        endDate: "",
+      });
+      setEndDate(null);
     } catch (error) {
       // Handle the error here
       console.error("An error occurred:", error);
@@ -90,77 +97,98 @@ export default function TaskForReviewList() {
     }
   };
 
+
+  const ITEM_HEIGHT = '3rem';
+  const ITEM_PADDING_TOP = '8px';
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        marginTop: ITEM_HEIGHT,
+        width: 250,
+      },
+    },
+    getContentAnchorEl: () => null,
+  };
+
   return (
     <Card>
       <Typography variant="subtitle1" component="body1"> Add task</Typography>
       <form onSubmit={submit}>
-        <TextField
-          required
-          style={{ width: '100%', margin: "5px" }}
-          id="filled-basic"
-          type="text"
-          label="title"
-          variant="filled"
-          name="projectName"
-          value={project.projectName}
-          onChange={handleChange}
-          InputProps={{ disableUnderline: true }}
-        />
-        <br />
-
-        <div style={{ display: 'flex', width: '100%' }}>
-          <FormControl style={{ width: '50%' }} required>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                sx={{ margin: "5px", backgroundColor: '#f8fafc' }}
-                name="endDate"
-                value={project.endDate}
-                variant="filled" label="Deadline" InputProps={{
-                  disableUnderline: true,
-                }}
-              />
-            </LocalizationProvider>
-          </FormControl>
-
-          <FormControl style={{ width: '50%' }}>
-            <InputLabel>Select Empolyee</InputLabel>
-            <Select
-              value={project.projectEmpolyee}
-              defaultValue=''
-              label="Select Empolyee"
+        <Grid container>
+          <Grid xs={12}>
+            <TextField
+              required
+              style={{ width: '100%', margin: "5px" }}
+              id="filled-basic"
+              type="text"
+              label="Task Title"
+              variant="filled"
+              name="taskName"
+              value={task.taskName}
               onChange={handleChange}
-              name="projectEmpolyee"
-            >
-              {employees.map((employee) => (
-                <MenuItem key={employee._id} value={employee._id}>
-                  {employee.fname} {employee.lname}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              InputProps={{ disableUnderline: true }}
+            />
+          </Grid>
 
-        </div>
+          <Grid md={6} sm={12}>
+            <FormControl style={{ width: '100%' }} required>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  sx={{ margin: "5px", backgroundColor: '#f8fafc' }}
+                  value={endDate}
+                  onChange={handleDateChange}
+                  variant="filled"
+                  label="End Date"
+                  disablePast
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                />
+              </LocalizationProvider>
+            </FormControl>
+          </Grid>
 
-        <br />
-        <TextField
-          type="text"
-          label="Description"
-          name="projectDescription"
-          variant="filled"
-          value={project.projectDescription}
-          onChange={handleChange}
-          InputProps={{
-            disableUnderline: true,
-            style: { height: 300 }
-          }}
-          style={{ width: "100%", margin: "5px" }}
+          <Grid md={6} sm={12}>
+            <FormControl style={{ width: '100%' }} required>
+              <InputLabel>Select Empolyee</InputLabel>
+              <Select
+                value={task.taskEmployee}
+                defaultValue=''
+                label="Select Empolyee"
+                onChange={handleChange}
+                name="taskEmployee"
+                MenuProps={MenuProps}
+              >
+                {employees.map((employee) => (
+                  <MenuItem key={employee._id} value={employee._id}>
+                    {employee.fname} {employee.lname}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
 
-        />
+          <Grid xs={12}>
+            <TextField
+              type="text"
+              label="Description"
+              name="taskDescription"
+              variant="filled"
+              value={task.taskDescription}
+              onChange={handleChange}
+              InputProps={{
+                disableUnderline: true,
+                style: { height: 300 }
+              }}
+              style={{ width: "100%", margin: "5px" }}
+
+            />
+          </Grid>
+        </Grid>
+
         <div style={{
           paddingTop: '1rem'
         }}>
-
-
           <Button type="submit" variant="contained">
             Save
           </Button>
@@ -168,7 +196,7 @@ export default function TaskForReviewList() {
         </div>
       </form>
 
-    </Card>
+    </Card >
 
   );
 }

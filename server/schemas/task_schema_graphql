@@ -15,10 +15,17 @@ input TaskInputs {
   endDate: Date
 }
 
+input TaskStatusUpdateInputs {
+  _id: ID!
+  taskStatus: String!
+}
+
 type Query {
   getTasks: [Task!]!
+  getTaskById(_id: ID!): [Task]
 }
 
 type Mutation {
   createTask(task: TaskInputs): Task!
+  updateTaskStatus(task: TaskStatusUpdateInputs): Boolean
 }

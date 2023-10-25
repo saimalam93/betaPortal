@@ -1,0 +1,24 @@
+type Task {
+  _id: ID
+  taskName: String
+  taskDescription: String
+  taskEmployee: Employee
+  taskStatus: String
+  endDate: Date
+}
+
+input TaskInputs {
+  taskName: String!
+  taskDescription: String
+  taskEmployee: ID!
+  taskStatus: String
+  endDate: Date
+}
+
+type Query {
+  getTasks: [Task!]!
+}
+
+type Mutation {
+  createTask(task: TaskInputs): Task!
+}

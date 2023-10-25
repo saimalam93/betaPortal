@@ -69,7 +69,10 @@ export default function CustomizedDialogs() {
 					</Typography>
 				</DialogContent>
 
+				<DialogContent >
 				<CommentBox />
+				</DialogContent>
+
 				</div>
 			</Dialog>
 		</div>

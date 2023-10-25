@@ -57,8 +57,7 @@ export default function TaskForReviewList() {
 
   };
 
-  const handleDateChange = (e, date) => {
-    console.log(e.$d);
+  const handleDateChange = (e) => {
     setEndDate(e.$d);
     setTask({ ...task, endDate: e.$d });
   }
@@ -78,7 +77,6 @@ export default function TaskForReviewList() {
     // });
 
     try {
-
       const result = await createTask(url, { task }).then((result) => {
         toast.info(successfulNotify);
       });

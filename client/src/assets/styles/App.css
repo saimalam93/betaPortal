@@ -1,3 +1,7 @@
+:root{
+  --global-blue:#157BFF;
+}
+
 main{
   margin-inline: 3rem;
   margin-block: 2rem;
@@ -59,15 +63,13 @@ main{
   background-color: #f8fafc;
 }
 .MuiPaper-root .MuiButton-contained{
-  background-color: #157BFF ;
+  background-color: var(--global-blue) ;
   color: #fff ;
   max-width: 200px;
   max-height: 40px;
   text-align: end;
 }
-.state-btn.MuiButton-disableElevation{
-  width: 68px;
-}
+
 /* ------ Three color of the state --------*/
 .state-btn.todo-btn{
   background-color: #F8B362;
@@ -80,6 +82,13 @@ main{
 .state-btn.done-btn{
   background-color: #B4F3B0;
   color: #316B6E;
+}
+.state-btn.in-review-btn{
+  background-color:var(--global-blue);
+  color: #fff;
+}
+.state-btn.in-review-btn:hover{
+  background-color: var(--global-blue);
 }
 
 

@@ -12,15 +12,15 @@ export default function TaskForReviewList() {
     const [task, setTask] = useState([]);
 
     useEffect(() => {
-          loadData();
+        loadData();
         setTask(PROJECT_SAMPLE_DATA);
     }, []);
 
     const loadData = (filters) => {
-      getAllTasks(url).then((result) => {
-        console.log(result);
-        setTask(result.data.getTasks);
-      });
+        getAllTasks(url).then((result) => {
+            console.log(result);
+            setTask(result.data.getTasks);
+        });
     }; // end of loadData
 
     return (
@@ -43,13 +43,13 @@ export default function TaskForReviewList() {
                                             />
                                         </TableCell>
                                         <TableCell>{task.taskName}</TableCell>
-                                        <TableCell>
+                                        <TableCell style={{ textAlign: 'end'}}>
                                             <Button
-                                                className={`state-btn ${task.taskStatus === 'Todo' ? 'todo-btn' : (task.taskStatus === 'Doing' ? 'doing-btn' : 'done-btn')}`}
+                                                className="state-btn in-review-btn"
                                                 disableElevation
                                                 variant="contained"
                                             >
-                                                {task.taskStatus}
+                                                Show detail
                                             </Button>
                                         </TableCell>
                                     </TableRow>

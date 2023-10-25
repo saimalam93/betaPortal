@@ -1,7 +1,6 @@
 
 :root{
     --card-padding:1rem
-
 }
 
 .dialog-close .MuiSvgIcon-root{
@@ -19,4 +18,31 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 }
+
+.message-blue{
+    position: relative;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color:  var(--global-blue);
+      width: 60%;
+      text-align: left;
+      border-radius: 10px
+}
+.message-blue:after {
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid var(--global-blue);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    top: 0;
+    left: -15px
+  }
+
+.message-blue p{
+    color:#fff
+}
+
 

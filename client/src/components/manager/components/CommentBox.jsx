@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, TextField, Button, Grid } from '@material-ui/core';
 
+import '../../../assets/styles/popup.css'
 
 function CommentBox() {
 
@@ -35,19 +36,16 @@ function CommentBox() {
     return (
         <div>
             <Typography >Comment</Typography>
-            <form onSubmit={handleSubmit}>
-                <ul>
+            <form style={{paddingBlock:'10px'}} onSubmit={handleSubmit}>
                     {comments.map((comment, index) => (
-                        <li key={index}><p>{comment}</p></li>
+                        <div className='message-blue' key={index}><p>{comment}</p></div>
                     ))}
-                </ul>
-                <TextField type="text" value={newComment} onChange={e => setNewComment(e.target.value)}
+                <TextField
+                style={{width:' 100%'}}
+                type="text" value={newComment} onChange={e => setNewComment(e.target.value)}
                     id="outlined-basic" placeholder="Add a comment..."
-                    label="Outlined" variant="outlined" />
-                <button type="submit">Post</button>
+                    variant="outlined" />
             </form>
-
-            {/* List of comments */}
 
         </div>
     );

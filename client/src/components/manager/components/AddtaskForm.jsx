@@ -10,14 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 
 import viewAllEmployees from "../../../graphql/viewAllEmployees";
+import createTask  from "../../../graphql/createTask";
 
 
 
 export default function TaskForReviewList() {
-  const url = "https://betaportal-saimalam.onrender.com/graphql";
-  const navigate = useNavigate();
+  const url = "http://localhost:4000/graphql";
   const [employees, setemployee] = useState([]);
   const [endDate, setEndDate] = useState();
+  const [allTaks, setAllTasks] = useState([]);
 
   useEffect(() => {
     loadData(filters);
@@ -36,7 +37,7 @@ export default function TaskForReviewList() {
     taskName: "",
     taskDescription: "",
     taskEmployee: "",
-    endDate: null,
+    endDate: '',
   });
 
   const successfulNotify = () => (
@@ -56,7 +57,8 @@ export default function TaskForReviewList() {
 
   };
 
-  const handleDateChange =(e, date) => {
+  const handleDateChange = (e, date) => {
+    console.log(e.$d);
     setEndDate(e.$d);
     setTask({ ...task, endDate: e.$d });
   }
@@ -65,35 +67,34 @@ export default function TaskForReviewList() {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(task);
-
     if (task.taskEmployee === "") {
       throw new Error("Please select Employee");
     }
 
-    // try {
+    allTaks.push(task);
 
-    //   const result = await addNewTask(url, { task });
-    //   if (result && result.data && result.data.addNewTask) {
-    //     setTask(result.data.addNewTask);
-    //     toast.info(successfulNotify);
-    //   } else {
-    //     console.error("Unexpected structure for result:", result);
-    //     toast.error(errorlNotify);
-    //   }
-    setTask({
-      taskName: "",
-      taskDescription: "",
-      taskEmployee: "",
-      endDate: "",
-    });
-    setEndDate(null);
-    // } catch (error) {
-    //   // Handle the error here
-    //   console.error("An error occurred:", error);
-    //   toast.error(errorlNotify);
-    //   // Display an error message or take appropriate action
-    // }
+    // createTask(url, {task}).then((result) => {
+    //   console.log(result);
+    // });
+
+    try {
+
+      const result = await createTask(url, { task }).then((result) => {
+        toast.info(successfulNotify);
+      });
+      setTask({
+        taskName: "",
+        taskDescription: "",
+        taskEmployee: "",
+        endDate: "",
+      });
+      setEndDate(null);
+    } catch (error) {
+      // Handle the error here
+      console.error("An error occurred:", error);
+      toast.error(errorlNotify);
+      // Display an error message or take appropriate action
+    }
   };
 
 
@@ -120,7 +121,7 @@ export default function TaskForReviewList() {
               style={{ width: '100%', margin: "5px" }}
               id="filled-basic"
               type="text"
-              label="title"
+              label="Task Title"
               variant="filled"
               name="taskName"
               value={task.taskName}
@@ -148,11 +149,9 @@ export default function TaskForReviewList() {
           </Grid>
 
           <Grid md={6} sm={12}>
-            <FormControl style={{ width: '100%' }}>
+            <FormControl style={{ width: '100%' }} required>
               <InputLabel>Select Empolyee</InputLabel>
               <Select
-                // not yet add the taskEmpolyee query
-
                 value={task.taskEmployee}
                 defaultValue=''
                 label="Select Empolyee"

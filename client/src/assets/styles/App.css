@@ -18,7 +18,8 @@ main{
   padding-bottom: 24px
 }
 
-.MuiTableCell-root.MuiTableCell-body{
+.MuiTableCell-root.MuiTableCell-body
+.grey-Text{
   color:#616874
 }
 /* --------Global Card---------------*/
@@ -61,6 +62,7 @@ main{
   background-color: #157BFF ;
   color: #fff ;
   max-width: 200px;
+  max-height: 40px;
   text-align: end;
 }
 .state-btn.MuiButton-disableElevation{

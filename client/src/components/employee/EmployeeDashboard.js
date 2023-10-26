@@ -1,38 +1,39 @@
-
 import "../../assets/styles/employe.css";
-import React, {  useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Column from "./columnItem";
-import COLUMN_NAMES from './columnNames';
+import COLUMN_NAMES from "./columnNames";
 import { tasks } from "./tasks";
 import MovableItem from "./moveableItem";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import CommentBox from '../manager/components/CommentBox';
-
+import getTaskById from "../../graphql/getTaskById";
+import { AuthContext } from "../../context/authContext";
 import "../../assets/styles/popup.css"
 import CustomizedDialogs from "./TaskDetailPop";
 
 
-
 const EmployeeDashboard = () => {
-  const [items, setItems] = useState(tasks);
+  const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     console.log("open")
 		setOpen(true);
 	};
-	const handleClose = () => {
-		setOpen(false);
-	};
+	
+  const { user } = useContext(AuthContext);
+  const id = user._id;
+  const url = "http://localhost:4000/graphql";
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    getTaskById(url, { id }).then((result) => {
+      setItems(result.data.getTaskById);
+    });
+  };
+
   const moveCardHandler = (dragIndex, hoverIndex) => {
     const dragItem = items[dragIndex];
 
@@ -48,7 +49,10 @@ const EmployeeDashboard = () => {
   };
   const returnItemsForColumn = (columnName) => {
     return items
-      .filter((item) => item.column === columnName)
+      .filter((item) => {
+        console.log(item);
+        return item.column === columnName;
+      })
       .map((item, index) => (
         <MovableItem
           key={item.id}
@@ -62,9 +66,7 @@ const EmployeeDashboard = () => {
           moveCardHandler={moveCardHandler}
           handleClickOpen={handleClickOpen}
         />
-       
       ));
-      
   };
   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
 
@@ -79,10 +81,7 @@ const EmployeeDashboard = () => {
         <Column title={IN_PROGRESS} className="task-list-container ">
           {returnItemsForColumn(IN_PROGRESS)}
         </Column>
-        <Column
-          title={AWAITING_REVIEW}
-          className="task-list-container "
-        >
+        <Column title={AWAITING_REVIEW} className="task-list-container ">
           {returnItemsForColumn(AWAITING_REVIEW)}
         </Column>
         <Column title={DONE} className="task-list-container ">
@@ -93,6 +92,6 @@ const EmployeeDashboard = () => {
       
     </div>
   );
-}
+};
 
 export default EmployeeDashboard;

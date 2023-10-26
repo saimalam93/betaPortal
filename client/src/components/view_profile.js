@@ -59,6 +59,7 @@ const Veiw_Profile = (props) => {
   useEffect(() => {
     setloggedEmp(user);
   }, [loggedEmp]);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

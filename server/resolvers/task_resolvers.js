@@ -5,9 +5,11 @@ const taskResolvers = {
   Date: dateScalar,
   Query: {
     getTasks: tasks.getTasks,
+    getTaskById: tasks.getTaskById,
   },
   Mutation: {
     createTask: tasks.createTask,
+    updateTaskStatus: tasks.updateTaskStatus,
   },
 };
 

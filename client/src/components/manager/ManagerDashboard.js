@@ -3,17 +3,16 @@ import TaskForReviewList from "./components/TaskForReviewList";
 import AddtaskForm from "./components/AddtaskForm";
 import { Tabs, Tab, Box } from "@material-ui/core";
 import { TabPanel, TabContext } from "@mui/lab/";
+import CopyDashborad from "./components/UndragableDashborad";
 
 function Overview() {
   return (
     <div style={{ display: "flex", gap: "3rem" }}>
       <div style={{ width: "50%" }}>
-        {" "}
-        <TaskForReviewList />{" "}
+        <TaskForReviewList />
       </div>
       <div style={{ width: "50%" }}>
-        {" "}
-        <AddtaskForm />{" "}
+        <AddtaskForm />
       </div>
     </div>
   );
@@ -38,7 +37,7 @@ const ManagerDashboard = () => {
         <TabPanel value="0">
           <Overview />
         </TabPanel>
-        <TabPanel value="1">Task Dashboard</TabPanel>
+        <TabPanel value="1"><CopyDashborad /></TabPanel>
       </TabContext>
     </Box>
   );

@@ -7,10 +7,32 @@ import Column from "./columnItem";
 import COLUMN_NAMES from './columnNames';
 import { tasks } from "./tasks";
 import MovableItem from "./moveableItem";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import CommentBox from '../manager/components/CommentBox';
+
+import "../../assets/styles/popup.css"
+import CustomizedDialogs from "./TaskDetailPop";
+
 
 
 const EmployeeDashboard = () => {
   const [items, setItems] = useState(tasks);
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    console.log("open")
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
   const moveCardHandler = (dragIndex, hoverIndex) => {
     const dragItem = items[dragIndex];
 
@@ -38,6 +60,7 @@ const EmployeeDashboard = () => {
           setItems={setItems}
           index={index}
           moveCardHandler={moveCardHandler}
+          handleClickOpen={handleClickOpen}
         />
        
       ));
@@ -47,9 +70,11 @@ const EmployeeDashboard = () => {
 
   return (
     <div className="task-container">
+     
       <DndProvider backend={HTML5Backend}>
         <Column title={DO_IT} className="task-list-container ">
           {returnItemsForColumn(DO_IT)}
+          
         </Column>
         <Column title={IN_PROGRESS} className="task-list-container ">
           {returnItemsForColumn(IN_PROGRESS)}
@@ -64,6 +89,8 @@ const EmployeeDashboard = () => {
           {returnItemsForColumn(DONE)}
         </Column>
       </DndProvider>
+      <CustomizedDialogs open={open} setOpen={setOpen}/>
+      
     </div>
   );
 }

@@ -1,33 +1,26 @@
 import * as React from 'react';
-import { useState } from 'react';
+
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
+
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import CommentBox from './CommentBox';
+import CommentBox from '../manager/components/CommentBox';
 
-import '../../../assets/styles/popup.css'
+import "../../assets/styles/popup.css"
 
-export default function CustomizedDialogs() {
-	const [open, setOpen] = useState(false);
-
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
+const CustomizedDialogs = ({open,setOpen}) => {
+	
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	return (
 		<div>
-			<Button variant="outlined" onClick={handleClickOpen}>
-				Open dialog
-			</Button>
 			<Dialog
 				onClose={handleClose}
 				open={open}
@@ -60,8 +53,8 @@ export default function CustomizedDialogs() {
 
 
 				<DialogContent dividers>
-					<Typography >
-						Overview
+					<Typography >Overview
+						
 					</Typography>
 					<Typography className='grey-Text'
 					sx={{paddingTop:'5px'}}>
@@ -69,14 +62,14 @@ export default function CustomizedDialogs() {
 					</Typography>
 				</DialogContent>
 
-				<DialogContent >
+				{/* <DialogContent >
 				<CommentBox />
-				</DialogContent>
+				</DialogContent> */}
 
 				</div>
 			</Dialog>
 		</div>
 	);
 }
-
+export default CustomizedDialogs;
 

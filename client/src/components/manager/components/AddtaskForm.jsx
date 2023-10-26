@@ -1,24 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Box, Chip, InputLabel, Grid, Select, MenuItem, Typography, Card, FormControl, TextField, Button } from '@material-ui/core';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import moment from 'moment'
+import {
+  Box,
+  Chip,
+  InputLabel,
+  Grid,
+  Select,
+  MenuItem,
+  Typography,
+  Card,
+  FormControl,
+  TextField,
+  Button,
+} from "@material-ui/core";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 import viewAllEmployees from "../../../graphql/viewAllEmployees";
-import createTask  from "../../../graphql/createTask";
+import createTask from "../../../graphql/createTask";
 
-
+const ITEM_HEIGHT = "3rem";
+const MenuProps = {
+  PaperProps: {
+    style: {
+      marginTop: ITEM_HEIGHT,
+      width: 250,
+    },
+  },
+  getContentAnchorEl: () => null,
+};
 
 export default function TaskForReviewList() {
   const url = "http://localhost:4000/graphql";
   const [employees, setemployee] = useState([]);
   const [endDate, setEndDate] = useState();
-  const [allTaks, setAllTasks] = useState([]);
 
   useEffect(() => {
     loadData(filters);
@@ -28,16 +48,14 @@ export default function TaskForReviewList() {
     viewAllEmployees(url, { filters }).then((result) => {
       setemployee(result.data.viewAllEmployees);
     });
-
   };
   let filters = {};
-
 
   const [task, setTask] = useState({
     taskName: "",
     taskDescription: "",
     taskEmployee: "",
-    endDate: '',
+    endDate: "",
   });
 
   const successfulNotify = () => (
@@ -54,23 +72,18 @@ export default function TaskForReviewList() {
 
   const handleChange = (event) => {
     setTask({ ...task, [event.target.name]: event.target.value });
-
   };
 
   const handleDateChange = (e) => {
     setEndDate(e.$d);
     setTask({ ...task, endDate: e.$d });
-  }
-
-
+  };
 
   const submit = async (e) => {
     e.preventDefault();
     if (task.taskEmployee === "") {
       throw new Error("Please select Employee");
     }
-
-    allTaks.push(task);
 
     // createTask(url, {task}).then((result) => {
     //   console.log(result);
@@ -95,28 +108,18 @@ export default function TaskForReviewList() {
     }
   };
 
-
-  const ITEM_HEIGHT = '3rem';
-  const ITEM_PADDING_TOP = '8px';
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        marginTop: ITEM_HEIGHT,
-        width: 250,
-      },
-    },
-    getContentAnchorEl: () => null,
-  };
-
   return (
     <Card>
-      <Typography variant="subtitle1" component="body1"> Add task</Typography>
+      <Typography variant="subtitle1" component="body1">
+        {" "}
+        Add task
+      </Typography>
       <form onSubmit={submit}>
         <Grid container>
           <Grid xs={12}>
             <TextField
               required
-              style={{ width: '100%', margin: "5px" }}
+              style={{ width: "100%", margin: "5px" }}
               id="filled-basic"
               type="text"
               label="Task Title"
@@ -129,10 +132,10 @@ export default function TaskForReviewList() {
           </Grid>
 
           <Grid md={6} sm={12}>
-            <FormControl style={{ width: '100%' }} required>
+            <FormControl style={{ width: "100%" }} required>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  sx={{ margin: "5px", backgroundColor: '#f8fafc' }}
+                  sx={{ margin: "5px", backgroundColor: "#f8fafc" }}
                   value={endDate}
                   onChange={handleDateChange}
                   variant="filled"
@@ -147,11 +150,11 @@ export default function TaskForReviewList() {
           </Grid>
 
           <Grid md={6} sm={12}>
-            <FormControl style={{ width: '100%' }} required>
+            <FormControl style={{ width: "100%" }} required>
               <InputLabel>Select Empolyee</InputLabel>
               <Select
                 value={task.taskEmployee}
-                defaultValue=''
+                defaultValue=""
                 label="Select Empolyee"
                 onChange={handleChange}
                 name="taskEmployee"
@@ -176,25 +179,24 @@ export default function TaskForReviewList() {
               onChange={handleChange}
               InputProps={{
                 disableUnderline: true,
-                style: { height: 300 }
+                style: { height: 300 },
               }}
               style={{ width: "100%", margin: "5px" }}
-
             />
           </Grid>
         </Grid>
 
-        <div style={{
-          paddingTop: '1rem'
-        }}>
+        <div
+          style={{
+            paddingTop: "1rem",
+          }}
+        >
           <Button type="submit" variant="contained">
             Save
           </Button>
           <ToastContainer />
         </div>
       </form>
-
-    </Card >
-
+    </Card>
   );
 }

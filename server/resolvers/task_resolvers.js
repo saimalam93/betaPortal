@@ -10,6 +10,7 @@ const taskResolvers = {
   Mutation: {
     createTask: tasks.createTask,
     updateTaskStatus: tasks.updateTaskStatus,
+    deleteTask: tasks.deleteTask,
   },
 };
 

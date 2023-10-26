@@ -25,7 +25,8 @@ const EmployeeDashboard = () => {
   const url = "http://localhost:4000/graphql";
 
   useEffect(() => {
-    loadData();
+    // loadData();
+    setItems(tasks);
   }, []);
 
   const loadData = () => {

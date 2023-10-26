@@ -28,4 +28,5 @@ type Query {
 type Mutation {
   createTask(task: TaskInputs): Task!
   updateTaskStatus(task: TaskStatusUpdateInputs): Boolean
+  deleteTask(_id: ID!): Boolean
 }

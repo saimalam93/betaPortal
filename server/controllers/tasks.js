@@ -38,9 +38,18 @@ async function updateTaskStatus(_, { task }) {
   return false;
 }
 
+async function deleteTask(_, { _id }) {
+  let result = await Task.deleteOne({ _id: _id });
+  if (result) {
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   getTasks,
   getTaskById,
   createTask,
   updateTaskStatus,
+  deleteTask,
 };

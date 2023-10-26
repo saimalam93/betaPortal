@@ -12,7 +12,8 @@ import COLUMN_NAMES from './columnNames';
     currentColumnName,
     assignedDate,
     moveCardHandler,
-    setItems
+    setItems,
+    handleClickOpen,
   }) => {
     const changeItemColumn = (currentItem, columnName) => {
       setItems((prevState) => {
@@ -101,16 +102,19 @@ import COLUMN_NAMES from './columnNames';
         isDragging: monitor.isDragging()
       })
     });
-  
+    
     const opacity = isDragging ? 0.4 : 1;
   
     drag(drop(ref));
     console.log(name)
     return (
-      <div ref={ref} className="movable-item task-card" style={{ opacity }}>
+      <div ref={ref} className="movable-item task-card" style={{ opacity }} >
         <div className="task-card-header">
           <p className="heading-text">{name}</p>
-          <MoreHorizIcon />
+          <div onClick={handleClickOpen}>
+            <MoreHorizIcon />
+          </div>
+          
         </div>
         <div className="task-card-info">
           <p className="info-text">

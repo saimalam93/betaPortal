@@ -5,6 +5,7 @@ type Task {
   taskEmployee: Employee
   taskStatus: String
   endDate: Date
+  assignedDate: Date
 }
 
 input TaskInputs {

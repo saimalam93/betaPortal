@@ -1,5 +1,5 @@
  const COLUMN_NAMES = {
-    DO_IT: 'Do it',
+    DO_IT: 'Todo',
     IN_PROGRESS: 'In Progress',
     AWAITING_REVIEW: 'Awaiting review',
     DONE: 'Done',

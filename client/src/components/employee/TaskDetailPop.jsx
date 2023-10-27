@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
@@ -13,7 +13,7 @@ import CommentBox from '../manager/components/CommentBox';
 
 import "../../assets/styles/popup.css"
 
-const CustomizedDialogs = ({open,setOpen}) => {
+const CustomizedDialogs = ({open,setOpen,title,description}) => {
 	
 	const handleClose = () => {
 		setOpen(false);
@@ -24,23 +24,20 @@ const CustomizedDialogs = ({open,setOpen}) => {
 			<Dialog
 				onClose={handleClose}
 				open={open}
-				sx={{ borderRadius: 16
-				 }}
+				
+				className='dialog_modal'
 			>
-				<IconButton
-					aria-label="close"
-					onClick={handleClose}
-					className='dialog-close'
-				>
-					<CloseIcon />
-				</IconButton>
+				<div className='close_button'>
+				<CloseIcon onClick={handleClose} />
+				</div>
+				
 
-				<div className='dialog-wrap'>
+				<div className='dialog-wrap '>
 				<div className='dialog-title-wrap'>
-					<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-						Project title
+					<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title" className='titleName'>
+					<DoubleArrowIcon className='arrow'/>{title}
 					</DialogTitle>
-					<Button
+					{/* <Button
 						className={`card-state-btn`
 						}
 						disableElevation
@@ -48,17 +45,17 @@ const CustomizedDialogs = ({open,setOpen}) => {
 						endIcon={<KeyboardArrowDownOutlinedIcon />}
 					>
 						projectStatus
-					</Button>
+					</Button> */}
 				</div>
 
 
-				<DialogContent dividers>
-					<Typography >Overview
+				<DialogContent className='content_modal'>
+					<Typography className='overview'>Overview
 						
 					</Typography>
-					<Typography className='grey-Text'
+					<Typography className='grey-Text desc-text'
 					sx={{paddingTop:'5px'}}>
-						Project detail:Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+						{description}
 					</Typography>
 				</DialogContent>
 

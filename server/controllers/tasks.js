@@ -16,8 +16,9 @@ async function getTaskById(_, { _id }) {
 }
 
 async function createTask(_, { task }) {
-  console.log(task);
   task._id = new mongoose.Types.ObjectId();
+  task.assignedDate = moment().format("YYYY-MM-DD");
+  console.log(task);
   if (task.startDate == "" || task.startDate == null) {
     task.startDate = moment().format("YYYY-MM-DD");
   }

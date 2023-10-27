@@ -23,10 +23,11 @@
 .title {
     background-color: #fff;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 4px;
     border: 1px solid #dddddd8c;
-
+    color: #fff;
+    font-weight: 600;
 }
 
 .task-card-header {
@@ -74,31 +75,48 @@
 }
 
 .task-card-footer {
-    border-top: 2px solid #ccc;
+    border-top: 1px dotted #ccc;
     margin-top: 10px;
     padding-top: 10px;
 }
 
-.task-card-footer {
+.task-card-footer p{
     font-size: 12px;
     font-weight: 500;
 }
-
+.task-card-footer p span{
+    color: #000;
+    font-weight: 600;
+}
 .do-it-column,
 .in-progress-column,
 .awaiting-review-column,
 .done-column {
-    background-color: #fff;
+    background-color: transparent;
 }
-
+.do-it-column .title{
+    background:  #8f115b;
+}
+.in-progress-column .title{
+    background:  #115a77;
+}
+.awaiting-review-column .title{
+    background: #d58a00;
+}
+.done-column .title{
+    background: #055105;
+}
 .movable-item {
     background-color: #fff;
     min-height: 160px;
     margin: 15px 0;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 0 15px #00000024;
 }
-
+.MoreHorizIcon{
+color: #7e7e7e;
+}
 @media (max-width: 991px) {
     .task-card-header p {
         font-size: 14px;

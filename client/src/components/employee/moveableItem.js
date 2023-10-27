@@ -3,6 +3,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TimerIcon from '@mui/icons-material/Timer';
 import { useDrag, useDrop } from "react-dnd";
 import COLUMN_NAMES from './columnNames';
+import updateTaskStatus  from "../../graphql/updateTaskStatus";
 
  const MovableItem = ({
     name,
@@ -14,17 +15,31 @@ import COLUMN_NAMES from './columnNames';
     moveCardHandler,
     setItems,
     handleClickOpen,
+    updateID
   }) => {
+
+    const url = "http://localhost:4000/graphql";
+
+    
+
     const changeItemColumn = (currentItem, columnName) => {
+     
       setItems((prevState) => {
+        let task = {
+          _id : updateID,
+          taskStatus: columnName
+        }
+          
+        updateTaskStatus(url, {task})
         return prevState.map((e) => {
+          
           return {
             ...e,
-            column: e.name === currentItem.name ? columnName : e.column
+            taskStatus: e.taskName === currentItem.name ? columnName : e.taskStatus
           };
         });
       });
-  
+     
     };
   
     const ref = useRef(null);
@@ -68,15 +83,17 @@ import COLUMN_NAMES from './columnNames';
         // but it's good here for the sake of performance
         // to avoid expensive index searches.
         item.index = hoverIndex;
+        
       }
     });
   
     const [{ isDragging }, drag] = useDrag({
       type: "Our first type",
       item: { index, name, currentColumnName },
+      
       end: (item, monitor) => {
         const dropResult = monitor.getDropResult();
-  
+      //  console.log(item);
         if (dropResult) {
           const { name } = dropResult;
           const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
@@ -106,13 +123,13 @@ import COLUMN_NAMES from './columnNames';
     const opacity = isDragging ? 0.4 : 1;
   
     drag(drop(ref));
-    console.log(name)
+   
     return (
       <div ref={ref} className="movable-item task-card" style={{ opacity }} >
         <div className="task-card-header">
           <p className="heading-text">{name}</p>
-          <div onClick={handleClickOpen}>
-            <MoreHorizIcon />
+          <div onClick={()=>handleClickOpen(name,description)}>
+            <MoreHorizIcon  className={'MoreHorizIcon'}/>
           </div>
           
         </div>
@@ -124,7 +141,7 @@ import COLUMN_NAMES from './columnNames';
             <span className="alarm-icon"><TimerIcon fontSize="20" /></span><p className="date-text"><span>Deadline:</span> {deadlineDate}</p></div>
         </div>
         <div className="task-card-footer">
-          <p>Assign on: {assignedDate}</p>
+          <p><span>Assign on:</span> {assignedDate}</p>
         </div>
       </div>
     );

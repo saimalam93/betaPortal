@@ -21,7 +21,7 @@ function Overview({ tasks, setTasks }) {
 
 const ManagerDashboard = () => {
   const [value, setValue] = React.useState("0");
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
     loadData();

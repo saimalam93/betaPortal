@@ -43,7 +43,7 @@ function CommentBox() {
             <Typography >Comment</Typography>
             <form style={{ paddingBlock: '10px' }} onSubmit={handleSubmit}>
                 {comments.map((comment, index) => (
-                    <div className='message-wrap'><div className='message-blue' key={index}><p>{comment}</p></div><DeleteIcon onClick={() => handleDelete(index)} /></div>
+                    <div className='message-wrap'><div className='message-blue' key={index}><p>{comment}</p><DeleteIcon onClick={() => handleDelete(index)} /></div></div>
                 ))}
                 <TextField
                     autoComplete="false"

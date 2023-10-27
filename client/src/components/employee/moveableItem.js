@@ -124,7 +124,7 @@ import updateTaskStatus  from "../../graphql/updateTaskStatus";
     drag(drop(ref));
 
     return (
-      <div ref={ref} className="movable-item task-card" style={{ opacity }} >
+      <div ref={ref} className="movable-item task-card grab" style={{ opacity }} >
         <div className="task-card-header">
           <p className="heading-text">{name}</p>
         </div>

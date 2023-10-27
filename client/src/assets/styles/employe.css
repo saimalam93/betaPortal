@@ -116,10 +116,20 @@
 .MoreHorizIcon{
 color: #7e7e7e;
 }
-.delete-btn{
+.task-card .delete-btn{
     color:#de2d2d;
     border: 1px solid #de2d2d9c;
     width: 60%;
+}
+.task-card .delete-btn .MuiButton-label{
+    line-height: 1.2;
+}
+.movable-item.grab:hover{
+    cursor: grab;
+}
+.task-card:hover{
+    cursor: pointer;
+    background-color: #f8f8f8;
 }
 @media (max-width: 991px) {
     .task-card-header p {
@@ -162,6 +172,9 @@ color: #7e7e7e;
     }
     .task-card-header {
         padding-bottom: 10px;
+    }
+    .task-card .delete-btn .MuiButton-label{
+        font-size: 12px;
     }
 }
 

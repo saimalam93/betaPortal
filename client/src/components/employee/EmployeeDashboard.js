@@ -8,9 +8,9 @@ import { tasks } from "./tasks";
 import MovableItem from "./moveableItem";
 import getTaskById from "../../graphql/getTaskById";
 import { AuthContext } from "../../context/authContext";
-import "../../assets/styles/popup.css"
+import "../../assets/styles/popup.css";
 import CustomizedDialogs from "./TaskDetailPop";
-import moment from 'moment';
+import moment from "moment";
 
 const EmployeeDashboard = () => {
   const [items, setItems] = useState([]);
@@ -18,20 +18,20 @@ const EmployeeDashboard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleClickOpen = (name,description) => {
-   console.log(name,description,"handleClickOpen")
-   setTitle(name);
-   setDescription(description);
-		setOpen(true);
-	};
-	
+  const handleClickOpen = (name, description) => {
+    console.log(name, description, "handleClickOpen");
+    setTitle(name);
+    setDescription(description);
+    setOpen(true);
+  };
+
   const { user } = useContext(AuthContext);
   const id = user._id;
   const url = "http://localhost:4000/graphql";
 
   useEffect(() => {
-    // loadData();
-    setItems(tasks);
+    loadData();
+    // setItems(tasks);
   }, []);
 
   const loadData = () => {
@@ -41,7 +41,6 @@ const EmployeeDashboard = () => {
   };
 
   const moveCardHandler = (dragIndex, hoverIndex) => {
- 
     const dragItem = items[dragIndex];
 
     if (dragItem) {
@@ -51,9 +50,7 @@ const EmployeeDashboard = () => {
         coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
         return coppiedStateArray;
       });
-   
     }
-    
   };
   const returnItemsForColumn = (columnName) => {
     return items
@@ -78,26 +75,35 @@ const EmployeeDashboard = () => {
       ));
   };
   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
- 
+
   return (
     <div className="task-container">
-     
       <DndProvider backend={HTML5Backend}>
         <Column title={DO_IT} className="task-list-container do-it-column">
           {returnItemsForColumn(DO_IT)}
-          
         </Column>
-        <Column title={IN_PROGRESS} className="task-list-container in-progress-column">
+        <Column
+          title={IN_PROGRESS}
+          className="task-list-container in-progress-column"
+        >
           {returnItemsForColumn(IN_PROGRESS)}
         </Column>
-        <Column title={AWAITING_REVIEW} className="task-list-container awaiting-review-column">
+        <Column
+          title={AWAITING_REVIEW}
+          className="task-list-container awaiting-review-column"
+        >
           {returnItemsForColumn(AWAITING_REVIEW)}
         </Column>
         <Column title={DONE} className="task-list-container done-column">
           {returnItemsForColumn(DONE)}
         </Column>
       </DndProvider>
-      <CustomizedDialogs open={open} setOpen={setOpen} title={title} description={description}/>
+      <CustomizedDialogs
+        open={open}
+        setOpen={setOpen}
+        title={title}
+        description={description}
+      />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import deleteTask from "../../../graphql/deleteTask";
 import TaskDetailPop from "../../common/TaskDetailPop";
 
 function UndragableDashborad({ tasks, setTasks }) {
-  const statuses = ["Todo", "In progress", "Awaiting review", "Done"];
+  const statuses = ["Todo", "In Progress", "Awaiting review", "Done"];
   const url = "http://localhost:4000/graphql";
 
   // -----------On click get Id-----------

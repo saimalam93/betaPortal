@@ -14,36 +14,35 @@ import updateTaskStatus  from "../../graphql/updateTaskStatus";
     assignedDate,
     moveCardHandler,
     setItems,
-    handleClickOpen,
-    updateID
+    updateID,
   }) => {
 
     const url = "http://localhost:4000/graphql";
 
-    
+
 
     const changeItemColumn = (currentItem, columnName) => {
-     
+
       setItems((prevState) => {
         let task = {
           _id : updateID,
           taskStatus: columnName
         }
-          
+
         updateTaskStatus(url, {task})
         return prevState.map((e) => {
-          
+
           return {
             ...e,
             taskStatus: e.taskName === currentItem.name ? columnName : e.taskStatus
           };
         });
       });
-     
+
     };
-  
+
     const ref = useRef(null);
-  
+
     const [, drop] = useDrop({
       accept: "Our first type",
       hover(item, monitor) {
@@ -83,14 +82,14 @@ import updateTaskStatus  from "../../graphql/updateTaskStatus";
         // but it's good here for the sake of performance
         // to avoid expensive index searches.
         item.index = hoverIndex;
-        
+
       }
     });
-  
+
     const [{ isDragging }, drag] = useDrag({
       type: "Our first type",
       item: { index, name, currentColumnName },
-      
+
       end: (item, monitor) => {
         const dropResult = monitor.getDropResult();
       //  console.log(item);
@@ -119,19 +118,15 @@ import updateTaskStatus  from "../../graphql/updateTaskStatus";
         isDragging: monitor.isDragging()
       })
     });
-    
+
     const opacity = isDragging ? 0.4 : 1;
-  
+
     drag(drop(ref));
-   
+
     return (
       <div ref={ref} className="movable-item task-card" style={{ opacity }} >
         <div className="task-card-header">
           <p className="heading-text">{name}</p>
-          <div onClick={()=>handleClickOpen(name,description)}>
-            <MoreHorizIcon  className={'MoreHorizIcon'}/>
-          </div>
-          
         </div>
         <div className="task-card-info">
           <p className="info-text">

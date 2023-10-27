@@ -9,20 +9,25 @@ import MovableItem from "./moveableItem";
 import getTaskById from "../../graphql/getTaskById";
 import { AuthContext } from "../../context/authContext";
 import "../../assets/styles/popup.css";
-import CustomizedDialogs from "./TaskDetailPop";
+import TaskDetailPopUp from "../common/TaskDetailPopUp";
 import moment from "moment";
 
 const EmployeeDashboard = () => {
   const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");
 
-  const handleClickOpen = (name, description) => {
-    console.log(name, description, "handleClickOpen");
-    setTitle(name);
-    setDescription(description);
+  const [selectedTask, setSelectedTask] = useState(null);
+
+
+  const handleClickOpen = (task) => {
+    setSelectedTask(task)
     setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const { user } = useContext(AuthContext);
@@ -59,6 +64,7 @@ const EmployeeDashboard = () => {
         return item.taskStatus === columnName;
       })
       .map((item, index) => (
+        <div key={item._id} onClick={() => handleClickOpen(item)}>
         <MovableItem
           key={item._id}
           name={item.taskName}
@@ -70,9 +76,9 @@ const EmployeeDashboard = () => {
           setItems={setItems}
           index={index}
           moveCardHandler={moveCardHandler}
-          handleClickOpen={handleClickOpen}
           updateID={item._id}
         />
+        </div>
       ));
   };
   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
@@ -99,12 +105,14 @@ const EmployeeDashboard = () => {
           {returnItemsForColumn(DONE)}
         </Column>
       </DndProvider>
-      <CustomizedDialogs
-        open={open}
-        setOpen={setOpen}
-        title={title}
-        description={description}
-      />
+      {open && selectedTask && (
+    <TaskDetailPopUp
+      task={selectedTask}
+      handleClose={handleClose}
+      handleClickOpen={handleClickOpen}
+      open={open}
+    />
+  )}
     </div>
   );
 };

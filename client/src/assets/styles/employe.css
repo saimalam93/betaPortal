@@ -23,15 +23,14 @@
 .title {
     background-color: #fff;
     margin-bottom: 10px;
-    padding: 10px 20px;
+    padding: 23px 20px;
     border-radius: 4px;
-    border: 1px solid #dddddd8c;
-    color: #fff;
+    border: 1px solid #dddddd;
     font-weight: 600;
 }
 
 .task-card-header {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -76,7 +75,6 @@
 
 .task-card-footer {
     border-top: 1px dotted #ccc;
-    margin-top: 10px;
     padding-top: 10px;
 }
 
@@ -94,18 +92,18 @@
 .done-column {
     background-color: transparent;
 }
-.do-it-column .title{
-    background:  #8f115b;
+/* .do-it-column .title{
+    background:  var(--global-todo-red-dark);
 }
 .in-progress-column .title{
-    background:  #115a77;
+    background:  var(--global-doing-dark);
 }
 .awaiting-review-column .title{
     background: #d58a00;
 }
 .done-column .title{
-    background: #055105;
-}
+    background: var(--global-done-dark);
+} */
 .movable-item {
     background-color: #fff;
     min-height: 160px;
@@ -113,9 +111,15 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 15px #00000024;
+    row-gap: 10px;
 }
 .MoreHorizIcon{
 color: #7e7e7e;
+}
+.delete-btn{
+    color:#de2d2d;
+    border: 1px solid #de2d2d9c;
+    width: 60%;
 }
 @media (max-width: 991px) {
     .task-card-header p {
@@ -149,7 +153,7 @@ color: #7e7e7e;
     .task-list-container {
         margin: 0 5px;
     }
-   
+
     .task-card-info .date-text {
         font-size: 9px;
     }

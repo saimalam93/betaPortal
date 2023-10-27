@@ -1,5 +1,14 @@
 :root{
   --global-blue:#157BFF;
+  --global-todo-red-light: #F8B362;
+  --global-doing-light:#FEBCBC;
+  --global-done-light:#B4F3B0;
+  --global-reivew-light: #59cab3;
+  --global-todo-red-dark: #893900;
+  --global-doing-dark:#832525;
+  --global-done-dark:#316B6E;
+
+
 }
 
 main{
@@ -13,6 +22,20 @@ main{
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+/* Frist load error fix: force change on first load*/
+nav .MuiPaper-root{
+  background-color: #121212;
+  color: #fff;
+}
+ nav .MuiAvatar-colorDefault {
+  color: #121227;
+  background-color: #757575;
+ }
+
+.datepicker .MuiInputBase-root{
+  min-height: 50px
 }
 
 /* overwrite MUI style */
@@ -50,10 +73,6 @@ main{
   padding:0;
   border: none;
 }
-.MuiFormControl-root .MuiInputBase-root{
-  border:0;
-}
-
 /* --------Input form------ */
 .MuiButtonBase-root{
   text-transform: none !important;
@@ -79,19 +98,19 @@ main{
 }
 
 .state-btn.todo-btn{
-  background-color: #F8B362;
-  color: #893900;
+  background-color: var(--global-todo-red-light);
+  color: var(--global-todo-red-dark);
 }
 .state-btn.doing-btn{
-  background-color: #FEBCBC;
-  color: #832525;
+  background-color: var(--global-doing-light);
+  color: var(--global-doing-dark);
 }
 .state-btn.done-btn{
-  background-color: #B4F3B0;
-  color: #316B6E;
+  background-color: var(--global-done-light);
+  color: var(--global-done-dark);
 }
 .state-btn.in-review-btn{
-  background-color:#59cab3;
+  background-color:var(--global-reivew-light);
   color: #fff;
 }
 .dialog-wrap .state-btn{

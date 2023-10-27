@@ -60,7 +60,6 @@ export default function AddTaskForm({ tasks, setTasks }) {
   const successfulNotify = () => (
     <div>
       <p> Added New Task!</p>
-      {/* <Link to="/toasttest">Go to Task Dashborad</Link> */}
     </div>
   );
   const errorlNotify = () => (
@@ -107,7 +106,6 @@ export default function AddTaskForm({ tasks, setTasks }) {
   return (
     <Card>
       <Typography variant="subtitle1" component="body1">
-        {" "}
         Add task
       </Typography>
       <form onSubmit={submit}>
@@ -140,6 +138,7 @@ export default function AddTaskForm({ tasks, setTasks }) {
                   InputProps={{
                     disableUnderline: true,
                   }}
+                  className="datepicker"
                 />
               </LocalizationProvider>
             </FormControl>

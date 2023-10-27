@@ -38,7 +38,7 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    // <Box sx={{ width: "100%" }}>
       <TabContext value={value}>
         <Box>
           <Tabs value={value} onChange={handleChange}>
@@ -53,7 +53,7 @@ const ManagerDashboard = () => {
           <UndragableDashborad tasks={tasks} setTasks={setTasks} />
         </TabPanel>
       </TabContext>
-    </Box>
+    // </Box>
   );
 };
 

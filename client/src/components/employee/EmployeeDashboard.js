@@ -32,7 +32,7 @@ const EmployeeDashboard = () => {
 
   const { user } = useContext(AuthContext);
   const id = user._id;
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
 
   useEffect(() => {
     loadData();

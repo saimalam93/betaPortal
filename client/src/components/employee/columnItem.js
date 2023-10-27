@@ -11,8 +11,10 @@ const Column = ({ children, className, title }) => {
       }),
       // Override monitor.canDrop() function
       canDrop: (item) => {
+       
         const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
         const { currentColumnName } = item;
+       
         return (
           currentColumnName === title ||
           (currentColumnName === DO_IT && title === IN_PROGRESS) ||
@@ -26,7 +28,6 @@ const Column = ({ children, className, title }) => {
     });
   
    
-  
     return (
       <div
         ref={drop}

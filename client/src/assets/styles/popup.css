@@ -44,5 +44,39 @@ justify-content: space-between;
 .message-blue p{
     color:#fff
 }
+.dialog_modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
 
+  width: 100%;
+  min-height: 250px;
+}
 
+.close_button {
+    padding: 15px 20px 10px;
+    position: absolute;
+    right: 0;
+}
+.titleName.css-140puxv-MuiTypography-root-MuiDialogTitle-root{
+   font-size: 18px;
+   font-weight: 600;
+   width: 90%;
+   padding: 10px;
+   border-bottom: 1px solid #ddd;
+}
+.content_modal.css-ypiqx9-MuiDialogContent-root{
+    padding: 10px;
+}
+p.overview.css-ahj2mt-MuiTypography-root{
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+
+}
+.desc-text.css-chfmmb-MuiTypography-root{
+   font-size: 14px;
+   color: #444;
+}
+.arrow{
+  color: orange;
+  margin-bottom: -6px;
+  margin-right: 5px;
+}

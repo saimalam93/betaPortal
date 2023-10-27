@@ -1,28 +1,23 @@
-import "../../assets/styles/employe.css";
-import React, { useState, useEffect, useContext } from "react";
+import moment from "moment";
+import React, { useContext, useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import "../../assets/styles/employe.css";
+import "../../assets/styles/popup.css";
+import { AuthContext } from "../../context/authContext";
+import getTaskById from "../../graphql/getTaskById";
+import TaskDetailPopUp from "../common/TaskDetailPopUp";
 import Column from "./columnItem";
 import COLUMN_NAMES from "./columnNames";
-import { tasks } from "./tasks";
 import MovableItem from "./moveableItem";
-import getTaskById from "../../graphql/getTaskById";
-import { AuthContext } from "../../context/authContext";
-import "../../assets/styles/popup.css";
-import TaskDetailPopUp from "../common/TaskDetailPopUp";
-import moment from "moment";
 
 const EmployeeDashboard = () => {
   const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-
   const [selectedTask, setSelectedTask] = useState(null);
 
-
   const handleClickOpen = (task) => {
-    setSelectedTask(task)
+    setSelectedTask(task);
     setOpen(true);
   };
 
@@ -65,19 +60,19 @@ const EmployeeDashboard = () => {
       })
       .map((item, index) => (
         <div key={item._id} onClick={() => handleClickOpen(item)}>
-        <MovableItem
-          key={item._id}
-          name={item.taskName}
-          description={item.taskDescription}
-          // assignedDate={item.assignedDate}
-          assignedDate={moment().format("MMM Do, YYYY")}
-          deadlineDate={moment.utc(item.endDate).format("MMM Do, YYYY")}
-          currentColumnName={item.taskStatus}
-          setItems={setItems}
-          index={index}
-          moveCardHandler={moveCardHandler}
-          updateID={item._id}
-        />
+          <MovableItem
+            key={item._id}
+            name={item.taskName}
+            description={item.taskDescription}
+            // assignedDate={item.assignedDate}
+            assignedDate={moment().format("MMM Do, YYYY")}
+            deadlineDate={moment.utc(item.endDate).format("MMM Do, YYYY")}
+            currentColumnName={item.taskStatus}
+            setItems={setItems}
+            index={index}
+            moveCardHandler={moveCardHandler}
+            updateID={item._id}
+          />
         </div>
       ));
   };
@@ -106,13 +101,13 @@ const EmployeeDashboard = () => {
         </Column>
       </DndProvider>
       {open && selectedTask && (
-    <TaskDetailPopUp
-      task={selectedTask}
-      handleClose={handleClose}
-      handleClickOpen={handleClickOpen}
-      open={open}
-    />
-  )}
+        <TaskDetailPopUp
+          task={selectedTask}
+          handleClose={handleClose}
+          handleClickOpen={handleClickOpen}
+          open={open}
+        />
+      )}
     </div>
   );
 };

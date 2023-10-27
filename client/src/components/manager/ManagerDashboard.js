@@ -20,7 +20,7 @@ function Overview({ tasks, setTasks }) {
 }
 
 const ManagerDashboard = () => {
-  const [value, setValue] = React.useState("0");
+  const [value, setValue] = useState("0");
   const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
@@ -39,20 +39,20 @@ const ManagerDashboard = () => {
 
   return (
     // <Box sx={{ width: "100%" }}>
-      <TabContext value={value}>
-        <Box>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Overview" value="0" />
-            <Tab label="Dashboard" value="1" />
-          </Tabs>
-        </Box>
-        <TabPanel value="0">
-          <Overview tasks={tasks} setTasks={setTasks} />
-        </TabPanel>
-        <TabPanel value="1">
-          <UndragableDashborad tasks={tasks} setTasks={setTasks} />
-        </TabPanel>
-      </TabContext>
+    <TabContext value={value}>
+      <Box>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Overview" value="0" />
+          <Tab label="Dashboard" value="1" />
+        </Tabs>
+      </Box>
+      <TabPanel value="0">
+        <Overview tasks={tasks} setTasks={setTasks} />
+      </TabPanel>
+      <TabPanel value="1">
+        <UndragableDashborad tasks={tasks} setTasks={setTasks} />
+      </TabPanel>
+    </TabContext>
     // </Box>
   );
 };

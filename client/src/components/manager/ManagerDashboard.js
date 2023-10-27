@@ -1,18 +1,19 @@
-import React from "react";
-import TaskForReviewList from "./components/TaskForReviewList";
+import { Box, Tab, Tabs } from "@material-ui/core";
+import { TabContext, TabPanel } from "@mui/lab/";
+import React, { useEffect, useState } from "react";
+import getAllTasks from "../../graphql/getAllTasks";
 import AddtaskForm from "./components/AddtaskForm";
-import { Tabs, Tab, Box } from "@material-ui/core";
-import { TabPanel, TabContext } from "@mui/lab/";
-import CopyDashborad from "./components/UndragableDashborad";
+import TaskForReviewList from "./components/TaskForReviewList";
+import UndragableDashborad from "./components/UndragableDashborad";
 
-function Overview() {
+function Overview({ tasks, setTasks }) {
   return (
     <div style={{ display: "flex", gap: "3rem" }}>
       <div style={{ width: "50%" }}>
-        <TaskForReviewList />
+        <TaskForReviewList tasks={tasks} />
       </div>
       <div style={{ width: "50%" }}>
-        <AddtaskForm />
+        <AddtaskForm tasks={tasks} setTasks={setTasks} />
       </div>
     </div>
   );
@@ -20,6 +21,17 @@ function Overview() {
 
 const ManagerDashboard = () => {
   const [value, setValue] = React.useState("0");
+  const url = "http://localhost:4000/graphql";
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    await getAllTasks(url).then((result) => {
+      setTasks(result.data.getTasks);
+    });
+  }; // end of loadData
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,9 +47,11 @@ const ManagerDashboard = () => {
           </Tabs>
         </Box>
         <TabPanel value="0">
-          <Overview />
+          <Overview tasks={tasks} setTasks={setTasks} />
         </TabPanel>
-        <TabPanel value="1"><CopyDashborad /></TabPanel>
+        <TabPanel value="1">
+          <UndragableDashborad tasks={tasks} setTasks={setTasks} />
+        </TabPanel>
       </TabContext>
     </Box>
   );

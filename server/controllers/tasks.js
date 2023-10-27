@@ -22,7 +22,8 @@ async function createTask(_, { task }) {
     task.startDate = moment().format("YYYY-MM-DD");
   }
 
-  return await Task.create(task);
+  const newTaskID = await Task.create(task);
+  return await Task.findById(newTaskID._id).populate("taskEmployee");
 }
 
 // Find task by id and update the task status

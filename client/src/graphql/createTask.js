@@ -1,12 +1,17 @@
 const query = `mutation Mutation($task: TaskInputs) {
-    createTask(task: $task) {
+  createTask(task: $task) {
+    _id
+    taskName
+    taskDescription
+    taskStatus
+    endDate
+    taskEmployee {
       _id
-      taskName
-      taskDescription
-      taskStatus
-      endDate
+      fname
+      lname
     }
-  }`;
+  }
+}`;
 
 async function createTask(url = "", variables) {
   const response = await fetch(url, {

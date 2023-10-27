@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import {
-  Box,
-  Chip,
-  InputLabel,
-  Grid,
-  Select,
-  MenuItem,
-  Typography,
+  Button,
   Card,
   FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
-  Button,
+  Typography,
 } from "@material-ui/core";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import moment from "moment";
 
-import viewAllEmployees from "../../../graphql/viewAllEmployees";
 import createTask from "../../../graphql/createTask";
+import viewAllEmployees from "../../../graphql/viewAllEmployees";
 
 const ITEM_HEIGHT = "3rem";
 const MenuProps = {
@@ -35,7 +31,7 @@ const MenuProps = {
   getContentAnchorEl: () => null,
 };
 
-export default function TaskForReviewList() {
+export default function AddTaskForm({ tasks, setTasks }) {
   const url = "http://localhost:4000/graphql";
   const [employees, setemployee] = useState([]);
   const [endDate, setEndDate] = useState();
@@ -85,12 +81,9 @@ export default function TaskForReviewList() {
       throw new Error("Please select Employee");
     }
 
-    // createTask(url, {task}).then((result) => {
-    //   console.log(result);
-    // });
-
     try {
-      const result = await createTask(url, { task }).then((result) => {
+      await createTask(url, { task }).then((result) => {
+        setTasks([...tasks, result.data.createTask]);
         toast.info(successfulNotify);
       });
       setTask({

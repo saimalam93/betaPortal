@@ -31,7 +31,6 @@ const EmployeeDashboard = () => {
 
   useEffect(() => {
     loadData();
-    // setItems(tasks);
   }, []);
 
   const loadData = () => {

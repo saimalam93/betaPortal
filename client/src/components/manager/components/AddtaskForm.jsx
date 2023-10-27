@@ -36,6 +36,10 @@ export default function AddTaskForm({ tasks, setTasks }) {
   const [employees, setemployee] = useState([]);
   const [endDate, setEndDate] = useState();
 
+  const filters = {
+    role: "Employee",
+  };
+
   useEffect(() => {
     loadData(filters);
   }, []);
@@ -45,7 +49,6 @@ export default function AddTaskForm({ tasks, setTasks }) {
       setemployee(result.data.viewAllEmployees);
     });
   };
-  let filters = {};
 
   const [task, setTask] = useState({
     taskName: "",

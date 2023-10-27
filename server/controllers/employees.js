@@ -8,9 +8,9 @@ const moment = require("moment");
 
 async function viewAllEmployees(_, { filters }) {
   let employees = Employee.find();
-  // if (filters.role) {
-  //   employees = employees.or({ role: filters.role });
-  // }
+  if (filters.role) {
+    employees = employees.or({ role: filters.role });
+  }
   return await employees;
 }
 

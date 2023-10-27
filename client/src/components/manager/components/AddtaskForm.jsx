@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   Button,
   Card,
@@ -16,7 +15,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import createTask from "../../../graphql/createTask";
 import viewAllEmployees from "../../../graphql/viewAllEmployees";
 
@@ -32,7 +30,7 @@ const MenuProps = {
 };
 
 export default function AddTaskForm({ tasks, setTasks }) {
-  const url = "http://localhost:4000/graphql";
+  const url = "https://betaportal-saimalam.onrender.com/graphql";
   const [employees, setemployee] = useState([]);
   const [endDate, setEndDate] = useState();
 
@@ -60,7 +58,6 @@ export default function AddTaskForm({ tasks, setTasks }) {
   const successfulNotify = () => (
     <div>
       <p> Added New Task!</p>
-      {/* <Link to="/toasttest">Go to Task Dashborad</Link> */}
     </div>
   );
   const errorlNotify = () => (
@@ -107,7 +104,6 @@ export default function AddTaskForm({ tasks, setTasks }) {
   return (
     <Card>
       <Typography variant="subtitle1" component="body1">
-        {" "}
         Add task
       </Typography>
       <form onSubmit={submit}>
@@ -140,6 +136,7 @@ export default function AddTaskForm({ tasks, setTasks }) {
                   InputProps={{
                     disableUnderline: true,
                   }}
+                  className="datepicker"
                 />
               </LocalizationProvider>
             </FormControl>

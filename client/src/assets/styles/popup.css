@@ -1,24 +1,30 @@
 
-:root{
-    --card-padding:1rem
-}
-
 .dialog-close .MuiSvgIcon-root{
     position: absolute;
     top:8px;
-    right:var(--card-padding)
+    right:6px;
 }
 
 .dialog-wrap{
-    padding:var(--card-padding)
+    padding-inline:8px
 }
+.dialog-wrap .state-btn{
+    padding: 11px 18px;
+  }
 
 .dialog-title-wrap{
 display: flex;
 align-items: center;
 justify-content: space-between;
+padding-top: 20px;
 }
-
+.dialog-subtitle{
+    font-weight: 500;
+}
+.grey-Text{
+    color: #636E72;
+    padding-top: 5px
+}
 .message-wrap{
     position: relative;
     margin-bottom: 2rem;
@@ -26,11 +32,28 @@ justify-content: space-between;
 
 .message-wrap svg{
     position: absolute;
-    left: 19px;
+    right: -26px;
+    top: calc(50% - 5px);
 }
-
-
-
+.opendDialog .MuiOutlinedInput-input{
+    padding: 11.5px 14px;
+}
+.deadline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+.deadline .alarm-icon {
+    margin-bottom: -1px;
+    margin-right: 4px;
+    font-size: 15px;
+    color: #FFA726;
+}
+.date-text span {
+    font-weight: 600;
+    color: #FFA726;
+}
 
 .message-blue{
     position: relative;

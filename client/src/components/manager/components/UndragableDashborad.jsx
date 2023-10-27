@@ -1,29 +1,42 @@
-import { Button } from "@material-ui/core";
-import DeleteIcon from "@mui/icons-material/Delete";
 import TimerIcon from "@mui/icons-material/Timer";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import "../../../assets/styles/employe.css";
 import deleteTask from "../../../graphql/deleteTask";
-import TaskDetailPop from "../../common/TaskDetailPop";
+import TaskDetailPopUp from "../../common/TaskDetailPopUp";
 
 function UndragableDashborad({ tasks, setTasks }) {
   const statuses = ["Todo", "In Progress", "Awaiting review", "Done"];
   const url = "http://localhost:4000/graphql";
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = (task) => {
+    setSelectedTask(task);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // -----------On click get Id-----------
   const deletebtn = (id) => {
     deleteTask(url, { id }).then((result) => {
       setTasks(tasks.filter((task) => task._id !== id));
+      handleClose();
     });
   };
 
   function TaskCard({ item }) {
     return (
-      <div className="movable-item task-card" id={item._id}>
+      <div
+        className="movable-item task-card"
+        id={item._id}
+        onClick={() => handleClickOpen(item)}
+      >
         <div className="task-card-header">
           <p className="heading-text">{item.taskName}</p>
-          <TaskDetailPop task={item} key={item._id} />
         </div>
         <div className="task-card-info">
           <p className="info-text">{item.taskDescription}</p>
@@ -40,13 +53,16 @@ function UndragableDashborad({ tasks, setTasks }) {
         <div className="task-card-footer">
           <p>Assign to: {item.taskEmployee.fname}</p>
         </div>
-        <Button
-          variant="outlined"
-          endIcon={<DeleteIcon />}
-          onClick={() => deletebtn(item._id)}
-        >
-          Delete task
-        </Button>
+
+        {open && (
+          <TaskDetailPopUp
+            task={selectedTask}
+            handleClose={handleClose}
+            handleClickOpen={handleClickOpen}
+            open={open}
+            id={item._id}
+          />
+        )}
       </div>
     );
   }
@@ -75,6 +91,15 @@ function UndragableDashborad({ tasks, setTasks }) {
           />
         ))}
       </div>
+      {open && selectedTask && (
+        <TaskDetailPopUp
+          task={selectedTask}
+          handleClose={handleClose}
+          open={open}
+          deletebtn={deletebtn}
+          id={selectedTask._id}
+        />
+      )}
     </div>
   );
 }

@@ -95,6 +95,7 @@ nav .MuiPaper-root{
   padding: 10px;
   text-align: center;
   border-radius: 6px;
+  font-size: 0.7rem
 }
 
 .state-btn.todo-btn{
@@ -113,9 +114,7 @@ nav .MuiPaper-root{
   background-color:var(--global-reivew-light);
   color: #fff;
 }
-.dialog-wrap .state-btn{
-  padding: 22px;
-}
+
 /*--------- Overwrite Mui Dialog size---------*/
 .MuiDialog-container .MuiPaper-root{
   min-width: 70vw;

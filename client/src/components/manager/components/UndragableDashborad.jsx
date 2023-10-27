@@ -37,7 +37,7 @@ function UndragableDashborad({ tasks, setTasks }) {
 
   function TaskCard({ item }) {
     return (
-      <div className="manager-task-card" id={item._id}
+      <div className="movable-item task-card" id={item._id}
      onClick={() => handleClickOpen(item)}>
         <div className="task-card-header">
           <p className="heading-text">{item.taskName}</p>

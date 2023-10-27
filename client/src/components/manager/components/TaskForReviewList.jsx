@@ -92,6 +92,7 @@ export default function TaskForReviewList({ tasks }) {
           handleClickOpen={handleClickOpen}
           open={open}
           index={index}
+          hidden={true}
         />
       )}
     </Card>

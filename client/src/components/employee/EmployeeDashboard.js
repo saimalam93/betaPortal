@@ -36,7 +36,9 @@ const EmployeeDashboard = () => {
 
   const loadData = () => {
     getTaskById(url, { id }).then((result) => {
-      setItems(result.data.getTaskById);
+      if (result) {
+        setItems(result.data.getTaskById);
+      }
     });
   };
 

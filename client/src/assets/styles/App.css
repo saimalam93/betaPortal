@@ -71,6 +71,13 @@ main{
 }
 
 /* ------ Three color of the state --------*/
+.state-btn{
+  height: 16px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+}
+
 .state-btn.todo-btn{
   background-color: #F8B362;
   color: #893900;
@@ -84,11 +91,15 @@ main{
   color: #316B6E;
 }
 .state-btn.in-review-btn{
-  background-color:var(--global-blue);
+  background-color:#59cab3;
   color: #fff;
 }
-.state-btn.in-review-btn:hover{
-  background-color: var(--global-blue);
+.dialog-wrap .state-btn{
+  padding: 22px;
+}
+/*--------- Overwrite Mui Dialog size---------*/
+.MuiDialog-container .MuiPaper-root{
+  min-width: 70vw;
 }
 
 

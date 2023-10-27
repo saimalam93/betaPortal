@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, TextField, Button, Grid } from '@material-ui/core';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import '../../../assets/styles/popup.css'
 
@@ -32,19 +33,27 @@ function CommentBox() {
             setNewComment('');
         }
     };
+    const handleDelete = (indexToDelete) => {
+        const updatedComments = comments.filter((_, index) => index !== indexToDelete);
+        setComments(updatedComments);
+    };
 
     return (
         <div>
             <Typography >Comment</Typography>
-            <form style={{paddingBlock:'10px'}} onSubmit={handleSubmit}>
-                    {comments.map((comment, index) => (
-                        <div className='message-blue' key={index}><p>{comment}</p></div>
-                    ))}
+            <form style={{ paddingBlock: '10px' }} onSubmit={handleSubmit}>
+                {comments.map((comment, index) => (
+                    <div className='message-wrap'><div className='message-blue' key={index}><p>{comment}</p></div><DeleteIcon onClick={() => handleDelete(index)} /></div>
+                ))}
                 <TextField
-                style={{width:' 100%'}}
-                type="text" value={newComment} onChange={e => setNewComment(e.target.value)}
-                    id="outlined-basic" placeholder="Add a comment..."
-                    variant="outlined" />
+                    autoComplete="false"
+                    style={{ width: ' 100%' }}
+                    type="text" value={newComment}
+                    onChange={e => setNewComment(e.target.value)}
+                    id="outlined-basic"
+                    placeholder="Add a comment..."
+                    variant="outlined"
+                />
             </form>
 
         </div>

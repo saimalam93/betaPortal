@@ -19,10 +19,23 @@ align-items: center;
 justify-content: space-between;
 }
 
+.message-wrap{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.message-wrap svg{
+    position: absolute;
+    left: 19px;
+}
+
+
+
+
 .message-blue{
     position: relative;
       margin-left: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       padding: 10px;
       background-color:  var(--global-blue);
       width: 60%;

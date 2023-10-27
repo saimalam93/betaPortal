@@ -1,3 +1,11 @@
+:root{
+  --global-blue:#157BFF;
+}
+
+main{
+  margin-inline: 3rem;
+  margin-block: 2rem;
+}
 .App {
   text-align: center;
 }
@@ -7,6 +15,99 @@
   pointer-events: none;
 }
 
+/* overwrite MUI style */
+
+.MuiTypography-root.MuiTypography-subtitle1{
+  font-weight: 700;
+  padding-bottom: 24px
+}
+
+.MuiTableCell-root.MuiTableCell-body
+.grey-Text{
+  color:#616874
+}
+/* --------Global Card---------------*/
+.MuiCard-root{
+  padding: 24px
+}
+/*-------- tab -----------*/
+.MuiTabs-flexContainer .MuiTab-textColorInherit{
+  opacity: 0.5;
+}
+.MuiTabs-flexContainer .MuiTab-textColorInherit.Mui-selected {
+  color: #137bff;
+}
+.MuiTabs-scroller .PrivateTabIndicator-colorSecondary-7{
+  display: none;
+}
+
+/* --------table ---------------*/
+.MuiCardHeader-avatar .MuiAvatar-root{
+  border-radius: 27%;
+}
+
+.MuiTableBody-root .MuiTableCell-root{
+  padding:0;
+  border: none;
+}
+.MuiFormControl-root .MuiInputBase-root{
+  border:0;
+}
+
+/* --------Input form------ */
+.MuiButtonBase-root{
+  text-transform: none !important;
+}
+
+.MuiFormControl-root .MuiFilledInput-root{
+  background-color: #f8fafc;
+}
+.MuiPaper-root .MuiButton-contained{
+  background-color: var(--global-blue) ;
+  color: #fff ;
+  max-width: 200px;
+  max-height: 40px;
+  text-align: end;
+}
+
+/* ------ Three color of the state --------*/
+.state-btn{
+  height: 16px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.state-btn.todo-btn{
+  background-color: #F8B362;
+  color: #893900;
+}
+.state-btn.doing-btn{
+  background-color: #FEBCBC;
+  color: #832525;
+}
+.state-btn.done-btn{
+  background-color: #B4F3B0;
+  color: #316B6E;
+}
+.state-btn.in-review-btn{
+  background-color:#59cab3;
+  color: #fff;
+}
+.dialog-wrap .state-btn{
+  padding: 22px;
+}
+/*--------- Overwrite Mui Dialog size---------*/
+.MuiDialog-container .MuiPaper-root{
+  min-width: 70vw;
+}
+
+
+@media (min-width: 600px){
+  .MuiTabs-flexContainer .MuiTab-root {
+    min-width: 100px;
+}
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -37,3 +138,10 @@
   }
 }
 
+
+@media (max-width:500px){
+  main {
+    margin-inline: 1rem;
+
+ }
+}

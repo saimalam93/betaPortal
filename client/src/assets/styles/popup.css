@@ -1,0 +1,95 @@
+
+:root{
+    --card-padding:1rem
+}
+
+.dialog-close .MuiSvgIcon-root{
+    position: absolute;
+    top:8px;
+    right:var(--card-padding)
+}
+
+.dialog-wrap{
+    padding:var(--card-padding)
+}
+
+.dialog-title-wrap{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.message-wrap{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.message-wrap svg{
+    position: absolute;
+    left: 19px;
+}
+
+
+
+
+.message-blue{
+    position: relative;
+      margin-left: 20px;
+      margin-bottom: 5px;
+      padding: 10px;
+      background-color:  var(--global-blue);
+      width: 60%;
+      text-align: left;
+      border-radius: 10px
+}
+.message-blue:after {
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid var(--global-blue);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    top: 0;
+    left: -15px
+  }
+
+.message-blue p{
+    color:#fff
+}
+.dialog_modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+
+  width: 100%;
+  min-height: 250px;
+}
+
+.close_button {
+    padding: 15px 20px 10px;
+    position: absolute;
+    right: 0;
+}
+.titleName.css-140puxv-MuiTypography-root-MuiDialogTitle-root{
+   font-size: 18px;
+   font-weight: 600;
+   width: 90%;
+   padding: 10px;
+   border-bottom: 1px solid #ddd;
+}
+.content_modal.css-ypiqx9-MuiDialogContent-root{
+    padding: 10px;
+}
+p.overview.css-ahj2mt-MuiTypography-root{
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+
+}
+.desc-text.css-chfmmb-MuiTypography-root{
+   font-size: 14px;
+   color: #444;
+}
+.arrow{
+  color: orange;
+  margin-bottom: -6px;
+  margin-right: 5px;
+}

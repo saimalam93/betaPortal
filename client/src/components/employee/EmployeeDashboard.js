@@ -1,61 +1,112 @@
-import { useState } from "react";
-import "../../assets/styles/dashboard.css";
+import "../../assets/styles/employe.css";
+import React, { useState, useEffect, useContext } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Column from "./columnItem";
+import COLUMN_NAMES from "./columnNames";
+import { tasks } from "./tasks";
+import MovableItem from "./moveableItem";
+import getTaskById from "../../graphql/getTaskById";
+import { AuthContext } from "../../context/authContext";
+import "../../assets/styles/popup.css";
+import CustomizedDialogs from "./TaskDetailPop";
+import moment from "moment";
 
-function Tasks() {
-  const [cards] = useState([
-    {
-      title: "Task 1 : Due Today",
-      text1: `Create graphs for dashboard`,
-      text2: `Description: Pie chart showing growth of the project`,
-      text3: `Status: Done`,
-      text4: `Project: Vision 3D`,
-      flag: `true`,
-    },
-    {
-      title: "Task 2 : Due on 15th Dec",
-      text1: `Update API of the rent table and change datatype of columns specific to value.`,
-      text2: `Description: Add column for Image and update datatype of price to Decimal`,
-      text3: `Status: Done`,
-      text4: `Project: Health Care`,
-    },
-    {
-      title: "Task 3 : Due on 20th Dec",
-      text1: `Delete customer who are not eligible for upgrade of mobile device and sim.`,
-      text2: `Description: Delete with specific id which matches to the first time user.`,
-      text3: `Status: Doing`,
-      text4: `Project: Capstone`,
-      flag: `false`,
-    },
-    {
-      title: "Task 4 : Due on 22th Dec",
-      text1: `Fix design for rent listing with respect to AODA complaince style.`,
-      text2: `Description: Desing using mui and Ant design for specific requirements.`,
-      text3: `Status: Doing`,
-      text4: `Project: Robotics`,
-    },
-  ]);
+const EmployeeDashboard = () => {
+  const [items, setItems] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleClickOpen = (name, description) => {
+    console.log(name, description, "handleClickOpen");
+    setTitle(name);
+    setDescription(description);
+    setOpen(true);
+  };
+
+  const { user } = useContext(AuthContext);
+  const id = user._id;
+  const url = "http://localhost:4000/graphql";
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    getTaskById(url, { id }).then((result) => {
+      if (result) {
+        setItems(result.data.getTaskById);
+      }
+    });
+  };
+
+  const moveCardHandler = (dragIndex, hoverIndex) => {
+    const dragItem = items[dragIndex];
+
+    if (dragItem) {
+      setItems((prevState) => {
+        const coppiedStateArray = [...prevState];
+        const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
+        coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+        return coppiedStateArray;
+      });
+    }
+  };
+  const returnItemsForColumn = (columnName) => {
+    return items
+      .filter((item) => {
+        return item.taskStatus === columnName;
+      })
+      .map((item, index) => (
+        <MovableItem
+          key={item._id}
+          name={item.taskName}
+          description={item.taskDescription}
+          // assignedDate={item.assignedDate}
+          assignedDate={moment().format("MMM Do, YYYY")}
+          deadlineDate={moment.utc(item.endDate).format("MMM Do, YYYY")}
+          currentColumnName={item.taskStatus}
+          setItems={setItems}
+          index={index}
+          moveCardHandler={moveCardHandler}
+          handleClickOpen={handleClickOpen}
+          updateID={item._id}
+        />
+      ));
+  };
+  const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
 
   return (
-    <div class="section">
-      <section>
-        <div className="container1">
-          <h1 align="center">My dashboard</h1>
-          <div className="cards">
-            {cards.map((card, i) => (
-              <div key={i} className="card">
-                <h2>{card.title}</h2>
-                <br />
-                <p>{card.text1}</p>
-                <p>{card.text2}</p>
-                <p>{card.text4}</p>
-                <p>{card.text3}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="task-container">
+      <DndProvider backend={HTML5Backend}>
+        <Column title={DO_IT} className="task-list-container do-it-column">
+          {returnItemsForColumn(DO_IT)}
+        </Column>
+        <Column
+          title={IN_PROGRESS}
+          className="task-list-container in-progress-column"
+        >
+          {returnItemsForColumn(IN_PROGRESS)}
+        </Column>
+        <Column
+          title={AWAITING_REVIEW}
+          className="task-list-container awaiting-review-column"
+        >
+          {returnItemsForColumn(AWAITING_REVIEW)}
+        </Column>
+        <Column title={DONE} className="task-list-container done-column">
+          {returnItemsForColumn(DONE)}
+        </Column>
+      </DndProvider>
+      <CustomizedDialogs
+        open={open}
+        setOpen={setOpen}
+        title={title}
+        description={description}
+      />
     </div>
   );
-}
+};
 
-export default Tasks;
+export default EmployeeDashboard;

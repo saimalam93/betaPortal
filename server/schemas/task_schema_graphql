@@ -1,0 +1,33 @@
+type Task {
+  _id: ID
+  taskName: String
+  taskDescription: String
+  taskEmployee: Employee
+  taskStatus: String
+  endDate: Date
+  assignedDate: Date
+}
+
+input TaskInputs {
+  taskName: String!
+  taskDescription: String
+  taskEmployee: ID!
+  taskStatus: String
+  endDate: Date
+}
+
+input TaskStatusUpdateInputs {
+  _id: ID!
+  taskStatus: String!
+}
+
+type Query {
+  getTasks: [Task!]!
+  getTaskById(_id: ID!): [Task]
+}
+
+type Mutation {
+  createTask(task: TaskInputs): Task!
+  updateTaskStatus(task: TaskStatusUpdateInputs): Boolean
+  deleteTask(_id: ID!): Boolean
+}

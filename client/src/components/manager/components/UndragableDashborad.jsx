@@ -1,8 +1,6 @@
+import TimerIcon from "@mui/icons-material/Timer";
 import moment from "moment";
 import React, { useState } from "react";
-
-import TimerIcon from "@mui/icons-material/Timer";
-
 import "../../../assets/styles/employe.css";
 import deleteTask from "../../../graphql/deleteTask";
 import TaskDetailPopUp from "../../common/TaskDetailPopUp";

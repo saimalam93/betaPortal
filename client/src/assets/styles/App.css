@@ -1,17 +1,15 @@
-:root{
-  --global-blue:#157BFF;
-  --global-todo-red-light: #F8B362;
-  --global-doing-light:#FEBCBC;
-  --global-done-light:#B4F3B0;
+:root {
+  --global-blue: #157bff;
+  --global-todo-red-light: #f8b362;
+  --global-doing-light: #febcbc;
+  --global-done-light: #b4f3b0;
   --global-reivew-light: #59cab3;
   --global-todo-red-dark: #893900;
-  --global-doing-dark:#832525;
-  --global-done-dark:#316B6E;
-
-
+  --global-doing-dark: #832525;
+  --global-done-dark: #316b6e;
 }
 
-main{
+main {
   margin-inline: 3rem;
   margin-block: 2rem;
 }
@@ -25,106 +23,103 @@ main{
 }
 
 /* Frist load error fix: force change on first load*/
-nav .MuiPaper-root{
+nav .MuiPaper-root {
   background-color: #121212;
   color: #fff;
 }
- nav .MuiAvatar-colorDefault {
+nav .MuiAvatar-colorDefault {
   color: #121227;
   background-color: #757575;
- }
+}
 
-.datepicker .MuiInputBase-root{
-  min-height: 50px
+.datepicker .MuiInputBase-root {
+  min-height: 50px;
 }
 
 /* overwrite MUI style */
 
-.MuiTypography-root.MuiTypography-subtitle1{
+.MuiTypography-root.MuiTypography-subtitle1 {
   font-weight: 700;
-  padding-bottom: 24px
+  padding-bottom: 24px;
 }
 
-.MuiTableCell-root.MuiTableCell-body
-.grey-Text{
-  color:#616874
+.MuiTableCell-root.MuiTableCell-body .grey-Text {
+  color: #616874;
 }
 /* --------Global Card---------------*/
-.MuiCard-root{
-  padding: 24px
+.MuiCard-root {
+  padding: 24px;
 }
 /*-------- tab -----------*/
-.MuiTabs-flexContainer .MuiTab-textColorInherit{
+.MuiTabs-flexContainer .MuiTab-textColorInherit {
   opacity: 0.5;
 }
 .MuiTabs-flexContainer .MuiTab-textColorInherit.Mui-selected {
   color: #137bff;
 }
-.MuiTabs-scroller .PrivateTabIndicator-colorSecondary-7{
+.MuiTabs-scroller .PrivateTabIndicator-colorSecondary-7 {
   display: none;
 }
 
 /* --------table ---------------*/
-.MuiCardHeader-avatar .MuiAvatar-root{
+.MuiCardHeader-avatar .MuiAvatar-root {
   border-radius: 27%;
 }
 
-.MuiTableBody-root .MuiTableCell-root{
-  padding:0;
+.MuiTableBody-root .MuiTableCell-root {
+  padding: 0;
   border: none;
 }
 /* --------Input form------ */
-.MuiButtonBase-root{
+.MuiButtonBase-root {
   text-transform: none !important;
 }
 
-.MuiFormControl-root .MuiFilledInput-root{
+.MuiFormControl-root .MuiFilledInput-root {
   background-color: #f8fafc;
 }
-.MuiPaper-root .MuiButton-contained{
-  background-color: var(--global-blue) ;
-  color: #fff ;
+.MuiPaper-root .MuiButton-contained {
+  background-color: var(--global-blue);
+  color: #fff;
   max-width: 200px;
   max-height: 40px;
   text-align: end;
 }
 
 /* ------ Three color of the state --------*/
-.state-btn{
-  height: 16px;
+.state-btn {
+  /* height: 16px; */
   padding: 10px;
   text-align: center;
   border-radius: 6px;
-  font-size: 0.7rem
+  font-size: 0.7rem;
 }
 
-.state-btn.todo-btn{
+.state-btn.todo-btn {
   background-color: var(--global-todo-red-light);
   color: var(--global-todo-red-dark);
 }
-.state-btn.doing-btn{
+.state-btn.doing-btn {
   background-color: var(--global-doing-light);
   color: var(--global-doing-dark);
 }
-.state-btn.done-btn{
+.state-btn.done-btn {
   background-color: var(--global-done-light);
   color: var(--global-done-dark);
 }
-.state-btn.in-review-btn{
-  background-color:var(--global-reivew-light);
+.state-btn.in-review-btn {
+  background-color: var(--global-reivew-light);
   color: #fff;
 }
-
 /*--------- Overwrite Mui Dialog size---------*/
-.MuiDialog-container .MuiPaper-root{
+.MuiDialog-container .MuiPaper-root {
   min-width: 70vw;
 }
 
-
-@media (min-width: 600px){
+@media (min-width: 600px) {
   .MuiTabs-flexContainer .MuiTab-root {
     min-width: 100px;
-}
+  }
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -156,10 +151,8 @@ nav .MuiPaper-root{
   }
 }
 
-
-@media (max-width:500px){
+@media (max-width: 500px) {
   main {
     margin-inline: 1rem;
-
- }
+  }
 }
